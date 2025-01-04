@@ -48,6 +48,18 @@
       </Content>
       <None Remove="Assets\Images\player-heart.png" />
       <Resource Include="Assets\Images\player-heart.png" />
+      <None Remove="Shared\Images\Tube\tube-1.png" />
+      <Resource Include="Shared\Images\Tube\tube-1.png" />
+      <None Remove="Shared\Images\Enemy\enemy-left-1.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-left-1.png" />
+      <None Remove="Shared\Images\Enemy\enemy-right-1.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-right-1.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Shared\Images\Background\" />
+      <Folder Include="Shared\Images\Finish\" />
+      <Folder Include="Shared\Images\Player\" />
     </ItemGroup>
 
 </Project>

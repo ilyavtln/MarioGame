@@ -7,7 +7,7 @@
     "Height": 64
   },
   "Finish" : {
-    "X": 1500,
+    "X": 2000,
     "Y": 300,
     "Width": 150,
     "Height": 300
@@ -31,6 +31,14 @@
       "Width": 100,
       "Height": 128
     }
+  ],
+  "Platforms": [
+    {
+      "X": 300,
+      "Y": 288,
+      "Width": 256,
+      "Height": 32
+    }  
   ],
   "Enemies": [
     {
@@ -58,6 +66,14 @@
       "Speed": 0
     }
   ],
+  "Tubes": [
+    {
+      "X": 1300,
+      "Y": 192,
+      "Width": 64,
+      "Height": 64
+    }
+  ],
   "Backgrounds": [
     {
       "X": 160,
@@ -67,7 +83,7 @@
       "Type": "Cloud" 
     },
     {
-      "X": 560,
+      "X": 960,
       "Y": 350,
       "Width": 50,
       "Height": 50,

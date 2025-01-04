@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace MarioGame.Core.Components;
@@ -10,6 +11,7 @@ public class EnemyObject : GameObject
     private double _offset;
     private double _startX;
     private bool _movingRight = true;
+    private string _imagePath = "/Shared/Images/Enemy/";
 
     public EnemyObject(double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
     {
@@ -20,15 +22,27 @@ public class EnemyObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        var rect = new Rectangle
+        var image = new Image
         {
+            Source = new BitmapImage(new Uri(GetImage())),
             Width = Width,
-            Height = Height,
-            Fill = Brushes.Red
+            Height = Height
         };
-        Canvas.SetLeft(rect, X);
-        Canvas.SetTop(rect, Y);
-        canvas.Children.Add(rect);
+        Canvas.SetLeft(image, X);
+        Canvas.SetTop(image, Y);
+        canvas.Children.Add(image);
+    }
+
+    private string GetImage()
+    {
+        if (_movingRight)
+        {
+            return "pack://application:,,," + _imagePath + "enemy-right-1.png";
+        }
+        else
+        {
+            return "pack://application:,,," + _imagePath + "enemy-left-1.png";
+        }
     }
 
     public override void Update(Canvas canvas)

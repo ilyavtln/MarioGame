@@ -9,6 +9,8 @@ public class LevelData
     public List<GroundJson>? Grounds { get; set; }
     public List<EnemyJson>? Enemies { get; set; }
     public List<BackgroundJson>? Backgrounds { get; set; }
+    public List<PlatformJson>? Platforms { get; set; }
+    public List<TubeJson>? Tubes { get; set; }
     public FinishJson? Finish { get; set; }
     public PlayerJson? Player { get; set; }
 }

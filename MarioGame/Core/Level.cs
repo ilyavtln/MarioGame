@@ -77,6 +77,24 @@ public class Level
                 _objects.Add(enemyObject);
             }  
         }
+        
+        if (levelData?.Platforms != null)
+        {
+            foreach (var platform in levelData.Platforms)
+            {
+                var platformObject = new PlatformObject(platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height);
+                _objects.Add(platformObject);
+            }  
+        }
+        
+        if (levelData?.Tubes != null)
+        {
+            foreach (var tube in levelData.Tubes)
+            {
+                var tubeObject = new TubeObject(tube.X, _canvas.ActualHeight - tube.Y, tube.Width, tube.Height);
+                _objects.Add(tubeObject);
+            }  
+        }
     }
 
     private LevelData? LoadLevelData()
