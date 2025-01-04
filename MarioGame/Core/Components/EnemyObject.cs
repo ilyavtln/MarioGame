@@ -6,15 +6,16 @@ namespace MarioGame.Core.Components;
 
 public class EnemyObject : GameObject
 {
-    private double _speed = 2;
+    private double _speed;
     private double _offset;
     private double _startX;
     private bool _movingRight = true;
 
-    public EnemyObject(double x, double y, double width, double height, double offset) : base(x, y, width, height)
+    public EnemyObject(double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
     {
         _startX = x;
         _offset = offset;
+        _speed = speed;
     }
 
     public override void Draw(Canvas canvas)

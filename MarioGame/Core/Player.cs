@@ -27,6 +27,8 @@ public class Player
 
     public Player(double x, double y, double width, double height)
     {
+        // TODO: Придумать, что с этим делать
+        Console.WriteLine(_playerStatus);
         X = x;
         Y = y;
         Width = width;

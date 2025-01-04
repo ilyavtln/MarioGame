@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Core.Components;
@@ -12,7 +13,7 @@ public class Level
     private readonly uint _levelNumber;
     private readonly Canvas _canvas;
     private Player? _player;
-    private List<GameObject?> _objects;
+    private readonly List<GameObject?> _objects;
 
     public Level(uint levelNumber, Canvas canvas)
     {
@@ -25,7 +26,7 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
-        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null || levelData?.Enemies == null) { return; }
+        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null || levelData?.Enemies == null  || levelData?.Backgrounds == null) { return; }
         
         _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
         
@@ -37,8 +38,15 @@ public class Level
         
         foreach (var enemy in levelData.Enemies)
         {
-            var groundObject = new EnemyObject(enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset);
-            _objects.Add(groundObject);
+            var enemyObject = new EnemyObject(enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
+            _objects.Add(enemyObject);
+        }
+        
+        foreach (var background in levelData.Backgrounds)
+        {
+            var backgroundObject = new BackgroundObject(background.X, _canvas.ActualHeight - background.Y, background.Width,
+                background.Height, background.Type);
+            _objects.Add(backgroundObject);
         }
         
         var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
@@ -49,8 +57,15 @@ public class Level
     {
         string filePath = $"Levels/level_{_levelNumber}.json";
         string json = File.ReadAllText(filePath);
-        return JsonSerializer.Deserialize<LevelData>(json);
+
+        var options = new JsonSerializerOptions
+        {
+            Converters = { new JsonStringEnumConverter() }
+        };
+
+        return JsonSerializer.Deserialize<LevelData>(json, options);
     }
+
 
     public void ResizeObjects()
     {

@@ -1,67 +1,77 @@
 ﻿{
   "Index": 1,
+  "Player": {
+    "X": 0,
+    "Y": 150,
+    "Width": 32,
+    "Height": 64
+  },
+  "Finish" : {
+    "X": 1500,
+    "Y": 300,
+    "Width": 150,
+    "Height": 300
+  },
   "Grounds": [
     {
       "X": 0,
-      "Y": 50,
-      "Width": 144,
-      "Height": 100
+      "Y": 128,
+      "Width": 150,
+      "Height": 128
     },
     {
       "X": 200,
-      "Y": 50,
+      "Y": 128,
       "Width": 12800,
-      "Height": 50
+      "Height": 128
     },
     {
       "X": 400,
-      "Y": 100,
+      "Y": 128,
       "Width": 100,
-      "Height": 50
+      "Height": 128
     }
   ],
   "Enemies": [
     {
       "X": 800,
-      "Y": 100,
-      "Width": 20,
-      "Height": 50,
-      "Offset": 150
+      "Y": 160,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 100,
+      "Speed": 2
+    },
+    {
+      "X": 1000,
+      "Y": 160,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 50,
+      "Speed": 1
     },
     {
       "X": 1100,
-      "Y": 100,
-      "Width": 20,
-      "Height": 50,
-      "Offset": 0
+      "Y": 160,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 0,
+      "Speed": 0
     }
   ],
-  "Finish" : {
-    "X": 500,
-    "Y": 150,
-    "Width": 50,
-    "Height": 200
-  },
   "Backgrounds": [
     {
-      "X": 60,
-      "Y": 100,
+      "X": 160,
+      "Y": 400,
       "Width": 50,
       "Height": 50,
       "Type": "Cloud" 
     },
     {
-      "X": 160,
-      "Y": 50,
+      "X": 560,
+      "Y": 350,
       "Width": 50,
       "Height": 50,
       "Type": "Bush"
     }
-  ],
-  "Player": {
-    "X": 0,
-    "Y": 64,
-    "Width": 32,
-    "Height": 64
-  }
+  ]
 }

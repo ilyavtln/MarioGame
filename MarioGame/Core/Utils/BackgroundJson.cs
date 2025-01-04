@@ -4,9 +4,9 @@ namespace MarioGame.Core.Utils;
 
 public class BackgroundJson : BaseJsonData
 {
-    public BackgroundsTypes Type { get; set; }
+    public BackgroundType Type { get; set; }
     
-    public BackgroundJson(double x, double y, double width, double height, BackgroundsTypes type) : base(x, y, width, height)
+    public BackgroundJson(double x, double y, double width, double height, BackgroundType type) : base(x, y, width, height)
     {
         Type = type;
     }

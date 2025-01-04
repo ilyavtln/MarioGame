@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MarioGame.GameWindows"
         mc:Ignorable="d"
         Title="Mario" Height="600" Width="1000"
-        MinWidth="600" MinHeight="600"
+        MinWidth="1000" MinHeight="600"
         WindowState="Maximized">
     <Grid>
         <Canvas Name="GameCanvas" Background="LightBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Canvas>
@@ -27,9 +27,9 @@
                     VerticalAlignment="Top"
                     Height="50"
                     Margin="0,10,0,0">
-            <TextBlock Name="ScoreText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="White" Margin="20,0"/>
-            <TextBlock Name="LevelText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="White" Margin="20,0"/>
-            <TextBlock Name="TimeText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="White" Margin="20,0"/>
+            <TextBlock Name="ScoreText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="White"/>
+            <TextBlock Name="LevelText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="White" Margin="50,0"/>
+            <TextBlock Name="TimeText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="White"/>
         </StackPanel>
         
         <StackPanel Name="LivesPanel"
