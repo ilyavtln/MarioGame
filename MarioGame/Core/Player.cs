@@ -51,7 +51,7 @@ public class Player
             case Key.Right:
                 _velocityX = MoveSpeed;
                 break;
-            case Key.Space when !_isJumping: // Прыжок, если не в прыжке
+            case Key.Space when !_isJumping:
                 _isJumping = true;
                 _jumpVelocity = -MaxJumpHeight;
                 break;
@@ -78,21 +78,19 @@ public class Player
             if (obj is GroundObject ground && IsCollidingWithGround(ground))
             {
                 onGround = true;
-                Y = ground.Y - Height; // Установить игрока на поверхность земли
+                Y = ground.Y - Height;
                 _isJumping = false;
                 break;
             }
         }
-
-        // Если не на земле, применяем гравитацию
+        
         if (!onGround)
         {
             Y += _jumpVelocity;
             _jumpVelocity += Gravity;
         }
     }
-
-// Метод для проверки столкновения с землей
+    
     private bool IsCollidingWithGround(GroundObject ground)
     {
         return Y + Height >= ground.Y && X + Width > ground.X && X < ground.X + ground.Width;

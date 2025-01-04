@@ -4,5 +4,6 @@ public class LevelData
 {
     public int Index { get; set; }
     public List<GroundData>? Grounds { get; set; }
+    public FinishData? Finish { get; set; }
     public PlayerData? Player { get; set; }
 }

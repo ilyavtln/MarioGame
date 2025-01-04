@@ -27,11 +27,12 @@ public class Level
         var levelData = LoadLevelData();
         if (levelData == null || levelData.Grounds == null || levelData.Player == null) { return; }
         
-        _player = new Player(levelData.Player.X, levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
+        _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
+
         
         foreach (var ground in levelData.Grounds)
         {
-            var groundObject = new GroundObject(ground.X, ground.Y, ground.Width, ground.Height);
+            var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
             _objects.Add(groundObject);
         }
     }

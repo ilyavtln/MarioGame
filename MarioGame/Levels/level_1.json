@@ -3,20 +3,26 @@
   "Grounds": [
     {
       "X": 0,
-      "Y": 450,
+      "Y": 50,
       "Width": 144,
       "Height": 50
     },
     {
       "X": 200,
-      "Y": 450,
+      "Y": 50,
       "Width": 800,
       "Height": 50
     }
   ],
+  "Finish" : {
+    "X": 500,
+    "Y": 50,
+    "Width": 50,
+    "Height": 200
+  },
   "Player": {
     "X": 0,
-    "Y": 350,
+    "Y": 64,
     "Width": 32,
     "Height": 64
   }
