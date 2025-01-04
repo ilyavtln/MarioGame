@@ -58,7 +58,7 @@ public class Player
                 _playerStatus = PlayerStatus.IsMovingRight;
                 _velocityX = MoveSpeed;
                 break;
-            case Key.Space when _playerStatus != PlayerStatus.IsJumping && _isOnGround:
+            case Key.Space when _isOnGround:
                 _playerStatus = PlayerStatus.IsJumping;
                 _jumpVelocity = -MaxJumpHeight;
                 Y += _jumpVelocity;
@@ -132,7 +132,6 @@ public class Player
 
         return false;
     }
-
 
     private bool IsCollidingWithGround(GroundObject ground)
     {
