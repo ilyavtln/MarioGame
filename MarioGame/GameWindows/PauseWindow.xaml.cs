@@ -36,6 +36,7 @@ public partial class PauseWindow : Window
     
     private void SelectLevel_Click(object sender, RoutedEventArgs e)
     {
+        _soundManager.PlaySoundEffect("mario-pause.mp3");
         LevelSelectionPanel.Visibility = Visibility.Visible;
         ((this.Content as Grid)!).Children[0].Visibility = Visibility.Collapsed;
     }
@@ -67,6 +68,7 @@ public partial class PauseWindow : Window
 
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
+        _soundManager.PlaySoundEffect("mario-pause.mp3");
         LevelSelectionPanel.Visibility = Visibility.Collapsed;
         ((this.Content as Grid)!).Children[0].Visibility = Visibility.Visible;
     }
