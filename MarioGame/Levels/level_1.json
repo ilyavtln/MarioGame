@@ -22,11 +22,18 @@
   ],
   "Enemies": [
     {
-      "X": 200,
-      "Y": 50,
+      "X": 800,
+      "Y": 100,
       "Width": 20,
       "Height": 50,
-      "Offset": 50
+      "Offset": 150
+    },
+    {
+      "X": 1100,
+      "Y": 100,
+      "Width": 20,
+      "Height": 50,
+      "Offset": 0
     }
   ],
   "Finish" : {

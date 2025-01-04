@@ -68,6 +68,7 @@ public partial class GameWindow : Window
         pauseWindow.ShowDialog();
     }
 
+    // TODO: Вызывать при столкновении с Enemy
     private void UpdateLivesDisplay()
     {
         LivesPanel.Children.Clear();
@@ -85,10 +86,11 @@ public partial class GameWindow : Window
         }
     }
 
+    // TODO: Добавить корректный вывод
     private void UpdateTextPanel()
     {
-        ScoreText.Text = $"Score: {_score}";
-        LevelText.Text = $"Level: {_levelNumber} / {_levelCount}";
+        ScoreText.Text = $"score: {_score}";
+        LevelText.Text = $"level: {_levelNumber} / {_levelCount}";
         TimeText.Text = "00:00:00";
     }
     

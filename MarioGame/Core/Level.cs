@@ -25,13 +25,19 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
-        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null) { return; }
+        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null || levelData?.Enemies == null) { return; }
         
         _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
         
         foreach (var ground in levelData.Grounds)
         {
             var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+            _objects.Add(groundObject);
+        }
+        
+        foreach (var enemy in levelData.Enemies)
+        {
+            var groundObject = new EnemyObject(enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset);
             _objects.Add(groundObject);
         }
         
@@ -65,6 +71,10 @@ public class Level
     public void Update()
     {
         _player?.Update(_canvas, _objects);
+        foreach (var obj in _objects)
+        {
+            obj?.Update(_canvas);
+        }
         DrawLevel();
     }
     
