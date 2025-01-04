@@ -39,12 +39,12 @@ public class Level
                 _objects.Add(groundObject);
 
                 //изменение ширины уровня
-                double ground_right = ground.X + ground.Width;
-                Width = Math.Max(Width, ground_right);
+                double groundRight = ground.X + ground.Width;
+                Width = Math.Max(Width, groundRight);
 
                 //изменение высоты уровня
-                double ground_height = ground.Y + ground.Height;
-                Height = Math.Max(Height, ground_height);
+                double groundHeight = ground.Y + ground.Height;
+                Height = Math.Max(Height, groundHeight);
             }    
         }
         
