@@ -10,9 +10,10 @@
         WindowStyle="None"
         ResizeMode="NoResize">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
-            <TextBlock TextAlignment="Center" FontSize="40" FontWeight="Bold">game over!</TextBlock>
-            <Button Content="restart" Margin="0, 20" Width="200" Height="50" Click="Restart_Click" />
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 0, 0, 30">
+            <TextBlock Foreground="Violet" TextAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0, 10">game over</TextBlock>
+            <TextBlock Name="ScoreText" TextAlignment="Center" FontSize="20" Margin="0, 20"></TextBlock>
+            <Button Content="restart" Width="200" Height="50" Click="Restart_Click" />
         </StackPanel>
     </Grid>
 </Window>

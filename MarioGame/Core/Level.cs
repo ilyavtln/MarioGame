@@ -11,9 +11,14 @@ namespace MarioGame.Core;
 public class Level
 {
     private readonly uint _levelNumber;
+    private int _score = 0;
+    private int _lives = 3;
     private readonly Canvas _canvas;
     private Player? _player;
     private readonly List<GameObject?> _objects;
+    private List<GameObject> _objectsToRemove = new List<GameObject>();
+    public event Action<int>? ScoreChanged;
+    public event Action<int>? LivesChanged;
 
     //для обновления камеры
     public double Width { get; private set; } = 0;
@@ -58,6 +63,15 @@ public class Level
         {
             _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
         }
+
+        if (levelData?.Coins != null)
+        {
+            foreach (var coin in levelData.Coins)
+            {
+                var coinObject = new CoinObject(this, coin.X, _canvas.ActualHeight - coin.Y, coin.Width, coin.Height);
+                _objects.Add(coinObject);
+            }
+        }
     
         if (levelData?.Backgrounds != null)
         {
@@ -73,7 +87,7 @@ public class Level
         {
             foreach (var enemy in levelData.Enemies)
             {
-                var enemyObject = new EnemyObject(enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
+                var enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
                 _objects.Add(enemyObject);
             }  
         }
@@ -122,6 +136,15 @@ public class Level
         foreach (var obj in _objects)
         {
             obj?.Draw(_canvas);
+            
+            if (obj is CoinObject coin)
+            {
+                if (_player != null) coin.InteractWithPlayer(_player);
+            }
+            else if (obj is EnemyObject enemy)
+            {
+                if (_player != null) enemy.InteractWithPlayer(_player);
+            }
         }
         
         _player?.Draw(_canvas);
@@ -133,9 +156,24 @@ public class Level
         foreach (var obj in _objects)
         {
             obj?.Update(_canvas);
+
+            if (obj is EnemyObject enemy)
+            {
+                if (_player != null) enemy.InteractWithPlayer(_player);
+            }
         }
+    
+        // Удаляем объекты после итерации
+        foreach (var obj in _objectsToRemove)
+        {
+            _objects.Remove(obj);
+        }
+
+        _objectsToRemove.Clear();
+
         DrawLevel();
     }
+
     
     public void HandleKeyDown(Key key)
     {
@@ -147,7 +185,25 @@ public class Level
         _player?.HandleKeyUp(key);
     }
 
+    public void OnCoinCollected(CoinObject coin)
+    {
+        _objectsToRemove.Add(coin);
+        _score += 10; 
+        ScoreChanged?.Invoke(_score);
+    }
 
+    public void OnEnemyTouched(EnemyObject enemy)
+    {
+        _objectsToRemove.Add(enemy);
+        _lives -= 1;
+        LivesChanged?.Invoke(_lives);
+        
+        if (_lives <= 0)
+        {
+            _player?.OnDeath();
+        }
+    }
+    
     public Player? GetPlayer()
     {
         return _player;

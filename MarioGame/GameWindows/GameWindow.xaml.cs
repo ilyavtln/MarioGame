@@ -12,9 +12,10 @@ public partial class GameWindow : Window
     private readonly GameManager _gameManager;
     private readonly SoundManager _soundManager;
     private uint _levelCount = 3;
-    private int _lives = 3;
+    // TODO: Сделать взаимодействие с врагами
     private int _score = 0;
-
+    private int _lives = 3;
+    
     public GameWindow(uint levelNumber)
     {
         InitializeComponent();
@@ -22,17 +23,20 @@ public partial class GameWindow : Window
         _gameManager = new GameManager(_levelNumber, GameCanvas);
         _soundManager = new SoundManager();
         
+        UpdateTextPanel();
+        UpdateLivesDisplay(_lives);
+        
         _gameManager.PlayerDied += GameOver;
         _gameManager.LevelEnded += LoadNextLevel;
+        _gameManager.TimeUpdated += UpdateTimeDisplay;
+        _gameManager.ScoreUpdated += UpdateScoreDisplay;
+        _gameManager.LivesUpdated += UpdateLivesDisplay;
         
         this.Loaded += (sender, e) => StartGame();
         this.SizeChanged += (sender, e) => _gameManager.Resize();
         
         this.KeyDown += (sender, e) => _gameManager.HandleKeyDown(e.Key);
         this.KeyUp += (sender, e) => _gameManager.HandleKeyUp(e.Key);
-        
-        UpdateLivesDisplay();
-        UpdateTextPanel();
     }
 
     private void LoadNextLevel()
@@ -67,13 +71,28 @@ public partial class GameWindow : Window
         
         pauseWindow.ShowDialog();
     }
-
-    // TODO: Вызывать при столкновении с Enemy
-    private void UpdateLivesDisplay()
+    
+    // TODO: Добавить корректный вывод
+    private void UpdateTextPanel()
     {
+        LevelText.Text = $"level: {_levelNumber} / {_levelCount}";
+        ScoreText.Text = $"score: {_score}";
+    }
+    
+    private void UpdateScoreDisplay(int newScore)
+    {
+        _score = newScore; 
+        ScoreText.Text = $"score: {_score}";
+    }
+    
+    // TODO: Странно показывает жизни
+    private void UpdateLivesDisplay(int lives)
+    {
+        Console.WriteLine(lives);
+        
         LivesPanel.Children.Clear();
 
-        for (int i = 0; i < _lives; i++)
+        for (int i = 0; i < lives; i++)
         {
             var heart = new Image
             {
@@ -85,13 +104,10 @@ public partial class GameWindow : Window
             LivesPanel.Children.Add(heart);
         }
     }
-
-    // TODO: Добавить корректный вывод
-    private void UpdateTextPanel()
+    
+    private void UpdateTimeDisplay(TimeSpan gameTime)
     {
-        ScoreText.Text = $"score: {_score}";
-        LevelText.Text = $"level: {_levelNumber} / {_levelCount}";
-        TimeText.Text = "00:00:00";
+        TimeText.Text = $"time: {gameTime:mm\\:ss}";
     }
     
     private void GameOver()
@@ -102,7 +118,7 @@ public partial class GameWindow : Window
     
         _soundManager.PlaySoundEffect("mario-game-over.mp3");
     
-        var gameOverWindow = new GameOverWindow(_levelNumber) { Owner = this};
+        var gameOverWindow = new GameOverWindow(_levelNumber, _score) { Owner = this};
 
         gameOverWindow.ShowDialog();
     }

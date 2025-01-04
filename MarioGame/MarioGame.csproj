@@ -60,6 +60,7 @@
 
     <ItemGroup>
       <Folder Include="Shared\Images\Background\" />
+      <Folder Include="Shared\Images\Coins\" />
       <Folder Include="Shared\Images\Finish\" />
       <Folder Include="Shared\Images\Player\" />
     </ItemGroup>

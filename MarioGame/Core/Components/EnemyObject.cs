@@ -12,9 +12,11 @@ public class EnemyObject : GameObject
     private double _startX;
     private bool _movingRight = true;
     private string _imagePath = "pack://application:,,,/Shared/Images/Enemy/";
+    private Level _level;
 
-    public EnemyObject(double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
+    public EnemyObject(Level level, double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
     {
+        _level = level;
         _startX = x;
         _offset = offset;
         _speed = speed;
@@ -73,7 +75,12 @@ public class EnemyObject : GameObject
 
     public override void InteractWithPlayer(Player player)
     {
-        // Логика взаимодействия земли с игроком
-        // Например, земля может быть основой для движения
+        // Проверяем, пересекаются ли границы игрока и монеты
+        if (player.X < X + Width && player.X + player.Width > X &&
+            player.Y < Y + Height && player.Y + player.Height > Y)
+        {
+            // Уведомляем уровень о сборе монеты
+            _level.OnEnemyTouched(this);
+        }
     }
 }

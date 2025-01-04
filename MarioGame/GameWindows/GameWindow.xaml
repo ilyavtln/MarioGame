@@ -17,6 +17,7 @@
                 Height="50"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Focusable="False"
                 Margin="10"
                 FontSize="24"
                 Click="MenuButton_Click" />

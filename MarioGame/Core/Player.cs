@@ -142,6 +142,11 @@ public class Player
 
         return false;
     }
+    
+    public void OnDeath()
+    {
+        PlayerDied?.Invoke();
+    }
 
     private bool IsCollidingWithGround(GroundObject ground)
     {

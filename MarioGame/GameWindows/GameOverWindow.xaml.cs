@@ -5,10 +5,19 @@ namespace MarioGame.GameWindows;
 public partial class GameOverWindow : Window
 {
     private readonly uint _levelNumber;
-    public GameOverWindow(uint levelNumber)
+    private readonly int _score;
+    
+    public GameOverWindow(uint levelNumber, int score)
     {
         InitializeComponent();
         _levelNumber = levelNumber;
+        _score = score;
+        ShowScore();
+    }
+
+    private void ShowScore()
+    {
+        ScoreText.Text = $"score: {_score}";
     }
 
     private void Restart_Click(object sender, RoutedEventArgs e)
