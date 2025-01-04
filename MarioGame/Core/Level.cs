@@ -25,16 +25,18 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
-        if (levelData == null || levelData.Grounds == null || levelData.Player == null) { return; }
+        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null) { return; }
         
         _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
-
         
         foreach (var ground in levelData.Grounds)
         {
             var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
             _objects.Add(groundObject);
         }
+        
+        var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
+        _objects.Add(finishObject);
     }
 
     private LevelData? LoadLevelData()
@@ -66,12 +68,12 @@ public class Level
         DrawLevel();
     }
     
-    public void HandleKeyDown(System.Windows.Input.Key key)
+    public void HandleKeyDown(Key key)
     {
         _player?.HandleKeyDown(key);
     }
 
-    public void HandleKeyUp(System.Windows.Input.Key key)
+    public void HandleKeyUp(Key key)
     {
         _player?.HandleKeyUp(key);
     }
