@@ -29,7 +29,7 @@ public class GameManager
         
         canvas.Loaded += (sender, e) =>
         {
-            _camera = new Camera(_level.Width, _level.Height);
+            _camera = new Camera(_level!.Width, _level.Height);
         };
         
     }
