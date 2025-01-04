@@ -32,7 +32,7 @@
       </Content>
       <None Remove="Levels\level_1.json" />
       <Content Include="Levels\level_1.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <None Remove="Assets\Sounds\mario-pause.mp3" />
       <Content Include="Assets\Sounds\mario-pause.mp3">
