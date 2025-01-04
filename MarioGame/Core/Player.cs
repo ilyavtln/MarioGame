@@ -16,17 +16,15 @@ public class Player
     public double Height { get; set; }
 
     private double _velocityX = 0;
-    private bool _isJumping = false;
-    private bool _onGround = false;
     private double _jumpVelocity = 0;
     private const double Gravity = 1;
     private const double MaxJumpHeight = 15;
     private const double MoveSpeed = 5;
-    
+
     private PlayerStatus _playerStatus = PlayerStatus.Idle;
     private bool _isOnGround = false;
     public event Action? PlayerDied;
-    
+
     public Player(double x, double y, double width, double height)
     {
         X = x;
@@ -60,7 +58,7 @@ public class Player
                 _playerStatus = PlayerStatus.IsMovingRight;
                 _velocityX = MoveSpeed;
                 break;
-            case Key.Space:
+            case Key.Space when _isOnGround:
                 _playerStatus = PlayerStatus.IsJumping;
                 _jumpVelocity = -MaxJumpHeight;
                 Y += _jumpVelocity;
@@ -79,15 +77,13 @@ public class Player
 
     public void Update(Canvas canvas, List<GameObject?> objects)
     {
-        // Проверка столкновения с землей
-        _onGround = false;
-        var isBlockOnDirectionMove = false;
-
-        if(CheckIfPlayerDead(canvas))
+        if (CheckIfPlayerDead(canvas))
         {
             return;
         }
 
+        // Проверка столкновения с землей
+        var isBlockOnDirectionMove = false;
         _isOnGround = false;
         foreach (var obj in objects)
         {
@@ -95,9 +91,18 @@ public class Player
             {
                 _isOnGround = true;
                 Y = ground.Y - Height;
+                if (_velocityX > 0)
+                    _playerStatus = PlayerStatus.IsMovingRight;
+                else if (_velocityX < 0)
+                    _playerStatus = PlayerStatus.IsMovingLeft;
+                else
+                    _playerStatus = PlayerStatus.Idle;
                 break;
             }
+        }
 
+        foreach(var obj in objects)
+        {
             if (obj is GroundObject groundOnMove && IsCollidingWithBlockOnMove(groundOnMove, _velocityX))
             {
                 X = _velocityX > 0 ? groundOnMove.X - Width : groundOnMove.X + groundOnMove.Width;
@@ -108,7 +113,7 @@ public class Player
         if (!isBlockOnDirectionMove)
             X += _velocityX;
 
-        if (!_onGround)
+        if (!_isOnGround)
         {
             Y += _jumpVelocity;
             _jumpVelocity += Gravity;
@@ -128,7 +133,6 @@ public class Player
         return false;
     }
 
-    
     private bool IsCollidingWithGround(GroundObject ground)
     {
         return Y + Height >= ground.Y && X + Width > ground.X && X < ground.X + ground.Width;
@@ -137,7 +141,8 @@ public class Player
     private bool IsCollidingWithBlockOnMove(GroundObject ground, double shift)
     {
         return Y + Height > ground.Y && Y < ground.Y + ground.Height &&
-              (X + shift + Width > ground.X && X + shift + Width < ground.X + ground.Width) ||
-              (X + shift > ground.X && X + shift < ground.X + ground.Width);
+              (X + shift + Width > ground.X && X + shift + Width < ground.X + ground.Width ||
+               X + shift > ground.X && X + shift < ground.X + ground.Width);
+
     }
 }

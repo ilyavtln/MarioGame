@@ -10,10 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Assets\Images\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="Assets\Fonts\HarryPotter.ttf" />
       <None Remove="Assets\Fonts\HarryPotterEN-en.ttf" />
       <Resource Include="Assets\Fonts\HarryPotterKudosEN-en.ttf" />
@@ -50,6 +46,8 @@
       <Content Include="Levels\level_3.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="Assets\Images\player-heart.png" />
+      <Resource Include="Assets\Images\player-heart.png" />
     </ItemGroup>
 
 </Project>
