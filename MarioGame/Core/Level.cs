@@ -30,25 +30,25 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
-        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null || levelData?.Enemies == null  || levelData?.Backgrounds == null) { return; }
-        
-        _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
-        
-        foreach (var ground in levelData.Grounds)
+
+        if (levelData?.Grounds != null)
         {
-            var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
-            _objects.Add(groundObject);
+            foreach (var ground in levelData.Grounds)
+            {
+                var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+                _objects.Add(groundObject);
 
-            //изменение ширины уровня
-            double ground_right = ground.X + ground.Width;
-            Width = Math.Max(Width, ground_right);
+                //изменение ширины уровня
+                double ground_right = ground.X + ground.Width;
+                Width = Math.Max(Width, ground_right);
 
-            //изменение высоты уровня
-            double ground_height = ground.Y + ground.Height;
-            Height = Math.Max(Height, ground_height);
+                //изменение высоты уровня
+                double ground_height = ground.Y + ground.Height;
+                Height = Math.Max(Height, ground_height);
+            }    
         }
         
-        foreach (var enemy in levelData.Enemies)
+        if (levelData?.Finish != null)
         {
             var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
             _objects.Add(finishObject);
@@ -58,7 +58,7 @@ public class Level
         {
             _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
         }
-        
+    
         if (levelData?.Backgrounds != null)
         {
             foreach (var background in levelData.Backgrounds)
