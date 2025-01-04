@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using MarioGame.Core;
 using MarioGame.Shared.Enums;
 
@@ -35,12 +36,38 @@ public partial class PauseWindow : Window
     
     private void SelectLevel_Click(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        LevelSelectionPanel.Visibility = Visibility.Visible;
+        ((this.Content as Grid)!).Children[0].Visibility = Visibility.Collapsed;
     }
 
     private void Exit_Click(object sender, RoutedEventArgs e)
     {
         _gameManager.SetGameStatus(GameStatus.Stopped);
         Application.Current.Shutdown();
+    }
+
+    private void LevelButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button)
+        {
+            string? buttonTag = button.Tag?.ToString();
+
+            if (buttonTag != null)
+            {
+                uint selectedLevel = uint.Parse(buttonTag);
+
+                this.Close();
+                var newGameWindow = new GameWindow(selectedLevel);
+                newGameWindow.Show();
+            }
+        }
+        
+        Application.Current.Windows[0]?.Close();
+    }
+
+    private void BackButton_Click(object sender, RoutedEventArgs e)
+    {
+        LevelSelectionPanel.Visibility = Visibility.Collapsed;
+        ((this.Content as Grid)!).Children[0].Visibility = Visibility.Visible;
     }
 }

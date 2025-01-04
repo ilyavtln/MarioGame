@@ -1,5 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
+using MarioGame.GameWindows;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
@@ -13,6 +16,9 @@ public class GameManager
     private Level? _level;
     private Camera? _camera;
     private DispatcherTimer? _gameLoopTimer;
+    private bool _playerIsDead = false;
+    public event Action? PlayerDied;
+    public event Action? LevelEnded;
 
     public GameManager(uint levelNumber, Canvas canvas)
     {
@@ -46,6 +52,8 @@ public class GameManager
     {
         _gameStatus = GameStatus.Playing;
         _level?.DrawLevel();
+        var player = _level?.GetPlayer();
+        if (player != null) player.PlayerDied += OnPlayerDied;
         _gameLoopTimer?.Start();
     }
     
@@ -61,6 +69,11 @@ public class GameManager
             {
                 _camera?.Update(player, _canvas);
             }
+            
+            if (_playerIsDead)
+            {
+                PlayerDied?.Invoke();
+            }
         }
     }
     
@@ -72,12 +85,12 @@ public class GameManager
         _camera?.SetLevelDimensions(_canvas.ActualWidth, _canvas.ActualHeight);
     }
     
-    public void HandleKeyDown(System.Windows.Input.Key key)
+    public void HandleKeyDown(Key key)
     {
         _level?.HandleKeyDown(key);
     }
 
-    public void HandleKeyUp(System.Windows.Input.Key key)
+    public void HandleKeyUp(Key key)
     {
         _level?.HandleKeyUp(key);
     }
@@ -85,7 +98,7 @@ public class GameManager
     public void SetGameStatus(GameStatus gameStatus)
     {
         _gameStatus = gameStatus;
-        if (gameStatus == GameStatus.Paused)
+        if (gameStatus is GameStatus.Paused or GameStatus.Stopped)
         {
             _gameLoopTimer?.Stop();
         }
@@ -93,5 +106,17 @@ public class GameManager
         {
             _gameLoopTimer?.Start();
         }
+    }
+    
+    private void OnPlayerDied()
+    {
+        _playerIsDead = true;
+        SetGameStatus(GameStatus.Stopped);
+        PlayerDied?.Invoke();
+    }
+
+    protected virtual void OnLevelEnded()
+    {
+        LevelEnded?.Invoke();
     }
 }

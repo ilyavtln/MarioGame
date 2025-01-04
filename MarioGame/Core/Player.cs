@@ -1,8 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using MarioGame.Core.Components;
+using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
 
@@ -20,7 +22,11 @@ public class Player
     private const double Gravity = 1;
     private const double MaxJumpHeight = 15;
     private const double MoveSpeed = 5;
-
+    
+    private PlayerStatus _playerStatus = PlayerStatus.Idle;
+    private bool _isOnGround = false;
+    public event Action? PlayerDied;
+    
     public Player(double x, double y, double width, double height)
     {
         X = x;
@@ -47,13 +53,15 @@ public class Player
         switch (key)
         {
             case Key.Left:
+                _playerStatus = PlayerStatus.IsMovingLeft;
                 _velocityX = -MoveSpeed;
                 break;
             case Key.Right:
+                _playerStatus = PlayerStatus.IsMovingRight;
                 _velocityX = MoveSpeed;
                 break;
-            case Key.Space when !_isJumping && _onGround:
-                _isJumping = true;
+            case Key.Space:
+                _playerStatus = PlayerStatus.IsJumping;
                 _jumpVelocity = -MaxJumpHeight;
                 Y += _jumpVelocity;
                 break;
@@ -62,9 +70,10 @@ public class Player
 
     public void HandleKeyUp(Key key)
     {
-        if (key == Key.Left || key == Key.Right)
+        if (key is Key.Left or Key.Right)
         {
             _velocityX = 0;
+            _playerStatus = PlayerStatus.Idle;
         }
     }
 
@@ -74,13 +83,18 @@ public class Player
         _onGround = false;
         var isBlockOnDirectionMove = false;
 
+        if(CheckIfPlayerDead(canvas))
+        {
+            return;
+        }
+
+        _isOnGround = false;
         foreach (var obj in objects)
         {
             if (obj is GroundObject ground && IsCollidingWithGround(ground))
             {
-                _onGround = true;
+                _isOnGround = true;
                 Y = ground.Y - Height;
-                _isJumping = false;
                 break;
             }
 
@@ -103,6 +117,18 @@ public class Player
             _jumpVelocity = 0;
     }
 
+    private bool CheckIfPlayerDead(Canvas canvas)
+    {
+        if (Y >= canvas.ActualHeight)
+        {
+            PlayerDied?.Invoke();
+            return true;
+        }
+
+        return false;
+    }
+
+    
     private bool IsCollidingWithGround(GroundObject ground)
     {
         return Y + Height >= ground.Y && X + Width > ground.X && X < ground.X + ground.Width;

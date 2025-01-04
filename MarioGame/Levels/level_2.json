@@ -5,35 +5,16 @@
       "X": 0,
       "Y": 50,
       "Width": 144,
-      "Height": 100
-    },
-    {
-      "X": 200,
-      "Y": 50,
-      "Width": 12800,
-      "Height": 50
-    },
-    {
-      "X": 400,
-      "Y": 100,
-      "Width": 100,
       "Height": 50
     }
-
   ],
-  "Finish" : {
-    "X": 500,
-    "Y": 150,
-    "Width": 50,
-    "Height": 200
-  },
   "Backgrounds": [
     {
       "X": 60,
       "Y": 100,
       "Width": 50,
       "Height": 50,
-      "Type": "Cloud" 
+      "Type": "Cloud"
     },
     {
       "X": 160,
@@ -43,6 +24,12 @@
       "Type": "Bush"
     }
   ],
+  "Finish" : {
+    "X": 500,
+    "Y": 50,
+    "Width": 50,
+    "Height": 200
+  },
   "Player": {
     "X": 0,
     "Y": 64,

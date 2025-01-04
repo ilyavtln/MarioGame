@@ -38,6 +38,18 @@
       <Content Include="Levels\level_1.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Assets\Sounds\mario-pause.mp3" />
+      <Content Include="Assets\Sounds\mario-pause.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_2.json" />
+      <Content Include="Levels\level_2.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_3.json" />
+      <Content Include="Levels\level_3.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

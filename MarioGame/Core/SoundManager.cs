@@ -19,7 +19,7 @@ public class SoundManager
 
     private void InitDefaultSound()
     {
-        SetMusicVolume(0.0);
+        SetMusicVolume(0.1);
         SetSoundEffectVolume(0.4);
     }
 
