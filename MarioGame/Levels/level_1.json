@@ -12,7 +12,14 @@
       "Y": 50,
       "Width": 800,
       "Height": 50
+    },
+    {
+      "X": 400,
+      "Y": 100,
+      "Width": 100,
+      "Height": 50
     }
+
   ],
   "Backgrounds": [
     {
