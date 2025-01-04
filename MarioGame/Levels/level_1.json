@@ -14,6 +14,22 @@
       "Height": 50
     }
   ],
+  "Backgrounds": [
+    {
+      "X": 60,
+      "Y": 100,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud" 
+    },
+    {
+      "X": 160,
+      "Y": 50,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Bush"
+    }
+  ],
   "Finish" : {
     "X": 500,
     "Y": 50,
