@@ -1,0 +1,25 @@
+﻿<Window x:Class="MarioGame.GameWindows.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:MarioGame.GameWindows"
+        mc:Ignorable="d"
+        Title="Mario" Height="600" Width="1000"
+        WindowState="Maximized">
+    <Grid>
+        <Canvas Name="GameCanvas" Background="LightBlue"></Canvas>
+
+        <!-- Кнопка вызова меню -->
+        <Button Name="MenuButton"
+                Content="☰"
+                Background="Plum"
+                Width="50"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10"
+                FontSize="24"
+                Click="MenuButton_Click" />
+    </Grid>
+</Window>

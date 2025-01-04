@@ -1,0 +1,28 @@
+﻿<Application x:Class="MarioGame.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MarioGame"
+             StartupUri="/Startup/StartupWindow.xaml"
+             >
+    <Application.Resources>
+        <FontFamily x:Key="HarryPotterFont">pack://application:,,,/Assets/Fonts/#HarryPotterKudos</FontFamily>
+
+        <!-- Глобальные стили -->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
+        </Style>
+    </Application.Resources>
+</Application>
