@@ -29,7 +29,7 @@ public class GameManager
         
         canvas.Loaded += (sender, e) =>
         {
-            _camera = new Camera(_canvas.ActualWidth, _canvas.ActualHeight);
+            _camera = new Camera(_level.Width, _level.Height);
         };
         
     }
@@ -82,7 +82,7 @@ public class GameManager
         _canvas.Children.Clear();
         _level?.ResizeObjects();
         _level?.DrawLevel();
-        _camera?.SetLevelDimensions(_canvas.ActualWidth, _canvas.ActualHeight);
+        _camera?.SetLevelDimensions(_level.Width, _level.Height);
     }
     
     public void HandleKeyDown(Key key)

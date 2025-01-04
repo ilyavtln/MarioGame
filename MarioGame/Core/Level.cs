@@ -15,6 +15,10 @@ public class Level
     private Player? _player;
     private readonly List<GameObject?> _objects;
 
+    //для обновления камеры
+    public double Width { get; private set; } = 0;
+    public double Height { get; private set; } = 0;
+
     public Level(uint levelNumber, Canvas canvas)
     {
         _levelNumber = levelNumber;
@@ -26,17 +30,25 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
-
-        if (levelData?.Grounds != null)
+        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null || levelData?.Enemies == null  || levelData?.Backgrounds == null) { return; }
+        
+        _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
+        
+        foreach (var ground in levelData.Grounds)
         {
-            foreach (var ground in levelData.Grounds)
-            {
-                var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
-                _objects.Add(groundObject);
-            }    
-        }
+            var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+            _objects.Add(groundObject);
 
-        if (levelData?.Finish != null)
+            //изменение ширины уровня
+            double ground_right = ground.X + ground.Width;
+            Width = Math.Max(Width, ground_right);
+
+            //изменение высоты уровня
+            double ground_height = ground.Y + ground.Height;
+            Height = Math.Max(Height, ground_height);
+        }
+        
+        foreach (var enemy in levelData.Enemies)
         {
             var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
             _objects.Add(finishObject);
