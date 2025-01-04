@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using MarioGame.Core;
 using MarioGame.Shared.Enums;
 
@@ -10,7 +12,9 @@ public partial class GameWindow : Window
     private readonly GameManager _gameManager;
     private readonly SoundManager _soundManager;
     private uint _levelCount = 3;
-    
+    private int _lives = 3;
+    private int _score = 0;
+
     public GameWindow(uint levelNumber)
     {
         InitializeComponent();
@@ -26,6 +30,9 @@ public partial class GameWindow : Window
         
         this.KeyDown += (sender, e) => _gameManager.HandleKeyDown(e.Key);
         this.KeyUp += (sender, e) => _gameManager.HandleKeyUp(e.Key);
+        
+        UpdateLivesDisplay();
+        UpdateTextPanel();
     }
 
     private void LoadNextLevel()
@@ -61,6 +68,30 @@ public partial class GameWindow : Window
         pauseWindow.ShowDialog();
     }
 
+    private void UpdateLivesDisplay()
+    {
+        LivesPanel.Children.Clear();
+
+        for (int i = 0; i < _lives; i++)
+        {
+            var heart = new Image
+            {
+                Source = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/player-heart.png")),
+                Width = 30,
+                Height = 30,
+                Margin = new Thickness(5, 0, 0, 0)
+            };
+            LivesPanel.Children.Add(heart);
+        }
+    }
+
+    private void UpdateTextPanel()
+    {
+        ScoreText.Text = $"Score: {_score}";
+        LevelText.Text = $"Level: {_levelNumber} / {_levelCount}";
+        TimeText.Text = "00:00:00";
+    }
+    
     private void GameOver()
     {
         _gameManager.PlayerDied -= GameOver;
