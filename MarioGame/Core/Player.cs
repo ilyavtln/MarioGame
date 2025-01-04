@@ -27,6 +27,8 @@ public class Player
 
     public Player(double x, double y, double width, double height)
     {
+        // TODO: Придумать, что с этим делать
+        Console.WriteLine(_playerStatus);
         X = x;
         Y = y;
         Width = width;
@@ -39,7 +41,7 @@ public class Player
         {
             Width = Width,
             Height = Height,
-            Fill = Brushes.Red
+            Fill = Brushes.Indigo
         };
         Canvas.SetLeft(rect, X);
         Canvas.SetTop(rect, Y);
@@ -77,9 +79,17 @@ public class Player
 
     public void Update(Canvas canvas, List<GameObject?> objects)
     {
+        // Проверка, что игрок падает
         if (CheckIfPlayerDead(canvas))
         {
             return;
+        }
+        
+        // Левая граница
+        if(X < 0)
+        {
+            X = 0;
+            _velocityX = 0;
         }
 
         // Проверка столкновения с землей
@@ -137,7 +147,7 @@ public class Player
     {
         return Y + Height >= ground.Y && X + Width > ground.X && X < ground.X + ground.Width;
     }
-
+    
     private bool IsCollidingWithBlockOnMove(GroundObject ground, double shift)
     {
         return Y + Height > ground.Y && Y < ground.Y + ground.Height &&

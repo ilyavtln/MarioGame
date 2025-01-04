@@ -6,12 +6,16 @@ namespace MarioGame.Core.Components;
 
 public class EnemyObject : GameObject
 {
-    private double _speed = 5;
+    private double _speed;
     private double _offset;
+    private double _startX;
+    private bool _movingRight = true;
 
-    public EnemyObject(double x, double y, double width, double height, double offset) : base(x, y, width, height)
+    public EnemyObject(double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
     {
+        _startX = x;
         _offset = offset;
+        _speed = speed;
     }
 
     public override void Draw(Canvas canvas)
@@ -25,6 +29,28 @@ public class EnemyObject : GameObject
         Canvas.SetLeft(rect, X);
         Canvas.SetTop(rect, Y);
         canvas.Children.Add(rect);
+    }
+
+    public override void Update(Canvas canvas)
+    {
+        if (_offset == 0) { return;}
+        
+        if (_movingRight)
+        {
+            X += _speed;
+            if (X >= _startX + _offset)
+            {
+                _movingRight = false;
+            }
+        }
+        else
+        {
+            X -= _speed;
+            if (X <= _startX)
+            {
+                _movingRight = true; 
+            }
+        }
     }
 
     public override void InteractWithPlayer(Player player)

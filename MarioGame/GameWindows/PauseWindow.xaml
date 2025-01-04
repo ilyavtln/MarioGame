@@ -13,10 +13,10 @@
     <Grid>
         <!-- Первый StackPanel для кнопок паузы -->
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
-            <Button Content="Resume" Margin="0, 10" Width="200" Height="50" Click="Resume_Click" />
-            <Button Content="Restart" Margin="0, 10" Width="200" Height="50" Click="Restart_Click" />
-            <Button Content="Select level" Margin="0, 10" Width="200" Height="50" Click="SelectLevel_Click" />
-            <Button Content="Exit" Margin="0, 10" Width="200" Height="50" Click="Exit_Click" />
+            <Button Content="resume" Margin="0, 10" Width="200" Height="50" Click="Resume_Click" />
+            <Button Content="restart" Margin="0, 10" Width="200" Height="50" Click="Restart_Click" />
+            <Button Content="select level" Margin="0, 10" Width="200" Height="50" Click="SelectLevel_Click" />
+            <Button Content="exit" Margin="0, 10" Width="200" Height="50" Click="Exit_Click" />
         </StackPanel>
 
         <!-- Второй StackPanel для выбора уровней (по умолчанию скрыт) -->

@@ -21,9 +21,12 @@ public class GroundObject : GameObject
         canvas.Children.Add(rect);
     }
 
+    public override void Update(Canvas canvas)
+    {
+        
+    }
+
     public override void InteractWithPlayer(Player player)
     {
-        // Логика взаимодействия земли с игроком
-        // Например, земля может быть основой для движения
     }
 }
