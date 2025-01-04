@@ -64,6 +64,14 @@
       "Height": 32,
       "Offset": 0,
       "Speed": 0
+    },
+    {
+      "X": 2500,
+      "Y": 628,
+      "Width": 500,
+      "Height": 500,
+      "Offset": 1000,
+      "Speed": 10
     }
   ],
   "Tubes": [

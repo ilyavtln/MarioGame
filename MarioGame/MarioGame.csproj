@@ -54,6 +54,8 @@
       <Resource Include="Shared\Images\Enemy\enemy-left-1.png" />
       <None Remove="Shared\Images\Enemy\enemy-right-1.png" />
       <Resource Include="Shared\Images\Enemy\enemy-right-1.png" />
+      <None Remove="Shared\Images\Enemy\enemy-1.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-1.png" />
     </ItemGroup>
 
     <ItemGroup>

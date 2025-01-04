@@ -82,7 +82,7 @@ public class GameManager
         _canvas.Children.Clear();
         _level?.ResizeObjects();
         _level?.DrawLevel();
-        _camera?.SetLevelDimensions(_level.Width, _level.Height);
+        _camera?.SetLevelDimensions(_level!.Width, _level.Height);
     }
     
     public void HandleKeyDown(Key key)

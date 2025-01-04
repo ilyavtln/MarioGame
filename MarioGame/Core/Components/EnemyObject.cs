@@ -11,7 +11,7 @@ public class EnemyObject : GameObject
     private double _offset;
     private double _startX;
     private bool _movingRight = true;
-    private string _imagePath = "/Shared/Images/Enemy/";
+    private string _imagePath = "pack://application:,,,/Shared/Images/Enemy/";
 
     public EnemyObject(double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
     {
@@ -35,13 +35,17 @@ public class EnemyObject : GameObject
 
     private string GetImage()
     {
-        if (_movingRight)
+        if (_offset == 0 || _speed == 0)
         {
-            return "pack://application:,,," + _imagePath + "enemy-right-1.png";
+            return _imagePath + "enemy-1.png";
+        }
+        else if (_movingRight)
+        {
+            return _imagePath + "enemy-right-1.png";
         }
         else
         {
-            return "pack://application:,,," + _imagePath + "enemy-left-1.png";
+            return _imagePath + "enemy-left-1.png";
         }
     }
 
