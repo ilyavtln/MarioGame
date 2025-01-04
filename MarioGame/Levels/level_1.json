@@ -19,7 +19,15 @@
       "Width": 100,
       "Height": 50
     }
-
+  ],
+  "Enemies": [
+    {
+      "X": 200,
+      "Y": 50,
+      "Width": 20,
+      "Height": 50,
+      "Offset": 50
+    }
   ],
   "Finish" : {
     "X": 500,
