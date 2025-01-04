@@ -11,7 +11,6 @@
 
     <ItemGroup>
       <Folder Include="Assets\Images\" />
-      <Folder Include="Assets\Sounds\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,7 +22,22 @@
       <None Remove="Assets\app_icon.ico" />
       <Resource Include="Assets\favicon.ico" />
       <None Remove="Assets\icon.png" />
-      <Resource Include="Assets\icon.png" />
+      <None Remove="Assets\Music\mario-main.mp3" />
+      <Content Include="Assets\Music\mario-main.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Assets\Sounds\mario-win.mp3" />
+      <Content Include="Assets\Sounds\mario-win.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Assets\Sounds\mario-game-over.mp3" />
+      <Content Include="Assets\Sounds\mario-game-over.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_1.json" />
+      <Content Include="Levels\level_1.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

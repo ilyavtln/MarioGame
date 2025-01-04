@@ -1,20 +1,28 @@
 ﻿using System.Windows;
+using MarioGame.Core;
+using MarioGame.Shared.Enums;
 
 namespace MarioGame.GameWindows;
 
 public partial class PauseWindow : Window
 {
-    private uint _levelNumber;
+    private readonly uint _levelNumber;
+    private readonly SoundManager _soundManager;
+    private readonly GameManager _gameManager;
     
-    public PauseWindow(uint levelNumber)
+    public PauseWindow(uint levelNumber, SoundManager soundManager, GameManager gameManager)
     {
         InitializeComponent();
         _levelNumber = levelNumber;
+        _soundManager = soundManager;
+        _gameManager = gameManager;
     }
 
     private void Resume_Click(object sender, RoutedEventArgs e)
     {
-        this.Close(); // Закрытие меню
+        this.Close();
+        _gameManager.SetGameStatus(GameStatus.Playing);
+        _soundManager.ContinueMusic();
     }
 
     private void Restart_Click(object sender, RoutedEventArgs e)
@@ -32,6 +40,7 @@ public partial class PauseWindow : Window
 
     private void Exit_Click(object sender, RoutedEventArgs e)
     {
-        Application.Current.Shutdown(); // Закрытие приложения
+        _gameManager.SetGameStatus(GameStatus.Stopped);
+        Application.Current.Shutdown();
     }
 }

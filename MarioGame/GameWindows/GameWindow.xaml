@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:MarioGame.GameWindows"
         mc:Ignorable="d"
         Title="Mario" Height="600" Width="1000"
+        MinWidth="600" MinHeight="600"
         WindowState="Maximized">
     <Grid>
-        <Canvas Name="GameCanvas" Background="LightBlue"></Canvas>
-
-        <!-- Кнопка вызова меню -->
+        <Canvas Name="GameCanvas" Background="LightBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Canvas>
         <Button Name="MenuButton"
                 Content="☰"
                 Background="Plum"

@@ -1,3 +1,23 @@
 ﻿{
-  "index": 1
+  "Index": 1,
+  "Grounds": [
+    {
+      "X": 0,
+      "Y": 450,
+      "Width": 144,
+      "Height": 50
+    },
+    {
+      "X": 200,
+      "Y": 450,
+      "Width": 800,
+      "Height": 50
+    }
+  ],
+  "Player": {
+    "X": 0,
+    "Y": 350,
+    "Width": 32,
+    "Height": 64
+  }
 }
