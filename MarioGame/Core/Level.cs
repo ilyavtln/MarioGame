@@ -14,6 +14,10 @@ public class Level
     private Player? _player;
     private List<GameObject?> _objects;
 
+    //для обновления камеры
+    public double Width { get; private set; } = 0;
+    public double Height { get; private set; } = 0;
+
     public Level(uint levelNumber, Canvas canvas)
     {
         _levelNumber = levelNumber;
@@ -33,6 +37,14 @@ public class Level
         {
             var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
             _objects.Add(groundObject);
+
+            //изменение ширины уровня
+            double ground_right = ground.X + ground.Width;
+            Width = Math.Max(Width, ground_right);
+
+            //изменение высоты уровня
+            double ground_height = ground.Y + ground.Height;
+            Height = Math.Max(Height, ground_height);
         }
         
         var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
