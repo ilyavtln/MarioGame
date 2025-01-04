@@ -26,31 +26,45 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
-        if (levelData?.Grounds == null || levelData.Player == null || levelData.Finish == null || levelData?.Enemies == null  || levelData?.Backgrounds == null) { return; }
-        
-        _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
-        
-        foreach (var ground in levelData.Grounds)
+
+        if (levelData?.Grounds != null)
         {
-            var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
-            _objects.Add(groundObject);
+            foreach (var ground in levelData.Grounds)
+            {
+                var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+                _objects.Add(groundObject);
+            }    
+        }
+
+        if (levelData?.Finish != null)
+        {
+            var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
+            _objects.Add(finishObject);
+        }
+
+        if (levelData?.Player != null)
+        {
+            _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
         }
         
-        foreach (var enemy in levelData.Enemies)
+        if (levelData?.Backgrounds != null)
         {
-            var enemyObject = new EnemyObject(enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
-            _objects.Add(enemyObject);
+            foreach (var background in levelData.Backgrounds)
+            {
+                var backgroundObject = new BackgroundObject(background.X, _canvas.ActualHeight - background.Y, background.Width,
+                    background.Height, background.Type);
+                _objects.Add(backgroundObject);
+            }
         }
-        
-        foreach (var background in levelData.Backgrounds)
+
+        if (levelData?.Enemies != null)
         {
-            var backgroundObject = new BackgroundObject(background.X, _canvas.ActualHeight - background.Y, background.Width,
-                background.Height, background.Type);
-            _objects.Add(backgroundObject);
+            foreach (var enemy in levelData.Enemies)
+            {
+                var enemyObject = new EnemyObject(enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
+                _objects.Add(enemyObject);
+            }  
         }
-        
-        var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
-        _objects.Add(finishObject);
     }
 
     private LevelData? LoadLevelData()
