@@ -48,38 +48,6 @@
       </Content>
       <None Remove="Assets\Images\player-heart.png" />
       <None Remove="Shared\Images\Tube\tube-1.png" />
-      <Resource Include="Resources\Background\cloud-1.png" />
-      <Resource Include="Resources\Background\cloud-2.png" />
-      <Resource Include="Resources\Background\cloud-3.png" />
-      <Resource Include="Resources\Background\cloud-4.png" />
-      <Resource Include="Resources\Background\cloud-eye-1.png" />
-      <Resource Include="Resources\Background\cloud-eye-2.png" />
-      <Resource Include="Resources\Background\cloud-eye-3.png" />
-      <Resource Include="Resources\Background\cloud-eye-4.png" />
-      <Resource Include="Resources\Coin\coin-1.png" />
-      <Resource Include="Resources\Coin\coin-2.png" />
-      <Resource Include="Resources\Coin\coin-3.png" />
-      <Resource Include="Resources\Enemy\enemy-1.png" />
-      <Resource Include="Resources\Enemy\enemy-left-1.png" />
-      <Resource Include="Resources\Enemy\enemy-right-1.png" />
-      <Resource Include="Resources\Finish\finish-castle.png" />
-      <Resource Include="Resources\Ground\ground-1.png" />
-      <Resource Include="Resources\Platform\brick-1.png" />
-      <Resource Include="Resources\Platform\gift-chest-1.png" />
-      <Resource Include="Resources\Player\mario-go-left-1.png" />
-      <Resource Include="Resources\Player\mario-go-left-2.png" />
-      <Resource Include="Resources\Player\mario-go-left-3.png" />
-      <Resource Include="Resources\Player\mario-go-right-1.png" />
-      <Resource Include="Resources\Player\mario-go-right-2.png" />
-      <Resource Include="Resources\Player\mario-go-right-3.png" />
-      <Resource Include="Resources\Player\mario-jump-left.png" />
-      <Resource Include="Resources\Player\mario-jump-right.png" />
-      <Resource Include="Resources\Player\mario-sit-left.png" />
-      <Resource Include="Resources\Player\mario-sit-right.png" />
-      <Resource Include="Resources\Player\mario-stay-left.png" />
-      <Resource Include="Resources\Player\mario-stay-right.png" />
-      <Resource Include="Resources\Tube\tube-1.png" />
-      <Resource Include="Resources\UI\player-heart.png" />
       <Resource Include="Shared\Images\Tube\tube-1.png" />
       <None Remove="Shared\Images\Enemy\enemy-left-1.png" />
       <Resource Include="Shared\Images\Enemy\enemy-left-1.png" />
@@ -170,6 +138,10 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Resource Include="Shared\Images\UI\player-heart.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Background\" />
     </ItemGroup>
 
 </Project>
