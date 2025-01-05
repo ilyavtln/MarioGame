@@ -36,6 +36,7 @@ public partial class GameWindow : Window
         _gameManager.ScoreUpdated += UpdateScoreDisplay;
         _gameManager.LivesUpdated += UpdateLivesDisplay;
         
+        this.Closing += (sender, args) => _gameManager.StopGame();
         this.Loaded += (sender, e) => StartGame();
         this.KeyDown += (sender, e) => _gameManager.HandleKeyDown(e.Key);
         this.KeyUp += (sender, e) => _gameManager.HandleKeyUp(e.Key);
@@ -67,6 +68,15 @@ public partial class GameWindow : Window
         {
             GamePassed();
         }
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        _gameManager.PlayerDied -= GameOver;
+        _gameManager.LevelEnded -= LoadNextLevel;
+        _gameManager.TimeUpdated -= UpdateTimeDisplay;
+        _gameManager.ScoreUpdated -= UpdateScoreDisplay;
+        _gameManager.LivesUpdated -= UpdateLivesDisplay;
     }
 
     private void StartGame()
@@ -134,8 +144,9 @@ public partial class GameWindow : Window
     {
         DrawLivesByCount(0);
         
-        _gameManager.PlayerDied -= GameOver;
-        _gameManager.SetGameStatus(GameStatus.Stopped);
+        _gameManager.StopGame();
+        UnsubscribeFromEvents();
+        
         _soundManager.StopMusic();
     
         _soundManager.PlaySoundEffect("mario-game-over.mp3");
@@ -148,6 +159,9 @@ public partial class GameWindow : Window
     private void GamePassed()
     {
         DrawLivesByCount(0);
+        
+        _gameManager.StopGame();
+        UnsubscribeFromEvents();
         
         _gameManager.SetGameStatus(GameStatus.Stopped);
         _soundManager.StopMusic();

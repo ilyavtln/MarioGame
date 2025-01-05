@@ -1,24 +1,25 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
-using MarioGame.GameWindows;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
 
 public class GameManager
 {
-    private const double Fps = 60.0;
     private readonly Canvas _canvas;
     private readonly uint _levelNumber;
     private GameStatus _gameStatus = GameStatus.Stopped;
     private Level? _level;
     private Camera? _camera;
-    private DispatcherTimer? _gameLoopTimer;
-    private bool _playerIsDead = false;
+    
+    private const int TargetFps = 60;
+    private TimeSpan _frameInterval;
+    private CancellationTokenSource? _cancellationTokenSource;
+    private bool _isRunning = false;
+    private bool _playerIsDead;
     private int _currentScore = 0;
-    private TimeSpan _gameTime = TimeSpan.Zero;
+    private TimeSpan _gameTime;
     public event Action<TimeSpan>? TimeUpdated;
     public event Action? PlayerDied;
     public event Action? LevelEnded;
@@ -29,30 +30,54 @@ public class GameManager
     {
         _levelNumber = levelNumber;
         _canvas = canvas;
-        InitializeGame();
-        InitializeGameLoop();
-        
+        InitializeTimers();
+        InitializeLevel();
+
         canvas.Loaded += (sender, e) =>
         {
             if (_level != null) _camera = new Camera(_level.Width, _level.Height);
         };
-        
     }
 
-    private void InitializeGame()
+    private void InitializeTimers()
+    {
+        _frameInterval = TimeSpan.FromSeconds(1.0 / TargetFps);
+        _gameTime = TimeSpan.Zero;
+    }
+
+    private void InitializeLevel()
     {
         _level = new Level(_levelNumber, _canvas);
         _level.ScoreChanged += OnScoreChanged;
         _level.LivesChanged += OnLiveStatusUpdated;
     }
 
-    private void InitializeGameLoop()
+    public async Task StartGameLoopAsync()
     {
-        _gameLoopTimer = new DispatcherTimer
+        _cancellationTokenSource = new CancellationTokenSource();
+        var token = _cancellationTokenSource.Token;
+
+        // Используем Stopwatch вместо DateTime
+        var stopwatch = Stopwatch.StartNew();
+        var lastFrameTime = stopwatch.Elapsed;
+
+        while (_isRunning && !token.IsCancellationRequested)
         {
-            Interval = TimeSpan.FromSeconds(1.0 / Fps)
-        };
-        _gameLoopTimer.Tick += (sender, e) => UpdateGame();
+            var currentFrameTime = stopwatch.Elapsed;
+            var deltaTime = currentFrameTime - lastFrameTime;
+            lastFrameTime = currentFrameTime;
+
+            UpdateGame(deltaTime);
+
+            // Считывание времени для задержки
+            var elapsedTime = stopwatch.Elapsed - currentFrameTime;
+            var delayTime = _frameInterval - elapsedTime;
+
+            if (delayTime > TimeSpan.Zero)
+            {
+                await Task.Delay(delayTime, token);
+            }
+        }
     }
 
     public void StartGame()
@@ -60,43 +85,47 @@ public class GameManager
         _gameStatus = GameStatus.Playing;
         _gameTime = TimeSpan.Zero;
         _level?.DrawLevel();
+        _isRunning = true;
+
         var player = _level?.GetPlayer();
         if (player != null) player.PlayerDied += OnPlayerDied;
         if (_level != null) _level.LevelEnded += OnLevelEnded;
-        _gameLoopTimer?.Start();
+
+        _ = StartGameLoopAsync();
     }
-    
-    private void UpdateGame()
+
+    public void StopGame()
+    {
+        _gameStatus = GameStatus.Stopped;
+        _isRunning = false;
+        _cancellationTokenSource?.Cancel();
+        UnsubscribeFromLevelEvents();
+    }
+
+    private void UpdateGame(TimeSpan deltaTime)
     {
         if (_gameStatus == GameStatus.Playing)
         {
             _canvas.Children.Clear();
+
             _level?.Update();
-            
+
             var player = _level?.GetPlayer();
-            _gameTime += TimeSpan.FromSeconds(1.0 / Fps);
+            _gameTime += deltaTime;
             TimeUpdated?.Invoke(_gameTime);
+
             if (player != null)
             {
                 _camera?.Update(player, _canvas);
             }
-            
+
             if (_playerIsDead)
             {
                 PlayerDied?.Invoke();
             }
         }
     }
-    
-    public void Resize()
-    {
-        _canvas.Children.Clear();
-        // TODO: Подумать, как исправить
-        //_level?.ResizeObjects();
-        _level?.DrawLevel();
-        if (_level != null) _camera?.SetLevelDimensions(_level.Width, _level.Height);
-    }
-    
+
     public void HandleKeyDown(Key key)
     {
         _level?.HandleKeyDown(key);
@@ -110,16 +139,29 @@ public class GameManager
     public void SetGameStatus(GameStatus gameStatus)
     {
         _gameStatus = gameStatus;
-        if (gameStatus is GameStatus.Paused or GameStatus.Stopped)
+        if (gameStatus == GameStatus.Stopped)
         {
-            _gameLoopTimer?.Stop();
+            _isRunning = false;
+            _cancellationTokenSource?.Cancel();
         }
-        else if (gameStatus == GameStatus.Playing)
+        else if (gameStatus == GameStatus.Playing && !_isRunning)
         {
-            _gameLoopTimer?.Start();
+            _ = StartGameLoopAsync();
         }
     }
-    
+
+    private void UnsubscribeFromLevelEvents()
+    {
+        if (_level == null) return;
+
+        _level.ScoreChanged -= OnScoreChanged;
+        _level.LivesChanged -= OnLiveStatusUpdated;
+        _level.LevelEnded -= OnLevelEnded;
+        
+        var player = _level.GetPlayer();
+        if (player != null) player.PlayerDied -= OnPlayerDied;
+    }
+
     private void OnPlayerDied()
     {
         _playerIsDead = true;
@@ -131,13 +173,13 @@ public class GameManager
     {
         LivesUpdated?.Invoke(lives);
     }
-    
+
     private void OnScoreChanged(int newScore)
     {
-        _currentScore = newScore; 
+        _currentScore = newScore;
         ScoreUpdated?.Invoke(_currentScore);
     }
-    
+
     private void OnLevelEnded()
     {
         LevelEnded?.Invoke();
