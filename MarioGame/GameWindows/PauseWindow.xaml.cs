@@ -12,15 +12,17 @@ public partial class PauseWindow : Window
     private readonly SoundManager _soundManager;
     private readonly GameManager _gameManager;
     private readonly uint _countLevels;
+    private GameProgress _gameProgress;
     private uint _currentLevelStart = 1;
     
-    public PauseWindow(uint levelNumber, SoundManager soundManager, GameManager gameManager, uint countLevels)
+    public PauseWindow(uint levelNumber, SoundManager soundManager, GameManager gameManager, uint countLevels, GameProgress gameProgress)
     {
         InitializeComponent();
         _levelNumber = levelNumber;
         _soundManager = soundManager;
         _gameManager = gameManager;
         _countLevels = countLevels;
+        _gameProgress = gameProgress;
         UpdateLevelButtons();
     }
     
@@ -42,7 +44,8 @@ public partial class PauseWindow : Window
                 Tag = level,
                 Width = 200,
                 Height = 50,
-                Margin = new Thickness(0, 10, 0, 10)
+                Margin = new Thickness(0, 10, 0, 10),
+                IsEnabled = _gameProgress.IsLevelUnlocked(level)
             };
             levelButton.Click += LevelButton_Click;
             LevelsPanel.Children.Add(levelButton);
@@ -73,7 +76,7 @@ public partial class PauseWindow : Window
     private void Restart_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
-        var newGameWindow = new GameWindow(_levelNumber);
+        var newGameWindow = new GameWindow(_levelNumber, _gameProgress);
         newGameWindow.Show();
         Application.Current.Windows[0]?.Close();
     }
@@ -89,6 +92,7 @@ public partial class PauseWindow : Window
     private void Exit_Click(object sender, RoutedEventArgs e)
     {
         _gameManager.SetGameStatus(GameStatus.Stopped);
+        _gameProgress.SaveProgress();
         Application.Current.Shutdown();
     }
 
@@ -103,7 +107,7 @@ public partial class PauseWindow : Window
                 uint selectedLevel = uint.Parse(buttonTag);
 
                 this.Close();
-                var newGameWindow = new GameWindow(selectedLevel);
+                var newGameWindow = new GameWindow(selectedLevel, _gameProgress);
                 newGameWindow.Show();
             }
         }

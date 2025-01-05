@@ -4,37 +4,34 @@ using System.Windows.Media.Imaging;
 using MarioGame.Core;
 using MarioGame.Shared.Enums;
 using System.IO;
+using System.Text.Json;
 
 namespace MarioGame.GameWindows;
 
 public partial class GameWindow : Window
 {
     private uint _levelNumber;
+    private GameProgress _gameProgress;
     private readonly GameManager _gameManager;
     private readonly SoundManager _soundManager;
     private uint _levelCount;
     private int _score = 0;
     private int _lives = 3;
     
-    public GameWindow(uint levelNumber, int score = 0)
+    public GameWindow(uint levelNumber, GameProgress gameProgress, int score = 0)
     {
         InitializeComponent();
         _levelNumber = levelNumber;
+        _gameProgress = gameProgress;
         _score = score;
 
         _levelCount = GetLevelsCount();
         
         _gameManager = new GameManager(_levelNumber, GameCanvas);
         _soundManager = new SoundManager();
-        
+
         UpdatePanels();
-        
-        // Подписки
-        _gameManager.PlayerDied += GameOver;
-        _gameManager.LevelEnded += LoadNextLevel;
-        _gameManager.TimeUpdated += UpdateTimeDisplay;
-        _gameManager.ScoreUpdated += UpdateScoreDisplay;
-        _gameManager.LivesUpdated += UpdateLivesDisplay;
+        SubscribeToEvents();
         
         this.Closing += (sender, args) => _gameManager.StopGame();
         this.Loaded += (sender, e) => StartGame();
@@ -56,18 +53,29 @@ public partial class GameWindow : Window
     {
         if (_levelNumber + 1 <= _levelCount)
         {
+            _gameProgress.UpdateProgress(_levelNumber);
             _levelNumber++;
             _gameManager.SetGameStatus(GameStatus.Stopped);
             _soundManager.StopMusic();
             
-            var newGameWindow = new GameWindow(_levelNumber, _score);
+            var newGameWindow = new GameWindow(_levelNumber, _gameProgress, _score);
             newGameWindow.Show();
             this.Close();
         }
         else
         {
+            _gameProgress.UpdateProgress(_levelNumber);
             GamePassed();
         }
+    }
+
+    private void SubscribeToEvents()
+    {
+        _gameManager.PlayerDied += GameOver;
+        _gameManager.LevelEnded += LoadNextLevel;
+        _gameManager.TimeUpdated += UpdateTimeDisplay;
+        _gameManager.ScoreUpdated += UpdateScoreDisplay;
+        _gameManager.LivesUpdated += UpdateLivesDisplay;
     }
 
     private void UnsubscribeFromEvents()
@@ -92,7 +100,7 @@ public partial class GameWindow : Window
         
         _soundManager.PlaySoundEffect("mario-pause.mp3");
         
-        var pauseWindow = new PauseWindow(_levelNumber, _soundManager, _gameManager, _levelCount) { Owner = this };
+        var pauseWindow = new PauseWindow(_levelNumber, _soundManager, _gameManager, _levelCount, _gameProgress) { Owner = this };
         
         pauseWindow.ShowDialog();
     }
@@ -150,8 +158,9 @@ public partial class GameWindow : Window
         _soundManager.StopMusic();
     
         _soundManager.PlaySoundEffect("mario-game-over.mp3");
+        _gameProgress.SaveProgress();
     
-        var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameManager) { Owner = this};
+        var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameManager, _gameProgress) { Owner = this};
 
         gameOverWindow.ShowDialog();
     }
@@ -167,6 +176,8 @@ public partial class GameWindow : Window
         _soundManager.StopMusic();
     
         _soundManager.PlaySoundEffect("mario-win.mp3");
+        
+        _gameProgress.SaveProgress();
     
         var gameOverWindow = new GamePassedWindow(_score) { Owner = this};
 

@@ -25,7 +25,7 @@ public partial class GamePassedWindow : Window
             _countdown--;
             CountdownText.Text = $"The game will close in {_countdown} seconds.";
         }
-
+        
         Application.Current.Shutdown();
     }
 
@@ -33,11 +33,5 @@ public partial class GamePassedWindow : Window
     {
         _cancellationTokenSource.Cancel();
         Application.Current.Shutdown();
-    }
-
-    protected override void OnClosed(EventArgs e)
-    {
-        _cancellationTokenSource.Cancel();
-        base.OnClosed(e);
     }
 }
