@@ -70,30 +70,6 @@
       "Height": 32,
       "Offset": 50,
       "Speed": 1
-    },
-    {
-      "X": 1100,
-      "Y": 160,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 0,
-      "Speed": 0
-    },
-    {
-      "X": 1200,
-      "Y": 160,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 0,
-      "Speed": 0
-    },
-    {
-      "X": 2500,
-      "Y": 628,
-      "Width": 500,
-      "Height": 500,
-      "Offset": 1000,
-      "Speed": 10
     }
   ],
   "Tubes": [

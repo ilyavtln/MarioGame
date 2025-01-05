@@ -18,7 +18,6 @@ public class GameManager
     private DispatcherTimer? _gameLoopTimer;
     private bool _playerIsDead = false;
     private int _currentScore = 0;
-    private int _currentLives = 3;
     private TimeSpan _gameTime = TimeSpan.Zero;
     public event Action<TimeSpan>? TimeUpdated;
     public event Action? PlayerDied;
@@ -63,6 +62,7 @@ public class GameManager
         _level?.DrawLevel();
         var player = _level?.GetPlayer();
         if (player != null) player.PlayerDied += OnPlayerDied;
+        if (_level != null) _level.LevelEnded += OnLevelEnded;
         _gameLoopTimer?.Start();
     }
     
@@ -127,7 +127,6 @@ public class GameManager
 
     private void OnLiveStatusUpdated(int lives)
     {
-        _currentLives = lives;
         LivesUpdated?.Invoke(lives);
     }
     
@@ -137,7 +136,6 @@ public class GameManager
         ScoreUpdated?.Invoke(_currentScore);
     }
     
-    // TODO: Нужно для запуска следующего уровня
     private void OnLevelEnded()
     {
         LevelEnded?.Invoke();

@@ -19,6 +19,7 @@ public class Level
     private List<GameObject> _objectsToRemove = new List<GameObject>();
     public event Action<int>? ScoreChanged;
     public event Action<int>? LivesChanged;
+    public event Action? LevelEnded;
 
     //для обновления камеры
     public double Width { get; private set; } = 0;
@@ -55,7 +56,7 @@ public class Level
         
         if (levelData?.Finish != null)
         {
-            var finishObject = new FinishObject(levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
+            var finishObject = new FinishObject(this, levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
             _objects.Add(finishObject);
         }
 
@@ -126,21 +127,16 @@ public class Level
 
     public void DrawLevel()
     {
+        _player?.Draw(_canvas);
+        
         foreach (var obj in _objects)
         {
             obj?.Draw(_canvas);
-            
-            if (obj is CoinObject coin)
+            if (_player != null)
             {
-                if (_player != null) coin.InteractWithPlayer(_player);
-            }
-            else if (obj is EnemyObject enemy)
-            {
-                if (_player != null) enemy.InteractWithPlayer(_player);
+                obj?.InteractWithPlayer(_player);
             }
         }
-        
-        _player?.Draw(_canvas);
     }
     
     public void Update()
@@ -150,9 +146,9 @@ public class Level
         {
             obj?.Update(_canvas);
 
-            if (obj is EnemyObject enemy)
+            if (_player != null)
             {
-                if (_player != null) enemy.InteractWithPlayer(_player);
+                obj?.InteractWithPlayer(_player);
             }
         }
     
@@ -195,6 +191,11 @@ public class Level
         {
             _player?.OnDeath();
         }
+    }
+
+    public void OnFinish(FinishObject finish)
+    {
+        LevelEnded?.Invoke();
     }
     
     public Player? GetPlayer()

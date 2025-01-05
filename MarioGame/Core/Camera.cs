@@ -11,8 +11,6 @@ public class Camera
     private double _levelWidth;
     private double _levelHeight;
 
-    private const double CameraMargin = 10;
-
     public Camera(double levelWidth, double levelHeight)
     {
         _levelWidth = levelWidth;
@@ -29,7 +27,6 @@ public class Camera
 
     private void ApplyCameraOffset(Canvas canvas)
     {
-        // Смещаем канвас для создания эффекта перемещения камеры
         var transform = new TranslateTransform(-_cameraX, -_cameraY);
         canvas.RenderTransform = transform;
     }
