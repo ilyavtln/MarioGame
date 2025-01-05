@@ -6,6 +6,7 @@ namespace MarioGame.Core;
 public class LevelData
 {
     public int Index { get; set; }
+    public int MaxLevelDuration { get; set; }
     public List<GroundJson>? Grounds { get; set; }
     public List<EnemyJson>? Enemies { get; set; }
     public List<CoinsJson>? Coins { get; set; }

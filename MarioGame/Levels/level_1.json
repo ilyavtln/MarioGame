@@ -1,5 +1,6 @@
 ﻿{
   "Index": 1,
+  "MaxLevelDuration": 20,
   "Player": {
     "X": 0,
     "Y": 150,

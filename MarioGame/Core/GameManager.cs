@@ -116,8 +116,11 @@ public class GameManager
             {
                 _camera?.Update(player, _canvas);
             }
+            
+            // Проверка, что истекло максимальное время уровня
+            bool isNoTime = _gameTime.Seconds >= _level?.MaxLevelDuration;
 
-            if (_playerIsDead)
+            if (_playerIsDead || isNoTime)
             {
                 PlayerDied?.Invoke();
             }

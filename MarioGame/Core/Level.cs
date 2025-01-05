@@ -21,6 +21,7 @@ public class Level
     public event Action<int>? LivesChanged;
     public event Action? LevelEnded;
 
+    public int MaxLevelDuration { get; private set; } = 10;
     //для обновления камеры
     public double Width { get; private set; } = 0;
     public double Height { get; private set; } = 0;
@@ -36,6 +37,11 @@ public class Level
     private void LoadLevelObjects()
     {
         var levelData = LoadLevelData();
+
+        if (levelData?.MaxLevelDuration != 0)
+        {
+            if (levelData != null) MaxLevelDuration = levelData.MaxLevelDuration;
+        }
 
         if (levelData?.Grounds != null)
         {
@@ -209,12 +215,6 @@ public class Level
     public void OnFinish(FinishObject finish)
     {
         LevelEnded?.Invoke();
-    }
-
-    public void ResizeObjects()
-    {
-        _objects.Clear();
-        LoadLevelObjects();
     }
 
     public Player? GetPlayer()
