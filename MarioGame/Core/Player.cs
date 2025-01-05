@@ -2,8 +2,10 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MarioGame.Core.Components;
+using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
@@ -24,13 +26,16 @@ public class Player
     public const double Gravity = 1;
     public const double MaxJumpHeight = 15;
     public const double MoveSpeed = 5;
+    
+    private string _imagePath = "pack://application:,,,/Shared/Images/Player/";
+    private MovingState _movingState = MovingState.State1;
+    private bool _lastDirectionRight = true;
+    private int _frameCounter = 0;
 
     public event Action? PlayerDied;
 
     public Player(double x, double y, double width, double height)
     {
-        // TODO: Придумать, что с этим делать
-        Console.WriteLine(PlayerStatus);
         X = x;
         Y = y;
         Width = width;
@@ -39,15 +44,50 @@ public class Player
 
     public void Draw(Canvas canvas)
     {
-        var rect = new Rectangle
+        var image = new Image
         {
+            Source = new BitmapImage(new Uri(GetImage())),
             Width = Width,
-            Height = Height,
-            Fill = Brushes.Indigo
+            Height = Height
         };
-        Canvas.SetLeft(rect, X);
-        Canvas.SetTop(rect, Y);
-        canvas.Children.Add(rect);
+        Canvas.SetLeft(image, X);
+        Canvas.SetTop(image, Y);
+        canvas.Children.Add(image);
+    }
+
+    private string GetImage()
+    {
+        int intState = (int)_movingState;
+        
+        switch (PlayerStatus)
+        {
+            case PlayerStatus.Idle:
+                return _lastDirectionRight 
+                    ? _imagePath + "mario-stay-right.png" 
+                    : _imagePath + "mario-stay-left.png";
+            case PlayerStatus.IsMovingRight:
+                return _imagePath + $"mario-go-right-{intState}.png";
+            case PlayerStatus.IsMovingLeft:
+                return _imagePath + $"mario-go-left-{intState}.png";
+            default:
+                return _imagePath + "mario-stay-right.png";
+        }
+    }
+    
+    private void UpdateMovingState()
+    {
+        _frameCounter++;
+        
+        if (_frameCounter % 3 == 0)
+        {
+            _movingState = _movingState switch
+            {
+                MovingState.State1 => MovingState.State2,
+                MovingState.State2 => MovingState.State3,
+                MovingState.State3 => MovingState.State1,
+                _ => MovingState.State1
+            };
+        }
     }
 
     public void HandleKeyDown(Key key)
@@ -57,10 +97,12 @@ public class Player
             case Key.Left:
                 PlayerStatus = PlayerStatus.IsMovingLeft;
                 VelocityX = -MoveSpeed;
+                _lastDirectionRight = false;
                 break;
             case Key.Right:
                 PlayerStatus = PlayerStatus.IsMovingRight;
                 VelocityX = MoveSpeed;
+                _lastDirectionRight = true;
                 break;
             case Key.Space when IsOnGround:
                 PlayerStatus = PlayerStatus.IsJumping;
@@ -93,13 +135,17 @@ public class Player
             X = 0;
             VelocityX = 0;
         }
+        
+        if (VelocityX != 0)
+        {
+            UpdateMovingState();
+        }
 
         if (!IsBlockOnDirectionMove)
             X += VelocityX;
 
         if (!IsOnGround)
         {
-            Console.WriteLine($"{IsOnGround}");
             Y += JumpVelocity;
             JumpVelocity += Gravity;
         }

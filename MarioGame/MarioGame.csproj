@@ -70,13 +70,32 @@
       <Resource Include="Shared\Images\Platform\gift-chest-1.png" />
       <None Remove="Shared\Images\Platform\brick-1.png" />
       <Resource Include="Shared\Images\Platform\brick-1.png" />
+      <None Remove="Shared\Images\Player\mario-stay-right.png" />
+      <Resource Include="Shared\Images\Player\mario-stay-right.png" />
+      <None Remove="Shared\Images\Player\mario-go-right-1.png" />
+      <Resource Include="Shared\Images\Player\mario-go-right-1.png" />
+      <None Remove="Shared\Images\Player\mario-go-right-2.png" />
+      <Resource Include="Shared\Images\Player\mario-go-right-2.png" />
+      <None Remove="Shared\Images\Player\mario-go-right-3.png" />
+      <Resource Include="Shared\Images\Player\mario-go-right-3.png" />
+      <None Remove="Shared\Images\Player\mario-go-left-1.png" />
+      <Resource Include="Shared\Images\Player\mario-go-left-1.png" />
+      <None Remove="Shared\Images\Player\mario-go-left-2.png" />
+      <Resource Include="Shared\Images\Player\mario-go-left-2.png" />
+      <None Remove="Shared\Images\Player\mario-go-left-3.png" />
+      <Resource Include="Shared\Images\Player\mario-go-left-3.png" />
+      <None Remove="Shared\Images\Player\mario-sit-left.png" />
+      <Resource Include="Shared\Images\Player\mario-sit-left.png" />
+      <None Remove="Shared\Images\Player\mario-sit-right.png" />
+      <Resource Include="Shared\Images\Player\mario-sit-right.png" />
+      <None Remove="Shared\Images\Player\mario-stay-left.png" />
+      <Resource Include="Shared\Images\Player\mario-stay-left.png" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Shared\Images\Background\" />
       <Folder Include="Shared\Images\Coins\" />
       <Folder Include="Shared\Images\Finish\" />
-      <Folder Include="Shared\Images\Player\" />
     </ItemGroup>
 
 </Project>
