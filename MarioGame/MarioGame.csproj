@@ -90,6 +90,10 @@
       <Resource Include="Shared\Images\Player\mario-sit-right.png" />
       <None Remove="Shared\Images\Player\mario-stay-left.png" />
       <Resource Include="Shared\Images\Player\mario-stay-left.png" />
+      <None Remove="Shared\Images\Player\mario-jump-left.png" />
+      <Resource Include="Shared\Images\Player\mario-jump-left.png" />
+      <None Remove="Shared\Images\Player\mario-jump-right.png" />
+      <Resource Include="Shared\Images\Player\mario-jump-right.png" />
     </ItemGroup>
 
     <ItemGroup>

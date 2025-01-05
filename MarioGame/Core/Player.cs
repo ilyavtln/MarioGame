@@ -65,6 +65,10 @@ public class Player
                 return _lastDirectionRight 
                     ? _imagePath + "mario-stay-right.png" 
                     : _imagePath + "mario-stay-left.png";
+            case PlayerStatus.IsJumping:
+                return _lastDirectionRight 
+                    ? _imagePath + "mario-jump-right.png" 
+                    : _imagePath + "mario-jump-left.png";
             case PlayerStatus.IsMovingRight:
                 return _imagePath + $"mario-go-right-{intState}.png";
             case PlayerStatus.IsMovingLeft:
