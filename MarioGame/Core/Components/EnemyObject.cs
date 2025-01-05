@@ -79,8 +79,14 @@ public class EnemyObject : GameObject
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
-            // Уведомляем уровень о сборе монеты
-            _level.OnEnemyTouched(this);
+            var isAttackFromAir = false;
+
+            if (player.Y + player.JumpVelocity + player.Height >= Y &&
+                player.Y + player.JumpVelocity + player.Height < Y + Height)
+                isAttackFromAir = true;
+
+            // Уведомляем уровень о взаимодействии с врагом
+            _level.OnEnemyTouched(this, isAttackFromAir);
         }
     }
 }

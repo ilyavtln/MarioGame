@@ -136,13 +136,13 @@ public class Level
     }
 
     public void Update()
-    { 
+    {
         if (_player != null)
         {
             _player.IsOnGround = false;
             _player.IsBlockOnDirectionMove = false;
         }
-        
+
         foreach (var obj in _objects)
         {
             obj?.Update(_canvas);
@@ -184,15 +184,24 @@ public class Level
         ScoreChanged?.Invoke(_score);
     }
 
-    public void OnEnemyTouched(EnemyObject enemy)
+    public void OnEnemyTouched(EnemyObject enemy, bool isAttackFromAir)
     {
         _objectsToRemove.Add(enemy);
-        _lives -= 1;
-        LivesChanged?.Invoke(_lives);
 
-        if (_lives <= 0)
+        if (!isAttackFromAir)
         {
-            _player?.OnDeath();
+            _lives -= 1;
+            LivesChanged?.Invoke(_lives);
+
+            if (_lives <= 0)
+            {
+                _player?.OnDeath();
+            }
+        }
+        else
+        {
+            _score += 10;
+            ScoreChanged?.Invoke(_score);
         }
     }
 
