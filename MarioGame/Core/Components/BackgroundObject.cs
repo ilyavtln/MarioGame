@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MarioGame.Shared.Enums;
 
@@ -8,6 +9,7 @@ namespace MarioGame.Core.Components;
 public class BackgroundObject : GameObject
 {
     private BackgroundType _type;
+    private string _imagePath = "pack://application:,,,/Shared/Images/Platform/";
     
     public BackgroundObject(double x, double y, double width, double height, BackgroundType type) : base(x, y, width, height)
     {
@@ -16,17 +18,22 @@ public class BackgroundObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        var fillColor = _type == BackgroundType.Bush ? Brushes.GreenYellow : Brushes.White;
+        string imageName = _type == BackgroundType.Bush ? "brick-1.png" : "gift-chest-1.png";
         
-        var rect = new Rectangle
+        var image = new Image
         {
+            Source = new BitmapImage(new Uri(GetImage(imageName))),
             Width = Width,
-            Height = Height,
-            Fill = fillColor
+            Height = Height
         };
-        Canvas.SetLeft(rect, X);
-        Canvas.SetTop(rect, Y);
-        canvas.Children.Add(rect);
+        Canvas.SetLeft(image, X);
+        Canvas.SetTop(image, Y);
+        canvas.Children.Add(image);
+    }
+
+    private string GetImage(string imageName)
+    {
+        return _imagePath + imageName;
     }
 
     public override void Update(Canvas canvas)
