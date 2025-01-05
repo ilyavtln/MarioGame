@@ -102,24 +102,7 @@ public class Player
         {
             if (obj is GroundObject ground /*&& IsCollidingWithBlockOnMoveY(ground, JumpVelocity)*/)
             {
-                //                IsOnGround = true;
-                /*if (IsOnGround)
-                {
-                    Y = ground.Y - Height;
-
-                    if (VelocityX > 0)
-                        PlayerStatus = PlayerStatus.IsMovingRight;
-                    else if (VelocityX < 0)
-                        PlayerStatus = PlayerStatus.IsMovingLeft;
-                    else
-                        PlayerStatus = PlayerStatus.Idle;
-                }
-                else
-                {
-                    JumpVelocity = 0;
-                    Y = ground.Y + ground.Height;
-                }
-                break;*/
+                
                 ground.InteractWithPlayer(this);
             }
 
