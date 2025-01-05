@@ -30,10 +30,4 @@ public class Camera
         var transform = new TranslateTransform(-_cameraX, -_cameraY);
         canvas.RenderTransform = transform;
     }
-
-    public void SetLevelDimensions(double levelWidth, double levelHeight)
-    {
-        _levelWidth = levelWidth;
-        _levelHeight = levelHeight;
-    }
 }

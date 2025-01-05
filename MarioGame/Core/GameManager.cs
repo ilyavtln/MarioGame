@@ -56,8 +56,7 @@ public class GameManager
     {
         _cancellationTokenSource = new CancellationTokenSource();
         var token = _cancellationTokenSource.Token;
-
-        // Используем Stopwatch вместо DateTime
+        
         var stopwatch = Stopwatch.StartNew();
         var lastFrameTime = stopwatch.Elapsed;
 
@@ -68,8 +67,7 @@ public class GameManager
             lastFrameTime = currentFrameTime;
 
             UpdateGame(deltaTime);
-
-            // Считывание времени для задержки
+            
             var elapsedTime = stopwatch.Elapsed - currentFrameTime;
             var delayTime = _frameInterval - elapsedTime;
 
