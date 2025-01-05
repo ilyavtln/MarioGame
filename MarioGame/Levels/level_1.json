@@ -30,6 +30,12 @@
       "Y": 128,
       "Width": 100,
       "Height": 128
+    },
+    {
+      "X": 0,
+      "Y": 400,
+      "Width": 100,
+      "Height": 128
     }
   ],
   "Platforms": [
