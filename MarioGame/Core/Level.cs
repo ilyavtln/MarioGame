@@ -198,6 +198,12 @@ public class Level
         LevelEnded?.Invoke();
     }
     
+    public void ResizeObjects()
+    {
+        _objects.Clear();
+        LoadLevelObjects();
+    }
+    
     public Player? GetPlayer()
     {
         return _player;
