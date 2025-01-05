@@ -4,23 +4,58 @@
              xmlns:local="clr-namespace:MarioGame"
              StartupUri="/Startup/StartupWindow.xaml">
     <Application.Resources>
+        <!-- Подключение шрифта -->
         <FontFamily x:Key="HarryPotterFont">pack://application:,,,/Assets/Fonts/#HarryPotterKudos</FontFamily>
         
+        <!-- Стиль для TextBlock -->
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
         </Style>
 
-        <Style TargetType="Button">
-            <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
-            <Setter Property="FontSize" Value="18"></Setter>
-        </Style>
-
+        <!-- Стиль для Label -->
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
         </Style>
 
+        <!-- Стиль для TextBox -->
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
+        </Style>
+
+        <!-- Стиль для Button -->
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Background" Value="CornflowerBlue" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="8"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Эффект при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DodgerBlue" TargetName="border"/>
+                            </Trigger>
+                            <!-- Эффект при нажатии -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="RoyalBlue" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>
