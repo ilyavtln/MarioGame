@@ -18,7 +18,7 @@ public class Player
 
     public double VelocityX { get; private set; } = 0;
     public double JumpVelocity { get; set; } = 0;
-    public bool IsOnGround { get; private set; } = false;
+    public bool IsOnGround { get; set; } = false;
     public bool IsBlockOnDirectionMove { get; set; } = false;
 
     public const double Gravity = 1;
@@ -94,35 +94,12 @@ public class Player
             VelocityX = 0;
         }
 
-        // Проверка столкновения с землей
-        // TODO: переместить в функции взаимодействия с объектом?
-        IsBlockOnDirectionMove = false;
-        IsOnGround = false;
-        foreach (var obj in objects)
-        {
-            if (obj is GroundObject ground /*&& IsCollidingWithBlockOnMoveY(ground, JumpVelocity)*/)
-            {
-                
-                ground.InteractWithPlayer(this);
-            }
-
-        }
-
-        // Коллизия с объектами на пути перемещения
-        /*foreach (var obj in objects)
-        {
-            if (obj is GroundObject groundOnMove && IsCollidingWithBlockOnMoveX(groundOnMove, VelocityX))
-            {
-                X = VelocityX > 0 ? groundOnMove.X - Width : groundOnMove.X + groundOnMove.Width;
-                isBlockOnDirectionMove = true;
-            }
-        }*/
-
         if (!IsBlockOnDirectionMove)
             X += VelocityX;
 
         if (!IsOnGround)
         {
+            Console.WriteLine($"{IsOnGround}");
             Y += JumpVelocity;
             JumpVelocity += Gravity;
         }
@@ -153,7 +130,7 @@ public class Player
                X + shift > ground.X && X + shift < ground.X + ground.Width);
     }
 
-    public bool IsCollidingWithBlockOnMoveY(GroundObject ground, double shift)
+    public bool IsCollidingWithBlockOnMoveY(GameObject ground, double shift)
     {
         var isCollisionY = false;
 

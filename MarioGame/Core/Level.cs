@@ -51,9 +51,9 @@ public class Level
                 //изменение высоты уровня
                 double groundHeight = ground.Y + ground.Height;
                 Height = Math.Max(Height, groundHeight);
-            }    
+            }
         }
-        
+
         if (levelData?.Finish != null)
         {
             var finishObject = new FinishObject(this, levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
@@ -73,7 +73,7 @@ public class Level
                 _objects.Add(coinObject);
             }
         }
-    
+
         if (levelData?.Backgrounds != null)
         {
             foreach (var background in levelData.Backgrounds)
@@ -90,25 +90,25 @@ public class Level
             {
                 var enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
                 _objects.Add(enemyObject);
-            }  
+            }
         }
-        
+
         if (levelData?.Platforms != null)
         {
             foreach (var platform in levelData.Platforms)
             {
                 var platformObject = new PlatformObject(platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height);
                 _objects.Add(platformObject);
-            }  
+            }
         }
-        
+
         if (levelData?.Tubes != null)
         {
             foreach (var tube in levelData.Tubes)
             {
                 var tubeObject = new TubeObject(tube.X, _canvas.ActualHeight - tube.Y, tube.Width, tube.Height);
                 _objects.Add(tubeObject);
-            }  
+            }
         }
     }
 
@@ -128,20 +128,21 @@ public class Level
     public void DrawLevel()
     {
         _player?.Draw(_canvas);
-        
+
         foreach (var obj in _objects)
         {
             obj?.Draw(_canvas);
-            if (_player != null)
-            {
-                obj?.InteractWithPlayer(_player);
-            }
         }
     }
-    
+
     public void Update()
-    {
-        _player?.Update(_canvas, _objects);
+    { 
+        if (_player != null)
+        {
+            _player.IsOnGround = false;
+            _player.IsBlockOnDirectionMove = false;
+        }
+        
         foreach (var obj in _objects)
         {
             obj?.Update(_canvas);
@@ -151,7 +152,9 @@ public class Level
                 obj?.InteractWithPlayer(_player);
             }
         }
-    
+
+        _player?.Update(_canvas, _objects);
+
         // Удаляем объекты после итерации
         foreach (var obj in _objectsToRemove)
         {
@@ -163,7 +166,7 @@ public class Level
         DrawLevel();
     }
 
-    
+
     public void HandleKeyDown(Key key)
     {
         _player?.HandleKeyDown(key);
@@ -177,7 +180,7 @@ public class Level
     public void OnCoinCollected(CoinObject coin)
     {
         _objectsToRemove.Add(coin);
-        _score += 10; 
+        _score += 10;
         ScoreChanged?.Invoke(_score);
     }
 
@@ -186,7 +189,7 @@ public class Level
         _objectsToRemove.Add(enemy);
         _lives -= 1;
         LivesChanged?.Invoke(_lives);
-        
+
         if (_lives <= 0)
         {
             _player?.OnDeath();
@@ -197,13 +200,13 @@ public class Level
     {
         LevelEnded?.Invoke();
     }
-    
+
     public void ResizeObjects()
     {
         _objects.Clear();
         LoadLevelObjects();
     }
-    
+
     public Player? GetPlayer()
     {
         return _player;

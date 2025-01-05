@@ -12,7 +12,7 @@ public class GroundObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        const int blockSize = 64;
+        const int blockSize = 48;
 
         int blocksHorizontal = (int)Math.Ceiling(Width / blockSize);
         int blocksVertical = (int)Math.Ceiling(Height / blockSize);
