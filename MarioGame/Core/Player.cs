@@ -26,7 +26,7 @@ public class Player
     public const double Gravity = 1;
     public const double MaxJumpHeight = 15;
     public const double MoveSpeed = 5;
-    
+
     private string _imagePath = "pack://application:,,,/Shared/Images/Player/";
     private MovingState _movingState = MovingState.State1;
     private bool _lastDirectionRight = true;
@@ -58,30 +58,32 @@ public class Player
     private string GetImage()
     {
         int intState = (int)_movingState;
-        
+
         switch (PlayerStatus)
         {
             case PlayerStatus.Idle:
-                return _lastDirectionRight 
-                    ? _imagePath + "mario-stay-right.png" 
+                return _lastDirectionRight
+                    ? _imagePath + "mario-stay-right.png"
                     : _imagePath + "mario-stay-left.png";
             case PlayerStatus.IsJumping:
-                return _lastDirectionRight 
-                    ? _imagePath + "mario-jump-right.png" 
+                return _lastDirectionRight
+                    ? _imagePath + "mario-jump-right.png"
                     : _imagePath + "mario-jump-left.png";
             case PlayerStatus.IsMovingRight:
                 return _imagePath + $"mario-go-right-{intState}.png";
             case PlayerStatus.IsMovingLeft:
                 return _imagePath + $"mario-go-left-{intState}.png";
             default:
-                return _imagePath + "mario-stay-right.png";
+                return _lastDirectionRight
+                    ? _imagePath + "mario-stay-right.png"
+                    : _imagePath + "mario-stay-left.png";
         }
     }
-    
+
     private void UpdateMovingState()
     {
         _frameCounter++;
-        
+
         if (_frameCounter % 3 == 0)
         {
             _movingState = _movingState switch
@@ -99,12 +101,14 @@ public class Player
         switch (key)
         {
             case Key.Left:
-                PlayerStatus = PlayerStatus.IsMovingLeft;
+                if (IsOnGround)
+                    PlayerStatus = PlayerStatus.IsMovingLeft;
                 VelocityX = -MoveSpeed;
                 _lastDirectionRight = false;
                 break;
             case Key.Right:
-                PlayerStatus = PlayerStatus.IsMovingRight;
+                if (IsOnGround)
+                    PlayerStatus = PlayerStatus.IsMovingRight;
                 VelocityX = MoveSpeed;
                 _lastDirectionRight = true;
                 break;
@@ -121,7 +125,10 @@ public class Player
         if (key is Key.Left or Key.Right)
         {
             VelocityX = 0;
-            PlayerStatus = PlayerStatus.Idle;
+            if (IsOnGround)
+                PlayerStatus = PlayerStatus.Idle;
+            else
+                PlayerStatus = PlayerStatus.IsJumping;
         }
     }
 
@@ -139,7 +146,7 @@ public class Player
             X = 0;
             VelocityX = 0;
         }
-        
+
         if (VelocityX != 0)
         {
             UpdateMovingState();
