@@ -140,8 +140,4 @@
       <Resource Include="Shared\Images\UI\player-heart.png" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Resources\Background\" />
-    </ItemGroup>
-
 </Project>
