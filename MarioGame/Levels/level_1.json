@@ -60,24 +60,40 @@
       "Height": 16
     }
   ],
-  "Enemies": [
-    {
-      "X": 800,
-      "Y": 176,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 100,
-      "Speed": 2
-    },
-    {
-      "X": 1000,
-      "Y": 176,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 50,
-      "Speed": 1
-    }
-  ],
+   "Enemies": [
+      {
+         "X": 800,
+         "Y": 176,
+         "Width": 32,
+         "Height": 32,
+         "Offset": 100,
+         "Speed": 2
+      },
+      {
+         "X": 1000,
+         "Y": 176,
+         "Width": 32,
+         "Height": 32,
+         "Offset": 50,
+         "Speed": 0
+      },
+      {
+         "X": 900,
+         "Y": 176,
+         "Width": 32,
+         "Height": 32,
+         "Offset": 50,
+         "Speed": 1
+      },
+      {
+         "X": 1100,
+         "Y": 176,
+         "Width": 32,
+         "Height": 32,
+         "Offset": 50,
+         "Speed": 0
+      }
+   ],
   "Tubes": [
     {
       "X": 1300,
