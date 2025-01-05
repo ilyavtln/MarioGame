@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace MarioGame.Core.Components;
@@ -10,6 +11,7 @@ public class CoinObject : GameObject
     private double _counter = 0;
     private const double MoveAmount = 10; 
     private const double MoveSpeed = 0.2;
+    private string _imagePath = "pack://application:,,,/Shared/Images/Coin/coin-1.png";
     private Level _level;
     
     public CoinObject(Level level, double x, double y, double width, double height) : base(x, y, width, height)
@@ -19,15 +21,15 @@ public class CoinObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        var ellipse = new Ellipse
+        var image = new Image
         {
+            Source = new BitmapImage(new Uri(_imagePath)),
             Width = Width,
-            Height = Height,
-            Fill = Brushes.Yellow
+            Height = Height
         };
-        Canvas.SetLeft(ellipse, X);
-        Canvas.SetTop(ellipse, Y);
-        canvas.Children.Add(ellipse);
+        Canvas.SetLeft(image, X);
+        Canvas.SetTop(image, Y);
+        canvas.Children.Add(image);
     }
 
     public override void Update(Canvas canvas)

@@ -106,11 +106,14 @@
       <Resource Include="Shared\Images\Background\cloud-eye-3.png" />
       <None Remove="Shared\Images\Background\cloud-eye-4.png" />
       <Resource Include="Shared\Images\Background\cloud-eye-4.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Shared\Images\Coins\" />
-      <Folder Include="Shared\Images\Finish\" />
+      <None Remove="Shared\Images\Coin\coin-1.png" />
+      <Resource Include="Shared\Images\Coin\coin-1.png" />
+      <None Remove="Shared\Images\Coin\coin-2.png" />
+      <Resource Include="Shared\Images\Coin\coin-2.png" />
+      <None Remove="Shared\Images\Coin\coin-3.png" />
+      <Resource Include="Shared\Images\Coin\coin-3.png" />
+      <None Remove="Shared\Images\Finish\finish-castle.png" />
+      <Resource Include="Shared\Images\Finish\finish-castle.png" />
     </ItemGroup>
 
 </Project>
