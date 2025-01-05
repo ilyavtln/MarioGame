@@ -5,13 +5,15 @@ namespace MarioGame.GameWindows;
 public partial class GamePassedWindow : Window
 {
     private int _countdown = 10;
+    private int _score;
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-    public GamePassedWindow()
+    public GamePassedWindow(int score)
     {
         InitializeComponent();
+        _score = score;
+        ScoreText.Text = $"Your score is {_score} points.";
         CountdownText.Text = $"The game will close in {_countdown} seconds.";
-        
         StartCountdownAsync(_cancellationTokenSource.Token);
     }
 
