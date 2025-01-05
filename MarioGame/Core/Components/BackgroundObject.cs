@@ -9,7 +9,7 @@ namespace MarioGame.Core.Components;
 public class BackgroundObject : GameObject
 {
     private BackgroundType _type;
-    private string _imagePath = "pack://application:,,,/Shared/Images/Platform/";
+    private string _imagePath = "pack://application:,,,/Shared/Images/Background/";
     
     public BackgroundObject(double x, double y, double width, double height, BackgroundType type) : base(x, y, width, height)
     {
@@ -18,7 +18,7 @@ public class BackgroundObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        string imageName = _type == BackgroundType.Bush ? "brick-1.png" : "gift-chest-1.png";
+        string imageName = _type == BackgroundType.Bush ? "cloud-1.png" : "cloud-eye-1.png";
         
         var image = new Image
         {

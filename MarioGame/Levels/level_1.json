@@ -104,17 +104,17 @@
   ],
   "Backgrounds": [
     {
-      "X": 160,
+      "X": 360,
       "Y": 400,
-      "Width": 50,
-      "Height": 50,
+      "Width": 64,
+      "Height": 48,
       "Type": "Cloud" 
     },
     {
       "X": 960,
       "Y": 350,
-      "Width": 50,
-      "Height": 50,
+      "Width": 64,
+      "Height": 48,
       "Type": "Bush"
     }
   ]

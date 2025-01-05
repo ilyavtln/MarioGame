@@ -94,10 +94,21 @@
       <Resource Include="Shared\Images\Player\mario-jump-left.png" />
       <None Remove="Shared\Images\Player\mario-jump-right.png" />
       <Resource Include="Shared\Images\Player\mario-jump-right.png" />
+      <Resource Include="Shared\Images\Background\cloud-1.png" />
+      <Resource Include="Shared\Images\Background\cloud-2.png" />
+      <Resource Include="Shared\Images\Background\cloud-3.png" />
+      <Resource Include="Shared\Images\Background\cloud-4.png" />
+      <None Remove="Shared\Images\Background\cloud-eye-1.png" />
+      <Resource Include="Shared\Images\Background\cloud-eye-1.png" />
+      <None Remove="Shared\Images\Background\cloud-eye-2.png" />
+      <Resource Include="Shared\Images\Background\cloud-eye-2.png" />
+      <None Remove="Shared\Images\Background\cloud-eye-3.png" />
+      <Resource Include="Shared\Images\Background\cloud-eye-3.png" />
+      <None Remove="Shared\Images\Background\cloud-eye-4.png" />
+      <Resource Include="Shared\Images\Background\cloud-eye-4.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Shared\Images\Background\" />
       <Folder Include="Shared\Images\Coins\" />
       <Folder Include="Shared\Images\Finish\" />
     </ItemGroup>

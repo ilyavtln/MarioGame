@@ -127,12 +127,13 @@ public class Level
 
     public void DrawLevel()
     {
-        _player?.Draw(_canvas);
-
         foreach (var obj in _objects)
         {
             obj?.Draw(_canvas);
         }
+        
+        // Игрока рисуем последним, чтобы бг был сзади
+        _player?.Draw(_canvas);
     }
 
     public void Update()
