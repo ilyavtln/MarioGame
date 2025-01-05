@@ -4,21 +4,21 @@
     {
       "X": 0,
       "Y": 50,
-      "Width": 144,
-      "Height": 50
+      "Width": 256,
+      "Height": 64
     }
   ],
   "Backgrounds": [
     {
-      "X": 60,
-      "Y": 100,
+      "X": 300,
+      "Y": 300,
       "Width": 50,
       "Height": 50,
       "Type": "Cloud"
     },
     {
-      "X": 160,
-      "Y": 50,
+      "X": 450,
+      "Y": 450,
       "Width": 50,
       "Height": 50,
       "Type": "Bush"

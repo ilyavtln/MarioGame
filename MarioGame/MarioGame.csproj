@@ -64,6 +64,12 @@
       <Content Include="Assets\Sounds\mario-collect-coin.mp3">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="Shared\Images\Ground\ground-1.png" />
+      <Resource Include="Shared\Images\Ground\ground-1.png" />
+      <None Remove="Shared\Images\Platform\gift-chest-1.png" />
+      <Resource Include="Shared\Images\Platform\gift-chest-1.png" />
+      <None Remove="Shared\Images\Platform\brick-1.png" />
+      <Resource Include="Shared\Images\Platform\brick-1.png" />
     </ItemGroup>
 
     <ItemGroup>

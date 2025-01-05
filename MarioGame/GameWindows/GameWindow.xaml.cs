@@ -34,7 +34,6 @@ public partial class GameWindow : Window
         _gameManager.LivesUpdated += UpdateLivesDisplay;
         
         this.Loaded += (sender, e) => StartGame();
-        this.SizeChanged += (sender, e) => _gameManager.Resize();
         this.KeyDown += (sender, e) => _gameManager.HandleKeyDown(e.Key);
         this.KeyUp += (sender, e) => _gameManager.HandleKeyUp(e.Key);
     }
