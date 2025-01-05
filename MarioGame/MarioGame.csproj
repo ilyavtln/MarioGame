@@ -47,8 +47,39 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <None Remove="Assets\Images\player-heart.png" />
-      <Resource Include="Assets\Images\player-heart.png" />
       <None Remove="Shared\Images\Tube\tube-1.png" />
+      <Resource Include="Resources\Background\cloud-1.png" />
+      <Resource Include="Resources\Background\cloud-2.png" />
+      <Resource Include="Resources\Background\cloud-3.png" />
+      <Resource Include="Resources\Background\cloud-4.png" />
+      <Resource Include="Resources\Background\cloud-eye-1.png" />
+      <Resource Include="Resources\Background\cloud-eye-2.png" />
+      <Resource Include="Resources\Background\cloud-eye-3.png" />
+      <Resource Include="Resources\Background\cloud-eye-4.png" />
+      <Resource Include="Resources\Coin\coin-1.png" />
+      <Resource Include="Resources\Coin\coin-2.png" />
+      <Resource Include="Resources\Coin\coin-3.png" />
+      <Resource Include="Resources\Enemy\enemy-1.png" />
+      <Resource Include="Resources\Enemy\enemy-left-1.png" />
+      <Resource Include="Resources\Enemy\enemy-right-1.png" />
+      <Resource Include="Resources\Finish\finish-castle.png" />
+      <Resource Include="Resources\Ground\ground-1.png" />
+      <Resource Include="Resources\Platform\brick-1.png" />
+      <Resource Include="Resources\Platform\gift-chest-1.png" />
+      <Resource Include="Resources\Player\mario-go-left-1.png" />
+      <Resource Include="Resources\Player\mario-go-left-2.png" />
+      <Resource Include="Resources\Player\mario-go-left-3.png" />
+      <Resource Include="Resources\Player\mario-go-right-1.png" />
+      <Resource Include="Resources\Player\mario-go-right-2.png" />
+      <Resource Include="Resources\Player\mario-go-right-3.png" />
+      <Resource Include="Resources\Player\mario-jump-left.png" />
+      <Resource Include="Resources\Player\mario-jump-right.png" />
+      <Resource Include="Resources\Player\mario-sit-left.png" />
+      <Resource Include="Resources\Player\mario-sit-right.png" />
+      <Resource Include="Resources\Player\mario-stay-left.png" />
+      <Resource Include="Resources\Player\mario-stay-right.png" />
+      <Resource Include="Resources\Tube\tube-1.png" />
+      <Resource Include="Resources\UI\player-heart.png" />
       <Resource Include="Shared\Images\Tube\tube-1.png" />
       <None Remove="Shared\Images\Enemy\enemy-left-1.png" />
       <Resource Include="Shared\Images\Enemy\enemy-left-1.png" />
@@ -114,6 +145,31 @@
       <Resource Include="Shared\Images\Coin\coin-3.png" />
       <None Remove="Shared\Images\Finish\finish-castle.png" />
       <Resource Include="Shared\Images\Finish\finish-castle.png" />
+      <None Remove="Levels\level_4.json" />
+      <Content Include="Levels\level_4.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_5.json" />
+      <Content Include="Levels\level_5.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_6.json" />
+      <Content Include="Levels\level_6.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_7.json" />
+      <Content Include="Levels\level_7.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_8.json" />
+      <Content Include="Levels\level_8.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Levels\level_9.json" />
+      <Content Include="Levels\level_9.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Resource Include="Shared\Images\UI\player-heart.png" />
     </ItemGroup>
 
 </Project>

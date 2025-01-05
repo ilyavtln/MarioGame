@@ -26,6 +26,6 @@ public partial class StartupWindow : Window
     /// </summary>
     private Task LoadDependenciesAsync()
     {
-        return Task.Run(() => System.Threading.Thread.Sleep(500));
+        return Task.Run(() => System.Threading.Thread.Sleep(1000));
     }
 }

@@ -13,19 +13,27 @@
         Background="Transparent">
     <Border Background="Lavender" CornerRadius="30">
         <Grid>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
-                <Button Content="resume" Margin="0, 10" Width="200" Height="50" Click="Resume_Click" />
-                <Button Content="restart" Margin="0, 10" Width="200" Height="50" Click="Restart_Click" />
-                <Button Content="select level" Margin="0, 10" Width="200" Height="50" Click="SelectLevel_Click" />
-                <Button Content="exit" Margin="0, 10" Width="200" Height="50" Click="Exit_Click" />
-            </StackPanel>
+            <!-- Главное меню паузы -->
+            <Grid x:Name="PauseMenuPanel" Visibility="Visible" Margin="20">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Content="resume" Margin="0, 10" Width="200" Height="50" Click="Resume_Click" />
+                    <Button Content="restart" Margin="0, 10" Width="200" Height="50" Click="Restart_Click" />
+                    <Button Content="select level" Margin="0, 10" Width="200" Height="50" Click="SelectLevel_Click" />
+                    <Button Content="exit" Margin="0, 10" Width="200" Height="50" Click="Exit_Click" />
+                </StackPanel>
+            </Grid>
             
-            <StackPanel x:Name="LevelSelectionPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Visibility="Collapsed">
-                <Button Content="Level 1" Tag="1" Width="200" Height="50" Margin="0, 10" Click="LevelButton_Click"/>
-                <Button Content="Level 2" Tag="2" Width="200" Height="50" Margin="0, 10" Click="LevelButton_Click"/>
-                <Button Content="Level 3" Tag="3" Width="200" Height="50" Margin="0, 10" Click="LevelButton_Click"/>
-                <Button Content="Back" Width="200" Height="50" Margin="0, 10" Click="BackButton_Click"/>
-            </StackPanel>
+            <!-- Панель выбора уровня -->
+            <Grid x:Name="LevelSelectionPanel" Visibility="Collapsed" Margin="20">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel x:Name="LevelsPanel" Orientation="Vertical" HorizontalAlignment="Center"></StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10">
+                        <Button x:Name="BackButton" Content="back" Width="90" Height="50" Margin="0, 0, 10, 0" Click="BackButton_Click"/>
+                        <Button x:Name="NextButton" Content="next" Width="90" Height="50" Margin="10, 0, 0, 0" Click="NextButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </Window>

@@ -1,39 +1,39 @@
 ﻿{
-  "Index": 3,
+  "Index": 9,
+  "Player": {
+    "X": 0,
+    "Y": 150,
+    "Width": 32,
+    "Height": 64
+  },
+  "Finish" : {
+    "X": 700,
+    "Y": 400,
+    "Width": 256,
+    "Height": 256
+  },
   "Grounds": [
     {
       "X": 0,
-      "Y": 50,
-      "Width": 1000,
-      "Height": 50
+      "Y": 144,
+      "Width": 1440,
+      "Height": 144
     }
   ],
   "Backgrounds": [
     {
-      "X": 60,
-      "Y": 100,
+      "X": 300,
+      "Y": 300,
       "Width": 50,
       "Height": 50,
       "Type": "Cloud"
     },
     {
-      "X": 160,
-      "Y": 50,
+      "X": 450,
+      "Y": 450,
       "Width": 50,
       "Height": 50,
       "Type": "Bush"
     }
-  ],
-  "Finish" : {
-    "X": 500,
-    "Y": 50,
-    "Width": 50,
-    "Height": 200
-  },
-  "Player": {
-    "X": 0,
-    "Y": 64,
-    "Width": 32,
-    "Height": 64
-  }
+  ]
 }

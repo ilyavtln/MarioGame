@@ -36,7 +36,6 @@ public partial class GameOverWindow : Window
 
     private void Exit_Click(object sender, RoutedEventArgs e)
     {
-        _gameManager.SetGameStatus(GameStatus.Stopped);
         Application.Current.Shutdown();
     }
 }

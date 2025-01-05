@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using MarioGame.Core;
 using MarioGame.Shared.Enums;
+using System.IO;
 
 namespace MarioGame.GameWindows;
 
@@ -11,7 +12,7 @@ public partial class GameWindow : Window
     private uint _levelNumber;
     private readonly GameManager _gameManager;
     private readonly SoundManager _soundManager;
-    private uint _levelCount = 3;
+    private uint _levelCount;
     private int _score = 0;
     private int _lives = 3;
     
@@ -20,6 +21,8 @@ public partial class GameWindow : Window
         InitializeComponent();
         _levelNumber = levelNumber;
         _score = score;
+
+        _levelCount = GetLevelsCount();
         
         _gameManager = new GameManager(_levelNumber, GameCanvas);
         _soundManager = new SoundManager();
@@ -37,10 +40,20 @@ public partial class GameWindow : Window
         this.KeyDown += (sender, e) => _gameManager.HandleKeyDown(e.Key);
         this.KeyUp += (sender, e) => _gameManager.HandleKeyUp(e.Key);
     }
+    
+
+    private uint GetLevelsCount()
+    {
+        string levelsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Levels");
+        var levelFiles = Directory.GetFiles(levelsFolderPath, "level_*.json");
+
+        return (uint)levelFiles.Length;
+    }
+
 
     private void LoadNextLevel()
     {
-        if (_levelNumber + 1 < _levelCount)
+        if (_levelNumber + 1 <= _levelCount)
         {
             _levelNumber++;
             _gameManager.SetGameStatus(GameStatus.Stopped);
@@ -49,6 +62,10 @@ public partial class GameWindow : Window
             var newGameWindow = new GameWindow(_levelNumber, _score);
             newGameWindow.Show();
             this.Close();
+        }
+        else
+        {
+            GamePassed();
         }
     }
 
@@ -65,7 +82,7 @@ public partial class GameWindow : Window
         
         _soundManager.PlaySoundEffect("mario-pause.mp3");
         
-        var pauseWindow = new PauseWindow(_levelNumber, _soundManager, _gameManager) { Owner = this };
+        var pauseWindow = new PauseWindow(_levelNumber, _soundManager, _gameManager, _levelCount) { Owner = this };
         
         pauseWindow.ShowDialog();
     }
@@ -99,7 +116,7 @@ public partial class GameWindow : Window
         {
             var heart = new Image
             {
-                Source = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/player-heart.png")),
+                Source = new BitmapImage(new Uri("pack://application:,,,/Shared/Images/UI/player-heart.png")),
                 Width = 30,
                 Height = 30,
                 Margin = new Thickness(5, 0, 0, 0)
@@ -115,6 +132,8 @@ public partial class GameWindow : Window
     
     private void GameOver()
     {
+        DrawLivesByCount(0);
+        
         _gameManager.PlayerDied -= GameOver;
         _gameManager.SetGameStatus(GameStatus.Stopped);
         _soundManager.StopMusic();
@@ -122,6 +141,20 @@ public partial class GameWindow : Window
         _soundManager.PlaySoundEffect("mario-game-over.mp3");
     
         var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameManager) { Owner = this};
+
+        gameOverWindow.ShowDialog();
+    }
+    
+    private void GamePassed()
+    {
+        DrawLivesByCount(0);
+        
+        _gameManager.SetGameStatus(GameStatus.Stopped);
+        _soundManager.StopMusic();
+    
+        _soundManager.PlaySoundEffect("mario-win.mp3");
+    
+        var gameOverWindow = new GamePassedWindow() { Owner = this};
 
         gameOverWindow.ShowDialog();
     }
