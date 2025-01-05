@@ -38,8 +38,13 @@ public partial class PauseWindow : Window
     {
         _soundManager.PlaySoundEffect("mario-pause.mp3");
         LevelSelectionPanel.Visibility = Visibility.Visible;
-        ((this.Content as Grid)!).Children[0].Visibility = Visibility.Collapsed;
+
+        if (this.Content is Grid grid)
+        {
+            grid.Children[0].Visibility = Visibility.Collapsed;
+        }
     }
+
 
     private void Exit_Click(object sender, RoutedEventArgs e)
     {
@@ -70,6 +75,10 @@ public partial class PauseWindow : Window
     {
         _soundManager.PlaySoundEffect("mario-pause.mp3");
         LevelSelectionPanel.Visibility = Visibility.Collapsed;
-        ((this.Content as Grid)!).Children[0].Visibility = Visibility.Visible;
+
+        if (this.Content is Grid grid)
+        {
+            grid.Children[0].Visibility = Visibility.Visible;
+        }
     }
 }
