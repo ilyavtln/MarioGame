@@ -121,7 +121,7 @@ public partial class GameWindow : Window
     
         _soundManager.PlaySoundEffect("mario-game-over.mp3");
     
-        var gameOverWindow = new GameOverWindow(_levelNumber, _score) { Owner = this};
+        var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameManager) { Owner = this};
 
         gameOverWindow.ShowDialog();
     }

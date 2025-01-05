@@ -9,11 +9,14 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         ResizeMode="NoResize">
-    <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 0, 0, 30">
-            <TextBlock Foreground="Violet" TextAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0, 10">game over</TextBlock>
-            <TextBlock Name="ScoreText" TextAlignment="Center" FontSize="20" Margin="0, 20"></TextBlock>
-            <Button Content="restart" Width="200" Height="50" Click="Restart_Click" />
-        </StackPanel>
-    </Grid>
+    <Border Background="Lavender" BorderBrush="DarkSlateBlue" BorderThickness="2" CornerRadius="20">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 0, 0, 30">
+                <TextBlock Foreground="Violet" TextAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0, 10">game over</TextBlock>
+                <TextBlock Name="ScoreText" TextAlignment="Center" FontSize="20" Margin="0, 20"></TextBlock>
+                <Button Content="restart" Width="200" Height="50" Margin="0, 10" Click="Restart_Click" />
+                <Button Content="exit" Width="200" Height="50" Margin="0, 10" Click="Exit_Click" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

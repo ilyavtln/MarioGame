@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using MarioGame.Core;
+using MarioGame.Shared.Enums;
 
 namespace MarioGame.GameWindows;
 
@@ -6,12 +8,14 @@ public partial class GameOverWindow : Window
 {
     private readonly uint _levelNumber;
     private readonly int _score;
+    private GameManager _gameManager;
     
-    public GameOverWindow(uint levelNumber, int score)
+    public GameOverWindow(uint levelNumber, int score, GameManager gameManager)
     {
         InitializeComponent();
         _levelNumber = levelNumber;
         _score = score;
+        _gameManager = gameManager;
         ShowScore();
     }
 
@@ -28,5 +32,11 @@ public partial class GameOverWindow : Window
         this.Close();
         
         Application.Current.Windows[0]?.Close();
+    }
+
+    private void Exit_Click(object sender, RoutedEventArgs e)
+    {
+        _gameManager.SetGameStatus(GameStatus.Stopped);
+        Application.Current.Shutdown();
     }
 }
