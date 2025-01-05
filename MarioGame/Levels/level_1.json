@@ -7,9 +7,9 @@
     "Height": 64
   },
   "Finish" : {
-    "X": 2000,
+    "X": 1500,
     "Y": 300,
-    "Width": 150,
+    "Width": 50,
     "Height": 300
   },
   "Grounds": [
@@ -22,13 +22,13 @@
     {
       "X": 200,
       "Y": 128,
-      "Width": 12800,
+      "Width": 128,
       "Height": 128
     },
     {
       "X": 400,
       "Y": 128,
-      "Width": 100,
+      "Width": 1200,
       "Height": 128
     },
     {
@@ -76,30 +76,6 @@
       "Height": 32,
       "Offset": 50,
       "Speed": 1
-    },
-    {
-      "X": 1100,
-      "Y": 160,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 0,
-      "Speed": 0
-    },
-    {
-      "X": 1200,
-      "Y": 160,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 0,
-      "Speed": 0
-    },
-    {
-      "X": 2500,
-      "Y": 628,
-      "Width": 500,
-      "Height": 500,
-      "Offset": 1000,
-      "Speed": 10
     }
   ],
   "Tubes": [

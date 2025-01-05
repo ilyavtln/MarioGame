@@ -9,7 +9,13 @@
         MinWidth="1000" MinHeight="600"
         WindowState="Maximized">
     <Grid>
-        <Canvas Name="GameCanvas" Background="LightBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Canvas>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="LightSkyBlue" Offset="0"/>
+                <GradientStop Color="PaleGreen" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Canvas Name="GameCanvas" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Canvas>
         <Button Name="MenuButton"
                 Content="☰"
                 Background="Plum"

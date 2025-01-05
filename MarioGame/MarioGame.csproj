@@ -56,6 +56,14 @@
       <Resource Include="Shared\Images\Enemy\enemy-right-1.png" />
       <None Remove="Shared\Images\Enemy\enemy-1.png" />
       <Resource Include="Shared\Images\Enemy\enemy-1.png" />
+      <None Remove="Assets\Sounds\mario-touch-enemy.mp3" />
+      <Content Include="Assets\Sounds\mario-touch-enemy.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Assets\Sounds\mario-collect-coin.mp3" />
+      <Content Include="Assets\Sounds\mario-collect-coin.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
