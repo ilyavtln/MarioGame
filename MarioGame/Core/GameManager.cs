@@ -91,7 +91,6 @@ public class GameManager
     public void Resize()
     {
         _canvas.Children.Clear();
-        _level?.ResizeObjects();
         _level?.DrawLevel();
         if (_level != null) _camera?.SetLevelDimensions(_level.Width, _level.Height);
     }

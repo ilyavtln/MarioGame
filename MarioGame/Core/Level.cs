@@ -124,13 +124,6 @@ public class Level
         return JsonSerializer.Deserialize<LevelData>(json, options);
     }
 
-
-    public void ResizeObjects()
-    {
-        _objects.Clear();
-        LoadLevelObjects();
-    }
-
     public void DrawLevel()
     {
         foreach (var obj in _objects)
