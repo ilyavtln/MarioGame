@@ -36,7 +36,7 @@ public class BackgroundObject : GameObject
         return _imagePath + imageName;
     }
 
-    public override void Update(Canvas canvas)
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
     }
 

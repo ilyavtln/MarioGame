@@ -178,23 +178,23 @@ public class Player
         PlayerDied?.Invoke();
     }
 
-    public bool IsCollidingWithBlockOnMoveX(GameObject ground, double shift)
+    public bool IsCollidingWithBlockOnMoveX(GameObject obj, double shift)
     {
-        return Y + Height > ground.Y && Y < ground.Y + ground.Height &&
-              (X + shift + Width > ground.X && X + shift + Width < ground.X + ground.Width ||
-               X + shift > ground.X && X + shift < ground.X + ground.Width);
+        return Y + Height > obj.Y && Y < obj.Y + obj.Height &&
+              (X + shift + Width > obj.X && X + shift + Width < obj.X + obj.Width ||
+               X + shift > obj.X && X + shift < obj.X + obj.Width);
     }
 
-    public bool IsCollidingWithBlockOnMoveY(GameObject ground, double shift)
+    public bool IsCollidingWithBlockOnMoveY(GameObject obj, double shift)
     {
         var isCollisionY = false;
 
-        if (X + Width > ground.X && X < ground.X + ground.Width)
+        if (X + Width > obj.X && X < obj.X + obj.Width)
         {
-            if (Y + shift > ground.Y && Y + shift < ground.Y + ground.Height)
+            if (Y + shift > obj.Y && Y + shift < obj.Y + obj.Height)
                 isCollisionY = true;
 
-            if (Y + shift + Height >= ground.Y && Y + shift + Height < ground.Y + ground.Height)
+            if (Y + shift + Height >= obj.Y && Y + shift + Height < obj.Y + obj.Height)
             {
                 isCollisionY = true;
                 IsOnGround = true;

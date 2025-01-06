@@ -14,6 +14,9 @@ public class EnemyObject : GameObject
     private string _imagePath = "pack://application:,,,/Shared/Images/Enemy/";
     private Level _level;
 
+    private double velocityY = 0;
+    private const double gravity = 1;
+
     public EnemyObject(Level level, double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
     {
         _level = level;
@@ -51,25 +54,55 @@ public class EnemyObject : GameObject
         }
     }
 
-    public override void Update(Canvas canvas)
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
         if (_offset == 0) { return;}
-        
-        if (_movingRight)
+
+        Console.WriteLine($"{canvas.ActualHeight}");
+        if (Y > canvas.ActualHeight)
         {
-            X += _speed;
-            if (X >= _startX + _offset)
+            _level.OnDeathFallenEnemy(this);
+            return;
+        }
+
+        double speed = _movingRight ? _speed : -_speed;
+
+        var isOnGround = false;
+        var isBlockOnDirectionMove = false;
+        foreach (var gameObject in gameObjects)
+        {
+            if (gameObject is GroundObject or PlatformObject or TubeObject)
             {
-                _movingRight = false;
+                if (IsCollidingWithBlockOnMoveY(gameObject))
+                {
+                    isOnGround = true;
+
+                    Y = gameObject.Y - Height;
+                }
+
+                if (IsCollidingWithBlockOnMoveX(gameObject, speed))
+                {
+                    isBlockOnDirectionMove = true;
+                    X = speed > 0 ? gameObject.X - Width : gameObject.X + gameObject.Width;
+                    _movingRight = !_movingRight;
+                }
             }
         }
-        else
+
+        if (!isOnGround)
         {
-            X -= _speed;
-            if (X <= _startX)
-            {
-                _movingRight = true; 
-            }
+            Y += velocityY;
+            velocityY += gravity;
+        }
+        else
+            velocityY = 0;
+
+        if (!isBlockOnDirectionMove)
+        {
+            X += speed;
+
+            if (X >= _startX + _offset || X <= _startX)
+                _movingRight = !_movingRight;
         }
     }
 
@@ -83,10 +116,26 @@ public class EnemyObject : GameObject
 
             if (player.Y + player.JumpVelocity + player.Height >= Y &&
                 player.Y + player.JumpVelocity + player.Height < Y + Height)
+            {
                 isAttackFromAir = true;
+                player.JumpVelocity = -5;
+            }
 
             // Уведомляем уровень о взаимодействии с врагом
             _level.OnEnemyTouched(this, isAttackFromAir);
         }
+    }
+
+    private bool IsCollidingWithBlockOnMoveX(GameObject obj, double shift)
+    {
+        return Y + Height > obj.Y && Y < obj.Y + obj.Height &&
+              (X + shift + Width > obj.X && X + shift + Width < obj.X + obj.Width ||
+               X + shift > obj.X && X + shift < obj.X + obj.Width);
+    }
+
+    private bool IsCollidingWithBlockOnMoveY(GameObject obj)
+    {
+        return X + Width > obj.X && X < obj.X + obj.Width &&
+               Y + Height >= obj.Y && Y + Height < obj.Y + obj.Height;
     }
 }

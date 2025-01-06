@@ -39,7 +39,7 @@ public class GroundObject : GameObject
         }
     }
 
-    public override void Update(Canvas canvas)
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
 
     }

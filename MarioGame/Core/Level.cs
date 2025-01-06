@@ -152,7 +152,7 @@ public class Level
 
         foreach (var obj in _objects)
         {
-            obj?.Update(_canvas);
+            obj?.Update(_canvas, _objects);
 
             if (_player != null)
             {
@@ -210,6 +210,11 @@ public class Level
             _score += 10;
             ScoreChanged?.Invoke(_score);
         }
+    }
+
+    public void OnDeathFallenEnemy(EnemyObject enemy)
+    {
+        _objectsToRemove.Add(enemy);
     }
 
     public void OnFinish(FinishObject finish)

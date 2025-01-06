@@ -18,6 +18,6 @@ public abstract class GameObject
     }
 
     public abstract void Draw(Canvas canvas);
-    public abstract void Update(Canvas canvas);
+    public abstract void Update(Canvas canvas, List<GameObject?> gameObjects);
     public abstract void InteractWithPlayer(Player player);
 }

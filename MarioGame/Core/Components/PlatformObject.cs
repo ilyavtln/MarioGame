@@ -27,7 +27,7 @@ public class PlatformObject : GameObject
         canvas.Children.Add(image);
     }
 
-    public override void Update(Canvas canvas)
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
     }
 
