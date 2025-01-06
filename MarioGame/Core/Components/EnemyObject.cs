@@ -57,8 +57,7 @@ public class EnemyObject : GameObject
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
         if (_offset == 0) { return;}
-
-        Console.WriteLine($"{canvas.ActualHeight}");
+        
         if (Y > canvas.ActualHeight)
         {
             _level.OnDeathFallingEnemy(this);
