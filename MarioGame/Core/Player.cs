@@ -114,16 +114,17 @@ public class Player
             await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
         }
         
+        _lastDirectionRight = !_lastDirectionRight;
         PlayerStatus = PlayerStatus.Idle;
         VelocityX = 0;
 
         await HidePlayer();
-        await Task.Delay(100);
     }
 
     
     private async Task HidePlayer()
     {
+        await Task.Delay(500);
         if (_playerImage != null)
         {
             int steps = 100;
@@ -140,6 +141,7 @@ public class Player
                 await Task.Delay(500);
             }
         }
+        await Task.Delay(100);
     }
 
     
