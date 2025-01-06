@@ -61,7 +61,7 @@ public class EnemyObject : GameObject
         Console.WriteLine($"{canvas.ActualHeight}");
         if (Y > canvas.ActualHeight)
         {
-            _level.OnDeathFallenEnemy(this);
+            _level.OnDeathFallingEnemy(this);
             return;
         }
 
@@ -108,7 +108,7 @@ public class EnemyObject : GameObject
 
     public override void InteractWithPlayer(Player player)
     {
-        // Проверяем, пересекаются ли границы игрока и монеты
+        // Проверяем, пересекаются ли границы игрока и врага
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {

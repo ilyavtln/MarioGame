@@ -212,7 +212,7 @@ public class Level
         }
     }
 
-    public void OnDeathFallenEnemy(EnemyObject enemy)
+    public void OnDeathFallingEnemy(EnemyObject enemy)
     {
         _objectsToRemove.Add(enemy);
     }
