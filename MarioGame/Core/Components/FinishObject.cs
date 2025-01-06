@@ -33,13 +33,14 @@ public class FinishObject : GameObject
         
     }
 
-    public override void InteractWithPlayer(Player player)
+    public override async void InteractWithPlayer(Player player)
     {
-        // Проверяем, пересекаются ли границы игрока и монеты
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
-            // Уведомляем уровень о сборе монеты
+            double targetDistance = (X + Width / 2) - player.X;
+            await player.AnimatedPlayerMove(targetDistance);
+            
             _level.OnFinish(this);
         }
     }

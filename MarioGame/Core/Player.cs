@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MarioGame.Core.Components;
@@ -31,6 +32,8 @@ public class Player
     private MovingState _movingState = MovingState.State1;
     private bool _lastDirectionRight = true;
     private int _frameCounter = 0;
+    private Image? _playerImage;
+    private double _opacity = 1.0;
 
     public event Action? PlayerDied;
 
@@ -44,15 +47,16 @@ public class Player
 
     public void Draw(Canvas canvas)
     {
-        var image = new Image
+        _playerImage = new Image
         {
             Source = new BitmapImage(new Uri(GetImage())),
             Width = Width,
-            Height = Height
+            Height = Height,
+            Opacity = _opacity
         };
-        Canvas.SetLeft(image, X);
-        Canvas.SetTop(image, Y);
-        canvas.Children.Add(image);
+        Canvas.SetLeft(_playerImage, X);
+        Canvas.SetTop(_playerImage, Y);
+        canvas.Children.Add(_playerImage);
     }
 
     private string GetImage()
@@ -94,6 +98,49 @@ public class Player
         }
     }
 
+    public async Task AnimatedPlayerMove(double distance)
+    {
+        int direction = distance > 0 ? 1 : -1;
+        double targetX = X + distance;
+        
+        PlayerStatus = direction > 0 ? PlayerStatus.IsMovingRight : PlayerStatus.IsMovingLeft;
+        _lastDirectionRight = direction > 0;
+        VelocityX = MoveSpeed * direction;
+        
+        while (Math.Abs(X - targetX) > MoveSpeed)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
+        }
+        
+        PlayerStatus = PlayerStatus.Idle;
+        VelocityX = 0;
+
+        await HidePlayer();
+        await Task.Delay(100);
+    }
+
+    
+    private async Task HidePlayer()
+    {
+        if (_playerImage != null)
+        {
+            int steps = 100;
+            double opacityStep = 1.0 / steps; 
+
+            for (int i = 0; i < steps; i++)
+            {
+                if (_playerImage != null)
+                {
+                    _playerImage.Opacity -= opacityStep;
+                    _opacity -= opacityStep;
+                }
+                if (_opacity < 0) break;
+                await Task.Delay(500);
+            }
+        }
+    }
+
+    
     public void HandleKeyDown(Key key)
     {
         switch (key)
