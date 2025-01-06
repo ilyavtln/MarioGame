@@ -35,7 +35,8 @@ public class Player
     private int _frameCounter = 0;
     private Image? _playerImage;
     private double _opacity = 1.0;
-
+    private SoundManager _soundManager = new SoundManager();
+    
     public event Action? PlayerDied;
 
     public Player(double x, double y, double width, double height)
@@ -162,6 +163,7 @@ public class Player
                 PlayerStatus = PlayerStatus.IsJumping;
                 JumpVelocity = -MaxJumpHeight;
                 Y += JumpVelocity;
+                _soundManager.PlaySoundEffect("mario-jump.mp3");
                 break;
         }
     }

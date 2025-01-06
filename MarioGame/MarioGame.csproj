@@ -138,6 +138,10 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Resource Include="Shared\Images\UI\player-heart.png" />
+      <None Remove="Assets\Sounds\mario-jump.mp3" />
+      <Content Include="Assets\Sounds\mario-jump.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>
