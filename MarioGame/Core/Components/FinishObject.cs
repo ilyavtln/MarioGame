@@ -38,6 +38,7 @@ public class FinishObject : GameObject
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
+            player.PlayerAtFinish = true;
             double targetDistance = (X + Width / 2) - player.X;
             await player.AnimatedPlayerMove(targetDistance);
             

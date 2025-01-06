@@ -23,6 +23,7 @@ public class Player
     public double JumpVelocity { get; set; } = 0;
     public bool IsOnGround { get; set; } = false;
     public bool IsBlockOnDirectionMove { get; set; } = false;
+    public bool PlayerAtFinish { get; set; } = false;
 
     public const double Gravity = 1;
     public const double MaxJumpHeight = 15;
@@ -157,7 +158,7 @@ public class Player
                 VelocityX = MoveSpeed;
                 _lastDirectionRight = true;
                 break;
-            case Key.Space when IsOnGround:
+            case Key.Space when IsOnGround && !PlayerAtFinish:
                 PlayerStatus = PlayerStatus.IsJumping;
                 JumpVelocity = -MaxJumpHeight;
                 Y += JumpVelocity;
