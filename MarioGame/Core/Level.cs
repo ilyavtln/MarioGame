@@ -122,7 +122,7 @@ public class Level
             {
                 var platformObject = new PlatformObject(this, platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height, platform.Type);
 
-                switch (platformObject.Type)
+                switch (platform.Type)
                 {
                     case PlatformType.ChestWithCoins or PlatformType.Coins:
                     {
@@ -216,15 +216,11 @@ public class Level
 
         _objectsToAdd.Clear();
 
-        foreach (var obj in _objectsToChange)
+        foreach (var platform in _objectsToChange.OfType<PlatformObject>())
         {
-            int i = _objects.IndexOf(obj);
-
-            if (_objects[i] is PlatformObject platform)
-            {
-                platform.Type = PlatformType.ChestDiactivated;
-            }
+            platform.DeactivateChest();
         }
+
         _objectsToChange.Clear();
         
         // Удаляем объекты после итерации

@@ -2,7 +2,6 @@
 using MarioGame.Shared.Enums;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using MarioGame.Core.Interfaces;
 
 namespace MarioGame.Core.Components;
 
@@ -11,12 +10,10 @@ public class PlatformObject : GameObject
     private double _velocity;
     private const double Gravity = 3d;
     private const double JumpVelocity = -6d;
-
+    private readonly Random _random = new();
     private bool _isMoving;
-
     public GameObject? ContainedObject { get; private set; }
-    // TODO: желательно сделать приватным
-    public PlatformType Type;
+    private PlatformType _type;
 
     private MovingState _movingState = MovingState.State1;
     private const string ImagePath = "pack://application:,,,/Shared/Images/Platform/";
@@ -32,14 +29,22 @@ public class PlatformObject : GameObject
     public PlatformObject(Level level, double x, double y, double width, double height, PlatformType type) : base(x, y, width, height)
     {
         _level = level;
-        Type = type;
-        switch(type)
+        _type = type;
+        ObjectsCount = GetObjectsCountByType();
+    }
+
+    private int GetObjectsCountByType()
+    {
+        int objectsCount;
+        switch(_type)
         {
-            case PlatformType.Coins: ObjectsCount = 5; break;
-            case PlatformType.ChestWithCoins: ObjectsCount = 1; break;
-            case PlatformType.ChestWithMushroom: ObjectsCount = 1; break;
-            default: ObjectsCount = 0; break;
+            case PlatformType.Coins: objectsCount = _random.Next(1, 6); break;
+            case PlatformType.ChestWithCoins: objectsCount = 1; break;
+            case PlatformType.ChestWithMushroom: objectsCount = 1; break;
+            default: objectsCount = 0; break;
         }
+        
+        return objectsCount;
     }
 
     public void InitializeChestObject(GameObject obj)
@@ -49,12 +54,12 @@ public class PlatformObject : GameObject
 
     public void DeactivateChest()
     {
-        Type = PlatformType.ChestDiactivated;
+        _type = PlatformType.ChestDiactivated;
     }
 
     private string GetImage()
     {
-        switch (Type)
+        switch (_type)
         {
             case PlatformType.Brick:
                 return ImagePath + "brick-1.png";
@@ -152,14 +157,14 @@ public class PlatformObject : GameObject
                 _isMoving = true;
                 _velocity = JumpVelocity;
 
-                switch (Type)
+                switch (_type)
                 {
                     case PlatformType.Coins:
                     {
                         if (ObjectsCount > 0)
                             _level.OnChestWithCoinTouched(this);
                         else
-                            Type = PlatformType.ChestDiactivated;
+                            _type = PlatformType.ChestDiactivated;
                         ObjectsCount--;
                         break;
                     }
@@ -171,7 +176,7 @@ public class PlatformObject : GameObject
                     case PlatformType.ChestWithMushroom:
                     {
                         player.OnPower();
-                        Type = PlatformType.ChestDiactivated;
+                        _type = PlatformType.ChestDiactivated;
                         break;
                     }
                 }
