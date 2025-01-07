@@ -3,8 +3,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MarioGame.Config;
 using MarioGame.Core.Components;
-using MarioGame.Core.Config;
 using MarioGame.Core.Interfaces;
 using MarioGame.Shared.Enums;
 

@@ -4,6 +4,7 @@ using System.Windows.Media.Imaging;
 using MarioGame.Core;
 using MarioGame.Shared.Enums;
 using System.IO;
+using MarioGame.Config;
 
 namespace MarioGame.GameWindows;
 
@@ -15,7 +16,7 @@ public partial class GameWindow
     private readonly SoundManager _soundManager;
     private readonly uint _levelCount;
     private int _score;
-    private const int Lives = 3;
+    private const int Lives = GameConfig.Lives;
 
     public GameWindow(uint levelNumber, GameProgress gameProgress, int score = 0)
     {
