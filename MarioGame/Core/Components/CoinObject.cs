@@ -122,7 +122,7 @@ public class CoinObject : GameObject
                 if (_moveSpeed < 10d + 1d + 1.0e-7 && _moveSpeed > 10d + 1d - 1.0e-7)
                 {
                     _moveSpeed = -10;
-                    _level.OnCoinFromChestDissapear(this);
+                    _level.OnCoinFromChestDisappear(this);
                 }
 
                 break;

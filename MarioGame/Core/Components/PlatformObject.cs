@@ -56,8 +56,6 @@ public class PlatformObject : GameObject
 
     private string GetImage()
     {
-        //int intState = (int)_movingState;
-
         switch (_type)
         {
             case PlatformType.Brick:
@@ -78,10 +76,9 @@ public class PlatformObject : GameObject
             }
             case PlatformType.ChestDiactivated:
                 return _imagePath + "chest-1.png";
-            default:
-                return _imagePath + "brick-1.png";
         }
-        return null;
+
+        return _imagePath + "brick-1.png";
     }
 
     public override void Draw(Canvas canvas)

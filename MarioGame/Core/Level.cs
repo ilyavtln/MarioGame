@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Core.Components;
-using MarioGame.Core.Utils;
+using MarioGame.Core.Interfaces;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
@@ -13,29 +12,29 @@ namespace MarioGame.Core;
 public class Level
 {
     private readonly uint _levelNumber;
-    private int _score = 0;
+    private int _score;
     private int _lives = 3;
     private readonly Canvas _canvas;
     private Player? _player;
     private readonly List<GameObject?> _objects;
-    private List<GameObject> _objectsToRemove = new List<GameObject>();
-    private List<GameObject> _objectsToChange = new List<GameObject>();
-    private List<GameObject> _objectsToAdd = new List<GameObject>();
-
+    private readonly List<GameObject> _objectsToRemove = [];
+    private readonly List<GameObject> _objectsToChange = [];
+    private readonly List<GameObject?> _objectsToAdd = [];
+    private bool _isUpdated;
     public event Action<int>? ScoreChanged;
     public event Action<int>? LivesChanged;
     public event Action? LevelEnded;
     public int MaxLevelDuration { get; private set; } = 15;
     //для обновления камеры
-    public double Width { get; private set; } = 0;
-    public double Height { get; private set; } = 0;
+    public double Width { get; private set; }
+    public double Height { get; private set; }
 
     public Level(uint levelNumber, Canvas canvas)
     {
         _levelNumber = levelNumber;
         _canvas = canvas;
-        _objects = new List<GameObject?>();
-        canvas.Loaded += (sender, e) => LoadLevelObjects();
+        _objects = [];
+        canvas.Loaded += (_, _) => LoadLevelObjects();
     }
 
     private void LoadLevelObjects()
@@ -174,7 +173,11 @@ public class Level
     {
         foreach (var obj in _objects)
         {
-            obj?.Draw(_canvas);
+            if (obj is not IStaticObject || _isUpdated)
+            {
+                obj?.Draw(_canvas);
+                _isUpdated = true;
+            }
         }
 
         // Игрока рисуем последним, чтобы бг был сзади
@@ -268,27 +271,20 @@ public class Level
 
     public void OnChestWithCoinTouched(PlatformObject platform)
     {
-        GameObject obj = platform._containedObject;
+        GameObject? obj = platform._containedObject;
 
         _objectsToAdd.Add(obj);
-
-        //int i = _objects.IndexOf(obj);
-
-        //_objectsToChange.Add(obj);
         _score += 10;
         ScoreChanged?.Invoke(_score);
 
         if (platform.ObjectsCount == 1)
         {
-            //i = _objects.IndexOf(platform);
-            //if (_objects[i] is PlatformObject pl)
-            //    pl.DeactivateChest();
             _objectsToChange.Add(platform);
         }
 
     }
 
-    public void OnCoinFromChestDissapear(CoinObject coin)
+    public void OnCoinFromChestDisappear(CoinObject coin)
     {
         _objectsToRemove.Add(coin);
     }
