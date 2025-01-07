@@ -6,7 +6,7 @@ using MarioGame.Core.States;
 
 namespace MarioGame.Core.Components;
 
-public sealed class GroundObject : GameObject, IStatic
+public sealed class GroundObject : GameObject, IStatic, INonUpdatable
 {
     private readonly GroundType _groundType;
     private const string FolderPath = "pack://application:,,,/Shared/Images/Ground/";

@@ -132,11 +132,9 @@ public class CoinObject : GameObject
         if (_type != CoinType.Common)
             return;
 
-        // Проверяем, пересекаются ли границы игрока и монеты
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
-            // Уведомляем уровень о сборе монеты
             _level.OnCoinCollected(this);
         }
     }

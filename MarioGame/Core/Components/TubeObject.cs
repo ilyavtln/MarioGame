@@ -6,13 +6,11 @@ using MarioGame.Core.States;
 
 namespace MarioGame.Core.Components;
 
-public class TubeObject : GameObject, IStatic
+public class TubeObject : GameObject, IStatic, INonUpdatable
 {
     private const string ImagePath = "/Shared/Images/Tube/tube-1.png";
 
-    public TubeObject(double x, double y, double width, double height) : base(x, y, width, height)
-    {
-    }
+    public TubeObject(double x, double y, double width, double height) : base(x, y, width, height) { }
 
     public override void Draw(Canvas canvas)
     {
@@ -27,9 +25,7 @@ public class TubeObject : GameObject, IStatic
         canvas.Children.Add(image);
     }
 
-    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
-    {
-    }
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects) { }
 
     public override void InteractWithPlayer(Player player)
     {
@@ -42,12 +38,12 @@ public class TubeObject : GameObject, IStatic
             {
                 player.Y = Y - player.Height;
 
-                if (player.VelocityX > 0)
-                    player.PlayerStatus = PlayerStatus.IsMovingRight;
-                else if (player.VelocityX < 0)
-                    player.PlayerStatus = PlayerStatus.IsMovingLeft;
-                else
-                    player.PlayerStatus = PlayerStatus.Idle;
+                player.PlayerStatus = player.VelocityX switch
+                {
+                    > 0 => PlayerStatus.IsMovingRight,
+                    < 0 => PlayerStatus.IsMovingLeft,
+                    _ => PlayerStatus.Idle
+                };
             }
             else
             {
@@ -56,10 +52,8 @@ public class TubeObject : GameObject, IStatic
             }
         }
 
-        if (player.IsCollidingWithBlockOnMoveX(this, player.VelocityX))
-        {
-            player.X = player.VelocityX > 0 ? X - player.Width : X + Width;
-            player.IsBlockOnDirectionMove = true;
-        }
+        if (!player.IsCollidingWithBlockOnMoveX(this, player.VelocityX)) return;
+        player.X = player.VelocityX > 0 ? X - player.Width : X + Width;
+        player.IsBlockOnDirectionMove = true;
     }
 }

@@ -4,25 +4,20 @@
              xmlns:local="clr-namespace:MarioGame"
              StartupUri="/Startup/StartupWindow.xaml">
     <Application.Resources>
-        <!-- Подключение шрифта -->
         <FontFamily x:Key="HarryPotterFont">pack://application:,,,/Assets/Fonts/#HarryPotterKudos</FontFamily>
         
-        <!-- Стиль для TextBlock -->
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
         </Style>
-
-        <!-- Стиль для Label -->
+        
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
         </Style>
-
-        <!-- Стиль для TextBox -->
+        
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
         </Style>
-
-        <!-- Стиль для Button -->
+        
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource HarryPotterFont}" />
             <Setter Property="FontSize" Value="18" />
@@ -44,11 +39,9 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!-- Эффект при наведении -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="DodgerBlue" TargetName="border"/>
                             </Trigger>
-                            <!-- Эффект при нажатии -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" Value="RoyalBlue" TargetName="border"/>
                             </Trigger>

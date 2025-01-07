@@ -33,8 +33,7 @@ public sealed class BackgroundObject : GameObject, IStatic, INonUpdatable, INonI
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects) { }
 
-    public override void InteractWithPlayer(Player player) {
-    }
+    public override void InteractWithPlayer(Player player) { }
 
     private string GetImage(string imageName)
     {

@@ -28,7 +28,7 @@
                 Focusable="False"
                 Margin="10"
                 FontSize="32"
-                Click="MenuButton_Click" />
+                Click="MenuButton_Click"></Button>
         
         <StackPanel Name="GameInfoPanel"
                     Orientation="Horizontal"

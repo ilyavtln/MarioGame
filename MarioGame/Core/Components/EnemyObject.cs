@@ -64,7 +64,7 @@ public class EnemyObject : GameObject
         }
         else
         {
-            int intState = (int)_movingState;
+            var intState = (int)_movingState;
             
             if (_offset == 0 || _speed == 0)
             {
@@ -116,22 +116,18 @@ public class EnemyObject : GameObject
         var isBlockOnDirectionMove = false;
         foreach (var gameObject in gameObjects)
         {
-            if (gameObject is GroundObject or PlatformObject or TubeObject)
+            if (gameObject is not (GroundObject or PlatformObject or TubeObject)) continue;
+            if (IsCollidingWithBlockOnMoveY(gameObject))
             {
-                if (IsCollidingWithBlockOnMoveY(gameObject))
-                {
-                    isOnGround = true;
+                isOnGround = true;
 
-                    Y = gameObject.Y - Height;
-                }
-
-                if (IsCollidingWithBlockOnMoveX(gameObject, speed))
-                {
-                    isBlockOnDirectionMove = true;
-                    X = speed > 0 ? gameObject.X - Width : gameObject.X + gameObject.Width;
-                    _movingRight = !_movingRight;
-                }
+                Y = gameObject.Y - Height;
             }
+
+            if (!IsCollidingWithBlockOnMoveX(gameObject, speed)) continue;
+            isBlockOnDirectionMove = true;
+            X = speed > 0 ? gameObject.X - Width : gameObject.X + gameObject.Width;
+            _movingRight = !_movingRight;
         }
 
         if (!isOnGround)
@@ -153,7 +149,6 @@ public class EnemyObject : GameObject
 
     public override void InteractWithPlayer(Player player)
     {
-        // Проверяем, пересекаются ли границы игрока и врага
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
@@ -165,8 +160,7 @@ public class EnemyObject : GameObject
                 isAttackFromAir = true;
                 player.JumpVelocity = -5;
             }
-
-            // Уведомляем уровень о взаимодействии с врагом
+            
             _level.OnEnemyTouched(this, isAttackFromAir);
         }
     }
