@@ -19,7 +19,7 @@ public class Player
     public double Height { get; set; }
     public PlayerStatus PlayerStatus { get; set; } = PlayerStatus.Idle;
 
-    public double VelocityX { get; private set; } = 0;
+    public double VelocityX { get; set; } = 0;
     public double JumpVelocity { get; set; } = 0;
     public bool IsOnGround { get; set; } = false;
     public bool IsBlockOnDirectionMove { get; set; } = false;
@@ -36,11 +36,11 @@ public class Player
     private Image? _playerImage;
     private double _opacity = 1.0;
     private SoundManager _soundManager = new SoundManager();
-    
+
     private int _playerWidth = 32;
-    private  int _playerHeight = 64;
-    
-    public event Action? PlayerDied;
+    private int _playerHeight = 64;
+
+    public event Action<bool>? PlayerDied;
 
     public bool isPowered = false;
 
@@ -84,6 +84,10 @@ public class Player
                 return _imagePath + $"mario-go-right-{intState}.png";
             case PlayerStatus.IsMovingLeft:
                 return _imagePath + $"mario-go-left-{intState}.png";
+            case PlayerStatus.IsDeath:
+                return _lastDirectionRight
+                    ? _imagePath + "mario-sit-right.png"
+                    : _imagePath + "mario-sit-left.png";
             default:
                 return _imagePath + "mario-stay-right.png";
         }
@@ -109,16 +113,16 @@ public class Player
     {
         int direction = distance > 0 ? 1 : -1;
         double targetX = X + distance;
-        
+
         PlayerStatus = direction > 0 ? PlayerStatus.IsMovingRight : PlayerStatus.IsMovingLeft;
         _lastDirectionRight = direction > 0;
         VelocityX = MoveSpeed * direction;
-        
+
         while (Math.Abs(X - targetX) > MoveSpeed)
         {
             await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
         }
-        
+
         _lastDirectionRight = !_lastDirectionRight;
         PlayerStatus = PlayerStatus.Idle;
         VelocityX = 0;
@@ -126,14 +130,14 @@ public class Player
         await HidePlayer();
     }
 
-    
+
     private async Task HidePlayer()
     {
         await Task.Delay(500);
         if (_playerImage != null)
         {
             int steps = 100;
-            double opacityStep = 1.0 / steps; 
+            double opacityStep = 1.0 / steps;
 
             for (int i = 0; i < steps; i++)
             {
@@ -142,31 +146,32 @@ public class Player
                     _playerImage.Opacity -= opacityStep;
                     _opacity -= opacityStep;
                 }
-                if (_opacity < 0) break;
+                if (_opacity < 0)
+                    break;
                 await Task.Delay(500);
             }
         }
         await Task.Delay(100);
     }
 
-    
+
     public void HandleKeyDown(Key key)
     {
         switch (key)
         {
-            case Key.Left:
+            case Key.Left when PlayerStatus != PlayerStatus.IsDeath:
                 if (IsOnGround)
                     PlayerStatus = PlayerStatus.IsMovingLeft;
                 VelocityX = -MoveSpeed;
                 _lastDirectionRight = false;
                 break;
-            case Key.Right:
+            case Key.Right when PlayerStatus != PlayerStatus.IsDeath:
                 if (IsOnGround)
                     PlayerStatus = PlayerStatus.IsMovingRight;
                 VelocityX = MoveSpeed;
                 _lastDirectionRight = true;
                 break;
-            case Key.Space when IsOnGround && !PlayerAtFinish:
+            case Key.Space when IsOnGround && !PlayerAtFinish && PlayerStatus != PlayerStatus.IsDeath:
                 PlayerStatus = PlayerStatus.IsJumping;
                 JumpVelocity = -MaxJumpHeight;
                 Y += JumpVelocity;
@@ -177,6 +182,9 @@ public class Player
 
     public void HandleKeyUp(Key key)
     {
+        if (PlayerStatus == PlayerStatus.IsDeath)
+            return;
+
         if (key is Key.Left or Key.Right)
         {
             VelocityX = 0;
@@ -221,25 +229,40 @@ public class Player
 
     private bool CheckIfPlayerDead(Canvas canvas)
     {
-        if (Y >= canvas.ActualHeight)
+        if (Y >= canvas.ActualHeight && PlayerStatus != PlayerStatus.IsDeath)
         {
-            PlayerDied?.Invoke();
+            PlayerDied?.Invoke(false);
             return true;
         }
 
         return false;
     }
 
-    public void OnDeath()
+    public async Task OnDeath(Canvas canvas)
     {
-        PlayerDied?.Invoke();
+        IsOnGround = false;
+        PlayerStatus = PlayerStatus.IsDeath;
+        JumpVelocity = -5;
+        VelocityX = _lastDirectionRight ? -2 : 2;
+        double targetY = canvas.ActualHeight;
+
+        _soundManager.PlaySoundEffect("mario-game-over.mp3");
+
+        while (Math.Abs(Y - targetY) > JumpVelocity)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
+        }
+
+        JumpVelocity = 0;
+
+        PlayerDied?.Invoke(true);
     }
 
-    public void OnPower() 
+    public void OnPower()
     {
-       isPowered = true;
-       Width *= 1.5;
-       Height *= 1.5;
+        isPowered = true;
+        Width *= 1.5;
+        Height *= 1.5;
     }
 
     public bool IsCollidingWithBlockOnMoveX(GameObject obj, double shift)

@@ -101,6 +101,9 @@ public class PlatformObject : GameObject
 
     public override void InteractWithPlayer(Player player)
     {
+        if (player.PlayerStatus == PlayerStatus.IsDeath)
+            return;
+
         if (player.IsCollidingWithBlockOnMoveY(this, player.JumpVelocity))
         {
             if (player.IsOnGround)

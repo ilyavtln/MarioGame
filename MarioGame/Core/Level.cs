@@ -44,7 +44,8 @@ public class Level
 
         if (levelData?.MaxLevelDuration != 0)
         {
-            if (levelData != null) MaxLevelDuration = levelData.MaxLevelDuration;
+            if (levelData != null)
+                MaxLevelDuration = levelData.MaxLevelDuration;
         }
 
         if (levelData?.Grounds != null)
@@ -52,7 +53,7 @@ public class Level
             foreach (var ground in levelData.Grounds)
             {
                 GroundObject groundObject;
-                
+
                 if (ground.Type != GroundType.Base)
                 {
                     groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height, GroundType.Ladder);
@@ -109,7 +110,7 @@ public class Level
             foreach (var enemy in levelData.Enemies)
             {
                 EnemyObject enemyObject;
-                
+
                 if (enemy.Type != EnemyType.Base)
                 {
                     enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed, enemy.Type);
@@ -126,9 +127,9 @@ public class Level
         {
             foreach (var platform in levelData.Platforms)
             {
-                var platformObject = new PlatformObject(this,platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height, platform.Type);
-                
-                switch(platformObject._type)
+                var platformObject = new PlatformObject(this, platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height, platform.Type);
+
+                switch (platformObject._type)
                 {
                     case PlatformType.ChestWithCoins or PlatformType.Coins:
                     {
@@ -175,7 +176,7 @@ public class Level
         {
             obj?.Draw(_canvas);
         }
-        
+
         // Игрока рисуем последним, чтобы бг был сзади
         _player?.Draw(_canvas);
     }
@@ -211,9 +212,9 @@ public class Level
         {
             int i = _objects.IndexOf(obj);
 
-            if(_objects[i] is PlatformObject platform)
+            if (_objects[i] is PlatformObject platform)
             {
-               platform._type = PlatformType.ChestDiactivated; 
+                platform._type = PlatformType.ChestDiactivated;
             }
         }
         _objectsToChange.Clear();
@@ -256,9 +257,7 @@ public class Level
             LivesChanged?.Invoke(_lives);
 
             if (_lives <= 0)
-            {
-                _player?.OnDeath();
-            }
+                _player?.OnDeath(_canvas);
         }
         else
         {
@@ -286,7 +285,7 @@ public class Level
             //    pl.DeactivateChest();
             _objectsToChange.Add(platform);
         }
-        
+
     }
 
     public void OnCoinFromChestDissapear(CoinObject coin)

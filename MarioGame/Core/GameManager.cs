@@ -12,7 +12,7 @@ public class GameManager
     private GameStatus _gameStatus = GameStatus.Stopped;
     private Level? _level;
     private Camera? _camera;
-    
+
     private const int TargetFps = 60;
     private TimeSpan _frameInterval;
     private CancellationTokenSource? _cancellationTokenSource;
@@ -21,7 +21,7 @@ public class GameManager
     private int _currentScore = 0;
     private TimeSpan _gameTime;
     public event Action<TimeSpan>? TimeUpdated;
-    public event Action? PlayerDied;
+    public event Action<bool>? PlayerDied;
     public event Action? LevelEnded;
     public event Action<int>? ScoreUpdated;
     public event Action<int>? LivesUpdated;
@@ -35,7 +35,8 @@ public class GameManager
 
         canvas.Loaded += (sender, e) =>
         {
-            if (_level != null) _camera = new Camera(_level.Width, _level.Height);
+            if (_level != null)
+                _camera = new Camera(_level.Width, _level.Height);
         };
     }
 
@@ -56,7 +57,7 @@ public class GameManager
     {
         _cancellationTokenSource = new CancellationTokenSource();
         var token = _cancellationTokenSource.Token;
-        
+
         var stopwatch = Stopwatch.StartNew();
         var lastFrameTime = stopwatch.Elapsed;
 
@@ -67,7 +68,7 @@ public class GameManager
             lastFrameTime = currentFrameTime;
 
             UpdateGame(deltaTime);
-            
+
             var elapsedTime = stopwatch.Elapsed - currentFrameTime;
             var delayTime = _frameInterval - elapsedTime;
 
@@ -89,7 +90,7 @@ public class GameManager
 
         return 0;
     }
-    
+
     public void StartGame()
     {
         _gameStatus = GameStatus.Playing;
@@ -98,8 +99,10 @@ public class GameManager
         _isRunning = true;
 
         var player = _level?.GetPlayer();
-        if (player != null) player.PlayerDied += OnPlayerDied;
-        if (_level != null) _level.LevelEnded += OnLevelEnded;
+        if (player != null)
+            player.PlayerDied += OnPlayerDied;
+        if (_level != null)
+            _level.LevelEnded += OnLevelEnded;
 
         _ = StartGameLoopAsync();
     }
@@ -128,13 +131,19 @@ public class GameManager
             {
                 _camera?.Update(player, _canvas);
             }
-            
+
             // Проверка, что истекло максимальное время уровня
             bool isNoTime = _gameTime.Seconds >= _level?.MaxLevelDuration;
+            var IsDeathFromEnemy = false;
+
+            if (player != null)
+                IsDeathFromEnemy = player.PlayerStatus == PlayerStatus.IsDeath
+                                   ? true
+                                   : false;
 
             if (_playerIsDead || isNoTime)
             {
-                PlayerDied?.Invoke();
+                PlayerDied?.Invoke(IsDeathFromEnemy);
             }
         }
     }
@@ -165,21 +174,23 @@ public class GameManager
 
     private void UnsubscribeFromLevelEvents()
     {
-        if (_level == null) return;
+        if (_level == null)
+            return;
 
         _level.ScoreChanged -= OnScoreChanged;
         _level.LivesChanged -= OnLiveStatusUpdated;
         _level.LevelEnded -= OnLevelEnded;
-        
+
         var player = _level.GetPlayer();
-        if (player != null) player.PlayerDied -= OnPlayerDied;
+        if (player != null)
+            player.PlayerDied -= OnPlayerDied;
     }
 
-    private void OnPlayerDied()
+    private void OnPlayerDied(bool IsDeathFromEnemy = false)
     {
         _playerIsDead = true;
         SetGameStatus(GameStatus.Stopped);
-        PlayerDied?.Invoke();
+        PlayerDied?.Invoke(IsDeathFromEnemy);
     }
 
     private void OnLiveStatusUpdated(int lives)
