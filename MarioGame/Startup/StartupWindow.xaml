@@ -14,9 +14,9 @@
     
     <Border CornerRadius="30">
         <Border.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="LightBlue" Offset="0"/>
-                <GradientStop Color="Lavender" Offset="1"/>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="2,1">
+                <GradientStop Color="LightSkyBlue" Offset="0"/>
+                <GradientStop Color="PaleGreen" Offset="1"/>
             </LinearGradientBrush>
         </Border.Background>
         
