@@ -95,7 +95,6 @@ public class GameManager
     {
         _gameStatus = GameStatus.Playing;
         _gameTime = TimeSpan.Zero;
-        //_level?.DrawLevel();
         _isRunning = true;
 
         var player = _level?.GetPlayer();
@@ -121,8 +120,6 @@ public class GameManager
         
         if (_gameStatus == GameStatus.Playing && player != null)
         {
-            //_canvas.Children.Clear();
-
             _level?.Update();
             
             _gameTime += deltaTime;
