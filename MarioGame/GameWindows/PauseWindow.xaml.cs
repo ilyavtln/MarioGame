@@ -6,13 +6,13 @@ using MarioGame.Shared.Enums;
 
 namespace MarioGame.GameWindows;
 
-public partial class PauseWindow : Window
+public partial class PauseWindow
 {
     private readonly uint _levelNumber;
     private readonly SoundManager _soundManager;
     private readonly GameManager _gameManager;
     private readonly uint _countLevels;
-    private GameProgress _gameProgress;
+    private readonly GameProgress _gameProgress;
     private uint _currentLevelStart = 1;
     
     public PauseWindow(uint levelNumber, SoundManager soundManager, GameManager gameManager, uint countLevels, GameProgress gameProgress)

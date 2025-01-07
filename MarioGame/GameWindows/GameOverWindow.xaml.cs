@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using MarioGame.Core;
-using MarioGame.Shared.Enums;
 
 namespace MarioGame.GameWindows;
 
@@ -8,15 +7,13 @@ public partial class GameOverWindow : Window
 {
     private readonly uint _levelNumber;
     private readonly int _score;
-    private GameManager _gameManager;
-    private GameProgress _gameProgress;
+    private readonly GameProgress _gameProgress;
     
-    public GameOverWindow(uint levelNumber, int score, GameManager gameManager, GameProgress gameProgress)
+    public GameOverWindow(uint levelNumber, int score, GameProgress gameProgress)
     {
         InitializeComponent();
         _levelNumber = levelNumber;
         _score = score;
-        _gameManager = gameManager;
         _gameProgress = gameProgress;
         ShowScore();
     }

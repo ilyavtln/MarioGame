@@ -1,18 +1,17 @@
-﻿using System.Windows.Documents;
-using MarioGame.Core.Utils;
+﻿using MarioGame.Core.Utils;
 
 namespace MarioGame.Core;
 
 public class LevelData
 {
-    public int Index { get; set; }
-    public int MaxLevelDuration { get; set; }
-    public List<GroundJson>? Grounds { get; set; }
-    public List<EnemyJson>? Enemies { get; set; }
-    public List<CoinsJson>? Coins { get; set; }
-    public List<BackgroundJson>? Backgrounds { get; set; }
-    public List<PlatformJson>? Platforms { get; set; }
-    public List<TubeJson>? Tubes { get; set; }
-    public FinishJson? Finish { get; set; }
-    public PlayerJson? Player { get; set; }
+    public int Index { get; init; }
+    public int MaxLevelDuration { get; init; }
+    public List<GroundJson>? Grounds { get; init; }
+    public List<EnemyJson>? Enemies { get; init; }
+    public List<CoinsJson>? Coins { get; init; }
+    public List<BackgroundJson>? Backgrounds { get; init; }
+    public List<PlatformJson>? Platforms { get; init; }
+    public List<TubeJson>? Tubes { get; init; }
+    public FinishJson? Finish { get; init; }
+    public PlayerJson? Player { get; init; }
 }

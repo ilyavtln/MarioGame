@@ -5,8 +5,8 @@ namespace MarioGame.Core;
 
 public class GameProgress
 {
-    public List<uint> CompletedLevels { get; }
-    private readonly string _fileName = "Progress.json";
+    private List<uint> CompletedLevels { get; }
+    private const string FileName = "Progress.json";
 
     public GameProgress()
     {
@@ -27,19 +27,19 @@ public class GameProgress
     {
         if (CompletedLevels.Count != 0) 
         {
-            File.WriteAllText(_fileName, JsonSerializer.Serialize(CompletedLevels));
+            File.WriteAllText(FileName, JsonSerializer.Serialize(CompletedLevels));
         }
     }
 
     // Метод для загрузки прогресса из файла
     private List<uint> LoadProgress()
     {
-        if (!File.Exists(_fileName))
+        if (!File.Exists(FileName))
         {
-            File.WriteAllText(_fileName, JsonSerializer.Serialize(new List<uint>()));
+            File.WriteAllText(FileName, JsonSerializer.Serialize(new List<uint>()));
         }
 
-        return JsonSerializer.Deserialize<List<uint>>(File.ReadAllText(_fileName)) ?? new List<uint>();
+        return JsonSerializer.Deserialize<List<uint>>(File.ReadAllText(FileName)) ?? new List<uint>();
     }
     
     public bool IsLevelUnlocked(uint levelNumber)

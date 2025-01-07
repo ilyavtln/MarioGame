@@ -8,8 +8,8 @@ public class Camera
     private double _cameraX;
     private double _cameraY;
 
-    private double _levelWidth;
-    private double _levelHeight;
+    private readonly double _levelWidth;
+    private readonly double _levelHeight;
 
     public Camera(double levelWidth, double levelHeight)
     {

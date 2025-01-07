@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Core.Components;
+using MarioGame.Core.Config;
 using MarioGame.Core.Interfaces;
 using MarioGame.Shared.Enums;
 
@@ -24,7 +25,7 @@ public class Level
     public event Action<int>? ScoreChanged;
     public event Action<int>? LivesChanged;
     public event Action? LevelEnded;
-    public int MaxLevelDuration { get; private set; } = 15;
+    public int MaxLevelDuration { get; private set; } = GameConfig.LevelDuration;
     //для обновления камеры
     public double Width { get; private set; }
     public double Height { get; private set; }
@@ -51,17 +52,9 @@ public class Level
         {
             foreach (var ground in levelData.Grounds)
             {
-                GroundObject groundObject;
-
-                if (ground.Type != GroundType.Base)
-                {
-                    groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height, GroundType.Ladder);
-                }
-                else
-                {
-                    groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
-                }
-
+                var groundObject = ground.Type != GroundType.Base ? new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height, GroundType.Ladder) : new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+                
+                groundObject.Draw(_canvas);
                 _objects.Add(groundObject);
 
                 //изменение ширины уровня
@@ -108,16 +101,7 @@ public class Level
         {
             foreach (var enemy in levelData.Enemies)
             {
-                EnemyObject enemyObject;
-
-                if (enemy.Type != EnemyType.Base)
-                {
-                    enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed, enemy.Type);
-                }
-                else
-                {
-                    enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
-                }
+                var enemyObject = enemy.Type != EnemyType.Base ? new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed, enemy.Type) : new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
                 _objects.Add(enemyObject);
             }
         }
@@ -128,7 +112,7 @@ public class Level
             {
                 var platformObject = new PlatformObject(this, platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height, platform.Type);
 
-                switch (platformObject._type)
+                switch (platformObject.Type)
                 {
                     case PlatformType.ChestWithCoins or PlatformType.Coins:
                     {
@@ -217,7 +201,7 @@ public class Level
 
             if (_objects[i] is PlatformObject platform)
             {
-                platform._type = PlatformType.ChestDiactivated;
+                platform.Type = PlatformType.ChestDiactivated;
             }
         }
         _objectsToChange.Clear();
@@ -271,7 +255,7 @@ public class Level
 
     public void OnChestWithCoinTouched(PlatformObject platform)
     {
-        GameObject? obj = platform._containedObject;
+        GameObject? obj = platform.ContainedObject;
 
         _objectsToAdd.Add(obj);
         _score += 10;

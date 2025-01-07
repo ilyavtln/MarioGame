@@ -1,7 +1,5 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
 
@@ -9,18 +7,18 @@ namespace MarioGame.Core.Components;
 
 public class EnemyObject : GameObject
 {
-    private double _speed;
-    private double _offset;
-    private double _startX;
+    private readonly double _speed;
+    private readonly double _offset;
+    private readonly double _startX;
+    private readonly EnemyType _enemyType;
     private bool _movingRight = true;
-    private string _imagePath = "pack://application:,,,/Shared/Images/Enemy/";
-    private Level _level;
+    private const string ImagePath = "pack://application:,,,/Shared/Images/Enemy/";
+    private readonly Level _level;
 
-    private double velocityY = 0;
-    private const double gravity = 1;
+    private double _velocityY;
+    private const double Gravity = 1;
     
-    private EnemyType _enemyType;
-    private int _frameCounter = 0;
+    private int _frameCounter;
     private MovingState _movingState = MovingState.State1;
 
     public EnemyObject(Level level, double x, double y, double width, double height, double offset, double speed, EnemyType enemyType = EnemyType.Base) : base(x, y, width, height)
@@ -82,7 +80,7 @@ public class EnemyObject : GameObject
             } 
         }
 
-        return _imagePath + imageName;
+        return ImagePath + imageName;
     }
     
     private void UpdateMovingState()
@@ -138,11 +136,11 @@ public class EnemyObject : GameObject
 
         if (!isOnGround)
         {
-            Y += velocityY;
-            velocityY += gravity;
+            Y += _velocityY;
+            _velocityY += Gravity;
         }
         else
-            velocityY = 0;
+            _velocityY = 0;
 
         if (!isBlockOnDirectionMove)
         {

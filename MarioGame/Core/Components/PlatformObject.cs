@@ -1,40 +1,37 @@
 ﻿using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MarioGame.Core.Components;
 
 public class PlatformObject : GameObject
 {
-    private double _velocity = 0d;
-    private const double gravity = 3d;
+    private double _velocity;
+    private const double Gravity = 3d;
     private const double JumpVelocity = -6d;
 
-    private bool _isMoving = false;
+    private bool _isMoving;
 
-    public GameObject? _containedObject { get; private set; }
-
-    public PlatformType _type = PlatformType.Brick;  //желательно сделать приватным
+    public GameObject? ContainedObject { get; private set; }
+    // TODO: желательно сделать приватным
+    public PlatformType Type;
 
     private MovingState _movingState = MovingState.State1;
-    //private ChestsState _state = ChestsState.State1;
-    private string _imagePath = "pack://application:,,,/Shared/Images/Platform/";
+    private const string ImagePath = "pack://application:,,,/Shared/Images/Platform/";
 
-    public int ObjectsCount { get; private set; } = 0;
+    public int ObjectsCount { get; private set; }
 
-    private Level _level;
+    private readonly Level _level;
 
-    private int _frameCounter = 0;
+    private int _frameCounter;
 
-    private bool _isUp = false;
+    private bool _isUp;
 
     public PlatformObject(Level level, double x, double y, double width, double height, PlatformType type) : base(x, y, width, height)
     {
         _level = level;
-        _type = type;
+        Type = type;
         switch(type)
         {
             case PlatformType.Coins: ObjectsCount = 5; break;
@@ -46,39 +43,39 @@ public class PlatformObject : GameObject
 
     public void InitializeChestObject(GameObject obj)
     {
-        _containedObject = obj;
+        ContainedObject = obj;
     }
 
     public void DeactivateChest()
     {
-        _type = PlatformType.ChestDiactivated;
+        Type = PlatformType.ChestDiactivated;
     }
 
     private string GetImage()
     {
-        switch (_type)
+        switch (Type)
         {
             case PlatformType.Brick:
-                return _imagePath + "brick-1.png";
+                return ImagePath + "brick-1.png";
             case PlatformType.Coins:
-                return _imagePath + "brick-1.png";
+                return ImagePath + "brick-1.png";
             case PlatformType.ChestWithCoins or PlatformType.ChestWithMushroom:
             {
                 switch(_movingState)
                 {
-                    case MovingState.State1: return _imagePath + "gift-chest-1.png";
-                    case MovingState.State2: return _imagePath + "gift-chest-1.png";
-                    case MovingState.State3: return _imagePath + "gift-chest-1.png";
-                    case MovingState.State4: return _imagePath + "gift-chest-2.png";
-                    case MovingState.State5: return _imagePath + "gift-chest-3.png";
+                    case MovingState.State1: return ImagePath + "gift-chest-1.png";
+                    case MovingState.State2: return ImagePath + "gift-chest-1.png";
+                    case MovingState.State3: return ImagePath + "gift-chest-1.png";
+                    case MovingState.State4: return ImagePath + "gift-chest-2.png";
+                    case MovingState.State5: return ImagePath + "gift-chest-3.png";
                 }
                 break;
             }
             case PlatformType.ChestDiactivated:
-                return _imagePath + "chest-1.png";
+                return ImagePath + "chest-1.png";
         }
 
-        return _imagePath + "brick-1.png";
+        return ImagePath + "brick-1.png";
     }
 
     public override void Draw(Canvas canvas)
@@ -119,9 +116,9 @@ public class PlatformObject : GameObject
         if (!_isMoving)
             return;
         Y += _velocity;
-        _velocity += gravity;
+        _velocity += Gravity;
         
-        if(_velocity < -JumpVelocity + gravity + 1.0e-7 && _velocity > -JumpVelocity + gravity - 1.0e-7)
+        if(_velocity < -JumpVelocity + Gravity + 1.0e-7 && _velocity > -JumpVelocity + Gravity - 1.0e-7)
         {
             _velocity = 0d;
             _isMoving = false;
@@ -154,27 +151,26 @@ public class PlatformObject : GameObject
                 _isMoving = true;
                 _velocity = JumpVelocity;
 
-                switch (_type)
+                switch (Type)
                 {
                     case PlatformType.Coins:
                     {
                         if (ObjectsCount > 0)
                             _level.OnChestWithCoinTouched(this);
                         else
-                            _type = PlatformType.ChestDiactivated;
+                            Type = PlatformType.ChestDiactivated;
                         ObjectsCount--;
                         break;
                     }
                     case PlatformType.ChestWithCoins:
                     {
                         _level.OnChestWithCoinTouched(this);
-                        //_type = PlatformType.ChestDiactivated;
                         break;
                     }
                     case PlatformType.ChestWithMushroom:
                     {
                         player.OnPower();
-                        _type = PlatformType.ChestDiactivated;
+                        Type = PlatformType.ChestDiactivated;
                         break;
                     }
                 }

@@ -30,7 +30,7 @@ public class SoundManager
         _musicPlayer.Stop();
         _musicPlayer.Open(new Uri(_baseMusicPath + "mario-main.mp3", UriKind.Relative));
         _musicPlayer.Play();
-        _musicPlayer.MediaEnded += (sender, e) => _musicPlayer.Position = TimeSpan.Zero;
+        _musicPlayer.MediaEnded += (_, _) => _musicPlayer.Position = TimeSpan.Zero;
     }
     
     // Остановка фоновой музыки

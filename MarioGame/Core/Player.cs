@@ -1,10 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MarioGame.Core.Components;
 using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
@@ -15,41 +11,41 @@ public class Player
 {
     public double X { get; set; }
     public double Y { get; set; }
-    public double Width { get; set; }
-    public double Height { get; set; }
+    public double Width { get; private set; }
+    public double Height { get; private set; }
     public PlayerStatus PlayerStatus { get; set; } = PlayerStatus.Idle;
 
-    public double VelocityX { get; set; } = 0;
-    public double JumpVelocity { get; set; } = 0;
-    public bool IsOnGround { get; set; } = false;
-    public bool IsBlockOnDirectionMove { get; set; } = false;
-    public bool PlayerAtFinish { get; set; } = false;
+    public double VelocityX { get; private set; }
+    public double JumpVelocity { get; set; }
+    public bool IsOnGround { get; set; }
+    public bool IsBlockOnDirectionMove { get; set; }
+    public bool PlayerAtFinish { get; set; }
 
-    public const double Gravity = 1;
-    public const double MaxJumpHeight = 15;
-    public const double MoveSpeed = 5;
+    private const double Gravity = 1;
+    private const double MaxJumpHeight = 15;
+    private const double MoveSpeed = 5;
 
-    private string _imagePath = "pack://application:,,,/Shared/Images/Player/";
+    private const string ImagePath = "pack://application:,,,/Shared/Images/Player/";
     private MovingState _movingState = MovingState.State1;
     private bool _lastDirectionRight = true;
-    private int _frameCounter = 0;
+    private int _frameCounter;
     private Image? _playerImage;
     private double _opacity = 1.0;
-    private SoundManager _soundManager = new SoundManager();
+    private readonly SoundManager _soundManager = new();
 
-    private int _playerWidth = 32;
-    private int _playerHeight = 64;
+    private const int PlayerWidth = 32;
+    private const int PlayerHeight = 64;
 
     public event Action<bool>? PlayerDied;
 
-    public bool isPowered = false;
+    public bool IsPowered;
 
     public Player(double x, double y)
     {
         X = x;
         Y = y;
-        Width = _playerWidth;
-        Height = _playerHeight;
+        Width = PlayerWidth;
+        Height = PlayerHeight;
     }
 
     public void Draw(Canvas canvas)
@@ -74,22 +70,22 @@ public class Player
         {
             case PlayerStatus.Idle:
                 return _lastDirectionRight
-                    ? _imagePath + "mario-stay-right.png"
-                    : _imagePath + "mario-stay-left.png";
+                    ? ImagePath + "mario-stay-right.png"
+                    : ImagePath + "mario-stay-left.png";
             case PlayerStatus.IsJumping:
                 return _lastDirectionRight
-                    ? _imagePath + "mario-jump-right.png"
-                    : _imagePath + "mario-jump-left.png";
+                    ? ImagePath + "mario-jump-right.png"
+                    : ImagePath + "mario-jump-left.png";
             case PlayerStatus.IsMovingRight:
-                return _imagePath + $"mario-go-right-{intState}.png";
+                return ImagePath + $"mario-go-right-{intState}.png";
             case PlayerStatus.IsMovingLeft:
-                return _imagePath + $"mario-go-left-{intState}.png";
+                return ImagePath + $"mario-go-left-{intState}.png";
             case PlayerStatus.IsDeath:
                 return _lastDirectionRight
-                    ? _imagePath + "mario-sit-right.png"
-                    : _imagePath + "mario-sit-left.png";
+                    ? ImagePath + "mario-sit-right.png"
+                    : ImagePath + "mario-sit-left.png";
             default:
-                return _imagePath + "mario-stay-right.png";
+                return ImagePath + "mario-stay-right.png";
         }
     }
 
@@ -188,10 +184,7 @@ public class Player
         if (key is Key.Left or Key.Right)
         {
             VelocityX = 0;
-            if (IsOnGround)
-                PlayerStatus = PlayerStatus.Idle;
-            else
-                PlayerStatus = PlayerStatus.IsJumping;
+            PlayerStatus = IsOnGround ? PlayerStatus.Idle : PlayerStatus.IsJumping;
         }
     }
 
@@ -260,7 +253,7 @@ public class Player
 
     public void OnPower()
     {
-        isPowered = true;
+        IsPowered = true;
         Width *= 1.5;
         Height *= 1.5;
     }

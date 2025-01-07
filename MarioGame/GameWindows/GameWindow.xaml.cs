@@ -4,19 +4,18 @@ using System.Windows.Media.Imaging;
 using MarioGame.Core;
 using MarioGame.Shared.Enums;
 using System.IO;
-using System.Text.Json;
 
 namespace MarioGame.GameWindows;
 
-public partial class GameWindow : Window
+public partial class GameWindow
 {
     private uint _levelNumber;
-    private GameProgress _gameProgress;
+    private readonly GameProgress _gameProgress;
     private readonly GameManager _gameManager;
     private readonly SoundManager _soundManager;
-    private uint _levelCount;
-    private int _score = 0;
-    private int _lives = 3;
+    private readonly uint _levelCount;
+    private int _score;
+    private const int Lives = 3;
 
     public GameWindow(uint levelNumber, GameProgress gameProgress, int score = 0)
     {
@@ -33,10 +32,10 @@ public partial class GameWindow : Window
         UpdatePanels();
         SubscribeToEvents();
 
-        this.Closing += (sender, args) => _gameManager.StopGame();
-        this.Loaded += (sender, e) => StartGame();
-        this.KeyDown += (sender, e) => _gameManager.HandleKeyDown(e.Key);
-        this.KeyUp += (sender, e) => _gameManager.HandleKeyUp(e.Key);
+        this.Closing += (_, _) => _gameManager.StopGame();
+        this.Loaded += (_, _) => StartGame();
+        this.KeyDown += (_, e) => _gameManager.HandleKeyDown(e.Key);
+        this.KeyUp += (_, e) => _gameManager.HandleKeyUp(e.Key);
     }
 
 
@@ -90,7 +89,7 @@ public partial class GameWindow : Window
     private void StartGame()
     {
         _soundManager.PlayMusic();
-        GameCanvas.Loaded += (sender, e) => _gameManager.StartGame();
+        GameCanvas.Loaded += (_, _) => _gameManager.StartGame();
     }
 
     private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -110,7 +109,7 @@ public partial class GameWindow : Window
         LevelText.Text = $"{_levelNumber} / {_levelCount}";
         ScoreText.Text = $"{_score}";
 
-        DrawLivesByCount(_lives);
+        DrawLivesByCount(Lives);
     }
 
     private void UpdateScoreDisplay(int newScore)
@@ -148,7 +147,7 @@ public partial class GameWindow : Window
         TimeText.Text = (_gameManager.GetRemainingTime()).ToString();
     }
 
-    private void GameOver(bool IsDeathFromEnemy = false)
+    private void GameOver(bool isDeathFromEnemy = false)
     {
         DrawLivesByCount(0);
 
@@ -157,12 +156,12 @@ public partial class GameWindow : Window
 
         _soundManager.StopMusic();
 
-        if (!IsDeathFromEnemy)
+        if (!isDeathFromEnemy)
             _soundManager.PlaySoundEffect("mario-game-over.mp3");
 
         _gameProgress.SaveProgress();
 
-        var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameManager, _gameProgress) { Owner = this };
+        var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameProgress) { Owner = this };
 
         gameOverWindow.ShowDialog();
     }

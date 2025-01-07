@@ -134,16 +134,16 @@ public class GameManager
 
             // Проверка, что истекло максимальное время уровня
             bool isNoTime = _gameTime.Seconds >= _level?.MaxLevelDuration;
-            var IsDeathFromEnemy = false;
+            var isDeathFromEnemy = false;
 
             if (player != null)
-                IsDeathFromEnemy = player.PlayerStatus == PlayerStatus.IsDeath
+                isDeathFromEnemy = player.PlayerStatus == PlayerStatus.IsDeath
                                    ? true
                                    : false;
 
             if (_playerIsDead || isNoTime)
             {
-                PlayerDied?.Invoke(IsDeathFromEnemy);
+                PlayerDied?.Invoke(isDeathFromEnemy);
             }
         }
     }
@@ -186,11 +186,11 @@ public class GameManager
             player.PlayerDied -= OnPlayerDied;
     }
 
-    private void OnPlayerDied(bool IsDeathFromEnemy = false)
+    private void OnPlayerDied(bool isDeathFromEnemy = false)
     {
         _playerIsDead = true;
         SetGameStatus(GameStatus.Stopped);
-        PlayerDied?.Invoke(IsDeathFromEnemy);
+        PlayerDied?.Invoke(isDeathFromEnemy);
     }
 
     private void OnLiveStatusUpdated(int lives)

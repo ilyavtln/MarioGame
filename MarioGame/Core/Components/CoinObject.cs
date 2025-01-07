@@ -1,26 +1,23 @@
 ﻿using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MarioGame.Core.Components;
 
 public class CoinObject : GameObject
 {
-    private CoinType _type = CoinType.Common;
+    private readonly CoinType _type = CoinType.Common;
     private bool _movingUp = true;
-    private double _counter = 0;
-    private int _frameCounter = 0;
-    private bool _isUp = false;
+    private double _counter;
+    private int _frameCounter;
+    private bool _isUp;
     private MovingState _movingState = MovingState.State1;
-    private double _moveAmount = 10;
+    private readonly double _moveAmount = 10;
     private double _moveSpeed = 0.2;
     private const double Gravity = 1;
-    private const double JumpVelocity = -5;
-    private string _imagePath = "pack://application:,,,/Shared/Images/Coin/";
-    private Level _level;
+    private readonly string _imagePath = "pack://application:,,,/Shared/Images/Coin/";
+    private readonly Level _level;
 
     public CoinObject(Level level, double x, double y, double width, double height) : base(x, y, width, height)
     {
@@ -119,7 +116,7 @@ public class CoinObject : GameObject
                 Y += _moveSpeed;
                 _moveSpeed += Gravity;
 
-                if (_moveSpeed < 10d + 1d + 1.0e-7 && _moveSpeed > 10d + 1d - 1.0e-7)
+                if (_moveSpeed is < 10d + 1d + 1.0e-7 and > 10d + 1d - 1.0e-7)
                 {
                     _moveSpeed = -10;
                     _level.OnCoinFromChestDisappear(this);

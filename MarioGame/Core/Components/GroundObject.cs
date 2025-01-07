@@ -1,16 +1,14 @@
 ﻿using MarioGame.Shared.Enums;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MarioGame.Core.Interfaces;
 
 namespace MarioGame.Core.Components;
 
 public class GroundObject : GameObject, IStaticObject
 {
-    private GroundType _groundType;
-    private string _folderPath = "pack://application:,,,/Shared/Images/Ground/";
+    private readonly GroundType _groundType;
+    private const string FolderPath = "pack://application:,,,/Shared/Images/Ground/";
 
     public GroundObject(double x, double y, double width, double height, GroundType groundType = GroundType.Base) : base(x, y, width, height)
     {
@@ -50,7 +48,7 @@ public class GroundObject : GameObject, IStaticObject
     {
         string imageName = _groundType == GroundType.Base ? "ground-1.png" : "ground-ladder.png";
         
-        return _folderPath + imageName;
+        return FolderPath + imageName;
     }
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects) { }

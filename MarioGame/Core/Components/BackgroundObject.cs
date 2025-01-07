@@ -1,16 +1,14 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core.Components;
 
 public class BackgroundObject : GameObject
 {
-    private BackgroundType _type;
-    private string _imagePath = "pack://application:,,,/Shared/Images/Background/";
-    
+    private readonly BackgroundType _type;
+    private const string ImagePath = "pack://application:,,,/Shared/Images/Background/";
+
     public BackgroundObject(double x, double y, double width, double height, BackgroundType type) : base(x, y, width, height)
     {
         _type = type;
@@ -33,7 +31,7 @@ public class BackgroundObject : GameObject
 
     private string GetImage(string imageName)
     {
-        return _imagePath + imageName;
+        return ImagePath + imageName;
     }
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
