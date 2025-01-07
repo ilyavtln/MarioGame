@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Config;
@@ -35,7 +36,13 @@ public class Level
         _levelNumber = levelNumber;
         _canvas = canvas;
         _objects = [];
-        canvas.Loaded += (_, _) => LoadLevelObjects();
+        canvas.Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        LoadLevelObjects();
+        _canvas.Loaded -= OnLoaded; 
     }
 
     private void LoadLevelObjects()
