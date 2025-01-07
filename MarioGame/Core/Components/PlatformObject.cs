@@ -18,12 +18,18 @@ public class PlatformObject : GameObject
     public GameObject? _containedObject { get; private set; }
 
     public PlatformType _type = PlatformType.Brick;  //желательно сделать приватным
-    private ChestsState _state = ChestsState.State1;
+
+    private MovingState _movingState = MovingState.State1;
+    //private ChestsState _state = ChestsState.State1;
     private string _imagePath = "pack://application:,,,/Shared/Images/Platform/";
 
     public int ObjectsCount { get; private set; } = 0;
 
     private Level _level;
+
+    private int _frameCounter = 0;
+
+    private bool _isUp = false;
 
     public PlatformObject(Level level, double x, double y, double width, double height, PlatformType type) : base(x, y, width, height)
     {
@@ -50,7 +56,7 @@ public class PlatformObject : GameObject
 
     private string GetImage()
     {
-        int intState = (int)_state;
+        //int intState = (int)_movingState;
 
         switch (_type)
         {
@@ -58,15 +64,24 @@ public class PlatformObject : GameObject
                 return _imagePath + "brick-1.png";
             case PlatformType.Coins:
                 return _imagePath + "brick-1.png";
-            case PlatformType.ChestWithCoins:
-                return _imagePath + $"gift-chest-{intState}.png";
-            case PlatformType.ChestWithMushroom:
-                return _imagePath + $"gift-chest-{intState}.png";
+            case PlatformType.ChestWithCoins or PlatformType.ChestWithMushroom:
+            {
+                switch(_movingState)
+                {
+                    case MovingState.State1: return _imagePath + "gift-chest-1.png";
+                    case MovingState.State2: return _imagePath + "gift-chest-1.png";
+                    case MovingState.State3: return _imagePath + "gift-chest-1.png";
+                    case MovingState.State4: return _imagePath + "gift-chest-2.png";
+                    case MovingState.State5: return _imagePath + "gift-chest-3.png";
+                }
+                break;
+            }
             case PlatformType.ChestDiactivated:
                 return _imagePath + "chest-1.png";
             default:
                 return _imagePath + "brick-1.png";
         }
+        return null;
     }
 
     public override void Draw(Canvas canvas)
@@ -86,6 +101,24 @@ public class PlatformObject : GameObject
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
+        _frameCounter++;
+
+        if (_frameCounter % 5 == 0)
+        {
+            if (_movingState == MovingState.State5 || _movingState == MovingState.State1)
+                _isUp = !_isUp;
+
+            _movingState = _movingState switch
+            {
+                MovingState.State1 => MovingState.State2,
+                MovingState.State2 => !_isUp ? MovingState.State3 : MovingState.State1,
+                MovingState.State3 => !_isUp ? MovingState.State4 : MovingState.State2,
+                MovingState.State4 => !_isUp ? MovingState.State5 : MovingState.State3,
+                MovingState.State5 => MovingState.State4,
+                _ => MovingState.State1
+            };
+        }
+
         if (!_isMoving)
             return;
         Y += _velocity;
