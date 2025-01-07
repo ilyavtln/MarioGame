@@ -2,6 +2,8 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MarioGame.Core.States;
+using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core.Components;
 
@@ -16,13 +18,18 @@ public class EnemyObject : GameObject
 
     private double velocityY = 0;
     private const double gravity = 1;
+    
+    private EnemyType _enemyType;
+    private int _frameCounter = 0;
+    private MovingState _movingState = MovingState.State1;
 
-    public EnemyObject(Level level, double x, double y, double width, double height, double offset, double speed) : base(x, y, width, height)
+    public EnemyObject(Level level, double x, double y, double width, double height, double offset, double speed, EnemyType enemyType = EnemyType.Base) : base(x, y, width, height)
     {
         _level = level;
         _startX = x;
         _offset = offset;
         _speed = speed;
+        _enemyType = enemyType;
     }
 
     public override void Draw(Canvas canvas)
@@ -40,23 +47,64 @@ public class EnemyObject : GameObject
 
     private string GetImage()
     {
-        if (_offset == 0 || _speed == 0)
+        string imageName;
+        
+        if (_enemyType == EnemyType.Base)
         {
-            return _imagePath + "enemy-1.png";
-        }
-        else if (_movingRight)
-        {
-            return _imagePath + "enemy-right-1.png";
+            if (_offset == 0 || _speed == 0)
+            {
+                imageName = "enemy-1.png";
+            }
+            else if (_movingRight)
+            {
+                imageName = "enemy-right-1.png";
+            }
+            else
+            {
+                imageName = "enemy-left-1.png";
+            }    
         }
         else
         {
-            return _imagePath + "enemy-left-1.png";
+            int intState = (int)_movingState;
+            
+            if (_offset == 0 || _speed == 0)
+            {
+                imageName = "enemy-turtle-left-1.png";
+            }
+            else if (_movingRight)
+            {
+                imageName = $"enemy-turtle-right-{intState}.png";
+            }
+            else
+            {
+                imageName = $"enemy-turtle-left-{intState}.png";
+            } 
+        }
+
+        return _imagePath + imageName;
+    }
+    
+    private void UpdateMovingState()
+    {
+        _frameCounter++;
+
+        if (_frameCounter % 5 == 0)
+        {
+            _movingState = _movingState switch
+            {
+                MovingState.State1 => MovingState.State2,
+                MovingState.State2 => MovingState.State1,
+                _ => MovingState.State1
+            };
         }
     }
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
         if (_offset == 0) { return;}
+        
+        UpdateMovingState();
         
         if (Y > canvas.ActualHeight)
         {

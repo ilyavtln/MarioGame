@@ -8,7 +8,13 @@ namespace MarioGame.Core.Components;
 
 public class GroundObject : GameObject
 {
-    public GroundObject(double x, double y, double width, double height) : base(x, y, width, height) { }
+    private GroundType _groundType;
+    private string _folderPath = "pack://application:,,,/Shared/Images/Ground/";
+
+    public GroundObject(double x, double y, double width, double height, GroundType groundType = GroundType.Base) : base(x, y, width, height)
+    {
+        _groundType = groundType;
+    }
 
     public override void Draw(Canvas canvas)
     {
@@ -23,7 +29,7 @@ public class GroundObject : GameObject
             {
                 var image = new Image
                 {
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Shared/Images/Ground/ground-1.png")),
+                    Source = new BitmapImage(new Uri(GetImage())),
                     Width = blockSize,
                     Height = blockSize
                 };
@@ -39,10 +45,14 @@ public class GroundObject : GameObject
         }
     }
 
-    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
+    private string GetImage()
     {
-
+        string imageName = _groundType == GroundType.Base ? "ground-1.png" : "ground-ladder.png";
+        
+        return _folderPath + imageName;
     }
+
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects) { }
 
     public override void InteractWithPlayer(Player player)
     {

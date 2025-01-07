@@ -3,15 +3,11 @@
   "MaxLevelDuration": 20,
   "Player": {
     "X": 0,
-    "Y": 150,
-    "Width": 32,
-    "Height": 64
+    "Y": 150
   },
   "Finish" : {
     "X": 1800,
-    "Y": 400,
-    "Width": 256,
-    "Height": 256
+    "Y": 400
   },
   "Grounds": [
     {
@@ -126,12 +122,13 @@
          "Speed": 1
       },
       {
-         "X": 1100,
-         "Y": 176,
-         "Width": 32,
-         "Height": 32,
+         "X": 1200,
+         "Y": 192,
+         "Width": 48,
+         "Height": 48,
          "Offset": 50,
-         "Speed": 0
+         "Speed": 1,
+         "Type": "Turtle"
       }
    ],
   "Tubes": [

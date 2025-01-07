@@ -2,16 +2,12 @@
   "Index": 2,
   "MaxLevelDuration": 35,
   "Player": {
-    "X": 0,
-    "Y": 150,
-    "Width": 32,
-    "Height": 64
+    "X": 2000,
+    "Y": 150
   },
   "Finish" : {
-    "X": 2700,
-    "Y": 400,
-    "Width": 256,
-    "Height": 256
+    "X": 3000,
+    "Y": 400
   },
   "Grounds": [
     {
@@ -53,13 +49,55 @@
     {
       "X": 1536,
       "Y": 144,
-      "Width": 48,
+      "Width": 288,
       "Height": 144
     },
     {
-      "X": 1632,
-      "Y": 144,
+      "X": 1680,
+      "Y": 192,
+      "Width": 144,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 1728,
+      "Y": 240,
+      "Width": 96,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 1774,
+      "Y": 288,
       "Width": 48,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 1966,
+      "Y": 192,
+      "Width": 144,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 1966,
+      "Y": 240,
+      "Width": 96,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 1966,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 1966,
+      "Y": 144,
+      "Width": 1440,
       "Height": 144
     }
   ],

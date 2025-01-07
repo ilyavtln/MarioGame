@@ -1,4 +1,6 @@
 ﻿namespace MarioGame.Core.Utils;
 
-public class FinishJson(double x, double y, double width, double height)
-    : BaseJsonData(x, y, width, height);
+public class FinishJson : BaseJsonData
+{
+    public FinishJson(double x, double y) : base(x, y) { }
+}

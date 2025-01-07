@@ -9,8 +9,10 @@ public class FinishObject : GameObject
 {
     private Level _level;
     private string _imagePath = "pack://application:,,,/Shared/Images/Finish/finish-castle.png";
+    private const int FinishWidth = 256;
+    private const int FinishHeight = 256;
 
-    public FinishObject(Level level, double x, double y, double width, double height) : base(x, y, width, height)
+    public FinishObject(Level level, double x, double y) : base(x, y, FinishWidth, FinishHeight)
     {
         _level = level;
     }

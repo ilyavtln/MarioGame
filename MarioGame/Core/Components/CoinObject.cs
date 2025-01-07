@@ -15,8 +15,8 @@ public class CoinObject : GameObject
     private int _frameCounter = 0;
     private bool _isUp = false;
     private MovingState _movingState = MovingState.State1;
-    private double MoveAmount = 10;
-    private double MoveSpeed = 0.2;
+    private double _moveAmount = 10;
+    private double _moveSpeed = 0.2;
     private const double Gravity = 1;
     private const double JumpVelocity = -5;
     private string _imagePath = "pack://application:,,,/Shared/Images/Coin/";
@@ -33,7 +33,7 @@ public class CoinObject : GameObject
         _type = type;
         if (_type == CoinType.Chest)
         {
-            MoveSpeed = -10;
+            _moveSpeed = -10;
         }
     }
 
@@ -89,12 +89,13 @@ public class CoinObject : GameObject
             case CoinType.Common:
             {
                 UpdateMovingState();
+
                 if (_movingUp)
                 {
-                    Y -= MoveSpeed;
-                    _counter += MoveSpeed;
+                    Y -= _moveSpeed;
+                    _counter += _moveSpeed;
 
-                    if (_counter >= MoveAmount)
+                    if (_counter >= _moveAmount)
                     {
                         _movingUp = false;
                         _counter = 0;
@@ -102,10 +103,10 @@ public class CoinObject : GameObject
                 }
                 else
                 {
-                    Y += MoveSpeed;
-                    _counter += MoveSpeed;
+                    Y += _moveSpeed;
+                    _counter += _moveSpeed;
 
-                    if (_counter >= MoveAmount)
+                    if (_counter >= _moveAmount)
                     {
                         _movingUp = true;
                         _counter = 0;
@@ -115,11 +116,14 @@ public class CoinObject : GameObject
             }
             case CoinType.Chest:
             {
-                Y += MoveSpeed;
-                MoveSpeed += Gravity;
+                Y += _moveSpeed;
+                _moveSpeed += Gravity;
 
-                if (MoveSpeed < 10d + 1d + 1.0e-7 && MoveSpeed > 10d + 1d - 1.0e-7)
+                if (_moveSpeed < 10d + 1d + 1.0e-7 && _moveSpeed > 10d + 1d - 1.0e-7)
+                {
+                    _moveSpeed = -10;
                     _level.OnCoinFromChestDissapear(this);
+                }
 
                 break;
             }

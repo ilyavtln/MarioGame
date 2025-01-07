@@ -9,11 +9,11 @@ namespace MarioGame.Core.Components;
 
 public class PlatformObject : GameObject
 {
-    private double velocity = 0d;
-    private const double gravity = 1d;
-    private const double JumpVelocity = -5d;
+    private double _velocity = 0d;
+    private const double gravity = 3d;
+    private const double JumpVelocity = -6d;
 
-    private bool _is_moving = false;
+    private bool _isMoving = false;
 
     public GameObject? _containedObject { get; private set; }
 
@@ -21,13 +21,9 @@ public class PlatformObject : GameObject
     private ChestsState _state = ChestsState.State1;
     private string _imagePath = "pack://application:,,,/Shared/Images/Platform/";
 
-    public int objects_count { get; private set; } = 0;
+    public int ObjectsCount { get; private set; } = 0;
 
     private Level _level;
-
-    //public PlatformObject(double x, double y, double width, double height) : base(x, y, width, height)
-    //{
-    //}
 
     public PlatformObject(Level level, double x, double y, double width, double height, PlatformType type) : base(x, y, width, height)
     {
@@ -35,10 +31,10 @@ public class PlatformObject : GameObject
         _type = type;
         switch(type)
         {
-            case PlatformType.Coins: objects_count = 5; break;
-            case PlatformType.ChestWithCoins: objects_count = 1; break;
-            case PlatformType.ChestWithMushroom: objects_count = 1; break;
-            default: objects_count = 0; break;
+            case PlatformType.Coins: ObjectsCount = 5; break;
+            case PlatformType.ChestWithCoins: ObjectsCount = 1; break;
+            case PlatformType.ChestWithMushroom: ObjectsCount = 1; break;
+            default: ObjectsCount = 0; break;
         }
     }
 
@@ -90,15 +86,15 @@ public class PlatformObject : GameObject
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
     {
-        if (!_is_moving)
+        if (!_isMoving)
             return;
-        Y += velocity;
-        velocity += gravity;
+        Y += _velocity;
+        _velocity += gravity;
         
-        if(velocity < -JumpVelocity + 1d  + 1.0e-7 && velocity > -JumpVelocity + 1d - 1.0e-7)
+        if(_velocity < -JumpVelocity + gravity + 1.0e-7 && _velocity > -JumpVelocity + gravity - 1.0e-7)
         {
-            velocity = 0d;
-            _is_moving = false;
+            _velocity = 0d;
+            _isMoving = false;
         }
             
     }
@@ -122,18 +118,18 @@ public class PlatformObject : GameObject
             {
                 player.JumpVelocity = 0;
                 player.Y = Y + Height;
-                _is_moving = true;
-                velocity = JumpVelocity;
+                _isMoving = true;
+                _velocity = JumpVelocity;
 
                 switch (_type)
                 {
                     case PlatformType.Coins:
                     {
-                        if (objects_count > 0)
+                        if (ObjectsCount > 0)
                             _level.OnChestWithCoinTouched(this);
                         else
                             _type = PlatformType.ChestDiactivated;
-                        objects_count--;
+                        ObjectsCount--;
                         break;
                     }
                     case PlatformType.ChestWithCoins:
