@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Core.Components;
 using MarioGame.Core.Utils;
+using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
 
@@ -15,8 +17,10 @@ public class Level
     private int _lives = 3;
     private readonly Canvas _canvas;
     private Player? _player;
-    private readonly List<GameObject?> _objects;
+    private List<GameObject?> _objects;
     private List<GameObject> _objectsToRemove = new List<GameObject>();
+    private List<GameObject> _objectsToAdd = new List<GameObject>();
+
     public event Action<int>? ScoreChanged;
     public event Action<int>? LivesChanged;
     public event Action? LevelEnded;
@@ -103,8 +107,21 @@ public class Level
         {
             foreach (var platform in levelData.Platforms)
             {
-                var platformObject = new PlatformObject(platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height);
+                var platformObject = new PlatformObject(this,platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height, platform.Type);
+                
+
+                switch (platform.Type)
+                {
+                    case PlatformType.Coins or PlatformType.ChestWithCoins:
+                    {
+                        var coinObject = new CoinObject(this, platform.X, platform.Y + platform.Height, 16d, 16d, CoinType.Chest);
+                        platformObject.InitializeChestObject(coinObject);
+                        break;
+                    }
+                }
                 _objects.Add(platformObject);
+                for(int i = 0; i < platformObject.objects_count; i++) 
+                    _objects.Add(platformObject._containedObject);
             }
         }
 
@@ -162,6 +179,14 @@ public class Level
 
         _player?.Update(_canvas, _objects);
 
+        //Добавляем объекты после итерации
+        foreach (var obj in _objectsToAdd)
+        {
+            _objects.Add(obj);
+        }
+
+        _objectsToAdd.Clear();
+
         // Удаляем объекты после итерации
         foreach (var obj in _objectsToRemove)
         {
@@ -210,6 +235,33 @@ public class Level
             _score += 10;
             ScoreChanged?.Invoke(_score);
         }
+    }
+
+    public void OnChestWithCoinTouched(PlatformObject platform)
+    {
+        //CoinObject newCoin = new CoinObject(this, platform.X,platform.Y + platform.Height, 16d, 16d, CoinType.Chest);
+        //_objectsToAdd.Add(newCoin);
+
+        GameObject obj = platform._containedObject;
+
+        int i = _objects.IndexOf(obj);
+
+        if(_objects[i] is CoinObject coin)
+            coin.UpdateMovingStatus();
+        _score += 10;
+        ScoreChanged?.Invoke(_score);
+        if (platform.objects_count == 1)
+        {
+            i = _objects.IndexOf(platform);
+            if (_objects[i] is PlatformObject pl)
+                pl.DeactivateChest();
+        }
+        
+    }
+
+    public void OnCoinFromChestDissapear(CoinObject coin)
+    {
+        _objectsToRemove.Add(coin);
     }
 
     public void OnDeathFallingEnemy(EnemyObject enemy)

@@ -1,6 +1,14 @@
-﻿namespace MarioGame.Core.Utils;
+﻿using MarioGame.Shared.Enums;
 
-public class PlatformJson(double x, double y, double width, double height) : BaseJsonData(x, y, width, height)
+namespace MarioGame.Core.Utils;
+
+
+public class PlatformJson : BaseJsonData
 {
-    
+    public PlatformType Type { get; set; }
+
+    public PlatformJson(double x, double y, double width, double height, PlatformType type) : base(x, y, width, height)
+    {
+        Type = type;
+    }
 }

@@ -35,34 +35,39 @@
   ],
    "Platforms": [
       {
-         "X": 600,
-         "Y": 300,
-         "Width": 32,
-         "Height": 32
+        "X": 600,
+        "Y": 300,
+        "Width": 32,
+        "Height": 32,
+        "Type": "ChestWithCoins"
       },
       {
          "X": 632,
          "Y": 300,
          "Width": 32,
-         "Height": 32
+         "Height": 32,
+         "Type": "Brick"
       },
       {
          "X": 664,
          "Y": 300,
          "Width": 32,
-         "Height": 32
+         "Height": 32,
+         "Type": "Brick"
       },
       {
          "X": 696,
          "Y": 300,
          "Width": 32,
-         "Height": 32
+         "Height": 32,
+         "Type": "Brick"
       },
       {
          "X": 728,
          "Y": 300,
          "Width": 32,
-         "Height": 32
+         "Height": 32,
+         "Type": "Brick"
       }
    ],
   "Coins": [

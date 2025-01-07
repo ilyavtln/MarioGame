@@ -38,6 +38,8 @@ public class Player
 
     public event Action? PlayerDied;
 
+    public bool isPowered = false;
+
     public Player(double x, double y, double width, double height)
     {
         X = x;
@@ -224,6 +226,13 @@ public class Player
     public void OnDeath()
     {
         PlayerDied?.Invoke();
+    }
+
+    public void OnPower() 
+    {
+       isPowered = true;
+       Width *= 1.5;
+       Height *= 1.5;
     }
 
     public bool IsCollidingWithBlockOnMoveX(GameObject obj, double shift)
