@@ -1,4 +1,4 @@
-﻿namespace MarioGame.Shared.Enums;
+﻿namespace MarioGame.Core.States;
 
 public enum GameStatus
 {

@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using MarioGame.Core.Interfaces;
+using MarioGame.Core.States;
 
 namespace MarioGame.Core.Components;
 

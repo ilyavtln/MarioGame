@@ -5,6 +5,7 @@ using MarioGame.Core;
 using MarioGame.Shared.Enums;
 using System.IO;
 using MarioGame.Config;
+using MarioGame.Core.States;
 
 namespace MarioGame.GameWindows;
 
@@ -174,7 +175,7 @@ public partial class GameWindow
         _gameManager.StopGame();
         UnsubscribeFromEvents();
 
-        _gameManager.SetGameStatus(GameStatus.Stopped);
+        _gameManager.SetGameStatus(GameStatus.Finished);
         _soundManager.StopMusic();
 
         _soundManager.PlaySoundEffect("mario-win.mp3");

@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using MarioGame.Core;
+using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.GameWindows;

@@ -1,6 +1,7 @@
 ﻿using MarioGame.Shared.Enums;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using MarioGame.Core.States;
 
 namespace MarioGame.Core.Components;
 

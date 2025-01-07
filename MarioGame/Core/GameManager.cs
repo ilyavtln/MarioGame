@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MarioGame.Core.States;
 using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
