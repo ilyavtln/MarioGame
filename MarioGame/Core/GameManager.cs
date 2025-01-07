@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Core.States;
-using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
 
@@ -17,9 +16,9 @@ public class GameManager
     private const int TargetFps = 60;
     private TimeSpan _frameInterval;
     private CancellationTokenSource? _cancellationTokenSource;
-    private bool _isRunning = false;
+    private bool _isRunning;
     private bool _playerIsDead;
-    private int _currentScore = 0;
+    private int _currentScore;
     private TimeSpan _gameTime;
     public event Action<TimeSpan>? TimeUpdated;
     public event Action<bool>? PlayerDied;
@@ -34,7 +33,7 @@ public class GameManager
         InitializeTimers();
         InitializeLevel();
 
-        canvas.Loaded += (sender, e) =>
+        canvas.Loaded += (_, _) =>
         {
             if (_level != null)
                 _camera = new Camera(_level.Width, _level.Height);
@@ -54,7 +53,7 @@ public class GameManager
         _level.LivesChanged += OnLiveStatusUpdated;
     }
 
-    public async Task StartGameLoopAsync()
+    private async Task StartGameLoopAsync()
     {
         _cancellationTokenSource = new CancellationTokenSource();
         var token = _cancellationTokenSource.Token;
@@ -118,29 +117,22 @@ public class GameManager
 
     private void UpdateGame(TimeSpan deltaTime)
     {
-        if (_gameStatus == GameStatus.Playing)
+        var player = _level?.GetPlayer();
+        
+        if (_gameStatus == GameStatus.Playing && player != null)
         {
             _canvas.Children.Clear();
 
             _level?.Update();
-
-            var player = _level?.GetPlayer();
+            
             _gameTime += deltaTime;
             TimeUpdated?.Invoke(_gameTime);
 
-            if (player != null)
-            {
-                _camera?.Update(player, _canvas);
-            }
+            _camera?.Update(player, _canvas);
 
             // Проверка, что истекло максимальное время уровня
             bool isNoTime = _gameTime.Seconds >= _level?.MaxLevelDuration;
-            var isDeathFromEnemy = false;
-
-            if (player != null)
-                isDeathFromEnemy = player.PlayerStatus == PlayerStatus.IsDeath
-                                   ? true
-                                   : false;
+            bool isDeathFromEnemy = player.PlayerStatus == PlayerStatus.IsDeath;
 
             if (_playerIsDead || isNoTime)
             {
