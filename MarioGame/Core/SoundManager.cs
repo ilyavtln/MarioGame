@@ -6,8 +6,8 @@ public class SoundManager
 {
     private readonly MediaPlayer _musicPlayer;
     private readonly MediaPlayer _soundEffectPlayer;
-    private readonly string _baseMusicPath = "Assets/Music/";
-    private readonly string _baseSoundPath = "Assets/Sounds/";
+    private readonly string _baseMusicPath = "GameSounds/Music/";
+    private readonly string _baseSoundPath = "GameSounds/Sounds/";
     private TimeSpan _currentMusicPosition;
 
     public SoundManager()
