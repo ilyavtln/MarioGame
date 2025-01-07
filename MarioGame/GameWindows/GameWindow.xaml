@@ -20,7 +20,7 @@
         <Canvas Name="GameCanvas" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Canvas>
         <Button Name="MenuButton"
                 Content="☰"
-                Background="MediumSeaGreen"
+                Background="IndianRed"
                 Width="64"
                 Height="64"
                 HorizontalAlignment="Left"
