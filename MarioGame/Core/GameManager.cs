@@ -78,6 +78,18 @@ public class GameManager
         }
     }
 
+    public int GetRemainingTime()
+    {
+        if (_level != null)
+        {
+            int maxDuration = _level.MaxLevelDuration;
+            int elapsedTime = (int)_gameTime.TotalSeconds;
+            return Math.Max(maxDuration - elapsedTime, 0);
+        }
+
+        return 0;
+    }
+    
     public void StartGame()
     {
         _gameStatus = GameStatus.Playing;

@@ -1,6 +1,6 @@
 ﻿{
   "Index": 2,
-  "MaxLevelDuration": 15,
+  "MaxLevelDuration": 35,
   "Player": {
     "X": 0,
     "Y": 150,
@@ -8,7 +8,7 @@
     "Height": 64
   },
   "Finish" : {
-    "X": 700,
+    "X": 2700,
     "Y": 400,
     "Width": 256,
     "Height": 256
@@ -17,23 +17,72 @@
     {
       "X": 0,
       "Y": 144,
-      "Width": 1440,
+      "Width": 1008,
+      "Height": 144
+    },
+    {
+      "X": 1056,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 1152,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 1248,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 1344,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 1440,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 1536,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 1632,
+      "Y": 144,
+      "Width": 48,
       "Height": 144
     }
   ],
   "Backgrounds": [
     {
       "X": 300,
-      "Y": 300,
+      "Y": 450,
+      "Width": 70,
+      "Height": 70,
+      "Type": "Cloud"
+    },
+    {
+      "X": 700,
+      "Y": 500,
       "Width": 50,
       "Height": 50,
       "Type": "Cloud"
     },
     {
       "X": 450,
-      "Y": 450,
-      "Width": 50,
-      "Height": 50,
+      "Y": 176,
+      "Width": 64,
+      "Height": 32,
       "Type": "Bush"
     }
   ]
