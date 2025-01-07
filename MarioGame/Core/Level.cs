@@ -279,7 +279,7 @@ public class Level
         _score += 10;
         ScoreChanged?.Invoke(_score);
 
-        if (platform.objects_count == 1)
+        if (platform.ObjectsCount == 1)
         {
             //i = _objects.IndexOf(platform);
             //if (_objects[i] is PlatformObject pl)
