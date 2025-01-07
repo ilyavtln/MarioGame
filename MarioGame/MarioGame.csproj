@@ -146,6 +146,18 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Resource Include="Shared\Images\UI\player-heart.png" />
+      <None Remove="Assets\Sounds\mario-jump.mp3" />
+      <Content Include="Assets\Sounds\mario-jump.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Shared\Images\Ground\ground-ladder.png" />
+      <Resource Include="Shared\Images\Ground\ground-ladder.png" />
+      <None Remove="Shared\Images\Background\bush-1.png" />
+      <Resource Include="Shared\Images\Background\bush-1.png" />
+      <None Remove="Shared\Images\Background\bush-2.png" />
+      <Resource Include="Shared\Images\Background\bush-2.png" />
+      <None Remove="Shared\Images\Background\bush-3.png" />
+      <Resource Include="Shared\Images\Background\bush-3.png" />
     </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@ public class BackgroundObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        string imageName = _type == BackgroundType.Bush ? "cloud-1.png" : "cloud-eye-1.png";
+        string imageName = _type == BackgroundType.Bush ? "bush-1.png" : "cloud-eye-1.png";
         
         var image = new Image
         {
@@ -40,7 +40,5 @@ public class BackgroundObject : GameObject
     {
     }
 
-    public override void InteractWithPlayer(Player player)
-    {
-    }
+    public override void InteractWithPlayer(Player player) { }
 }

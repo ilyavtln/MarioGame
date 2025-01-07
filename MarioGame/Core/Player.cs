@@ -35,7 +35,8 @@ public class Player
     private int _frameCounter = 0;
     private Image? _playerImage;
     private double _opacity = 1.0;
-
+    private SoundManager _soundManager = new SoundManager();
+    
     public event Action? PlayerDied;
 
     public bool isPowered = false;
@@ -115,16 +116,17 @@ public class Player
             await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
         }
         
+        _lastDirectionRight = !_lastDirectionRight;
         PlayerStatus = PlayerStatus.Idle;
         VelocityX = 0;
 
         await HidePlayer();
-        await Task.Delay(100);
     }
 
     
     private async Task HidePlayer()
     {
+        await Task.Delay(500);
         if (_playerImage != null)
         {
             int steps = 100;
@@ -141,6 +143,7 @@ public class Player
                 await Task.Delay(500);
             }
         }
+        await Task.Delay(100);
     }
 
     
@@ -164,6 +167,7 @@ public class Player
                 PlayerStatus = PlayerStatus.IsJumping;
                 JumpVelocity = -MaxJumpHeight;
                 Y += JumpVelocity;
+                _soundManager.PlaySoundEffect("mario-jump.mp3");
                 break;
         }
     }
