@@ -107,8 +107,8 @@ public partial class GameWindow : Window
     
     private void UpdatePanels()
     {
-        LevelText.Text = $"level: {_levelNumber} / {_levelCount}";
-        ScoreText.Text = $"score: {_score}";
+        LevelText.Text = $"{_levelNumber} / {_levelCount}";
+        ScoreText.Text = $"{_score}";
         
         DrawLivesByCount(_lives);
     }
@@ -117,7 +117,7 @@ public partial class GameWindow : Window
     {
         _soundManager.PlaySoundEffect("mario-collect-coin.mp3");
         _score = newScore; 
-        ScoreText.Text = $"score: {_score}";
+        ScoreText.Text = $"{_score}";
     }
     
     private void UpdateLivesDisplay(int lives)
@@ -145,7 +145,7 @@ public partial class GameWindow : Window
     
     private void UpdateTimeDisplay(TimeSpan gameTime)
     {
-        TimeText.Text = $"time: {gameTime:mm\\:ss}";
+        TimeText.Text = (_gameManager.GetRemainingTime()).ToString();
     }
     
     private void GameOver()

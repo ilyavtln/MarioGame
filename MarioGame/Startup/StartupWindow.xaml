@@ -12,10 +12,17 @@
         AllowsTransparency="True"
         Background="Transparent">
     
-    <Border Background="Lavender" CornerRadius="30">
+    <Border CornerRadius="30">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="Lavender" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        
         <Grid>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="loading" FontSize="40" Margin="0,0,0,32" HorizontalAlignment="Center"/>
+                <TextBlock Text="loading" FontSize="40" FontWeight="Black" Margin="0,0,0,32" HorizontalAlignment="Center"/>
                 <ProgressBar Width="300" Height="20" IsIndeterminate="True"/>
             </StackPanel>
         </Grid>

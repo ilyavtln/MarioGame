@@ -20,8 +20,7 @@ public class Level
     public event Action<int>? ScoreChanged;
     public event Action<int>? LivesChanged;
     public event Action? LevelEnded;
-
-    public int MaxLevelDuration { get; private set; } = 10;
+    public int MaxLevelDuration { get; private set; } = 15;
     //для обновления камеры
     public double Width { get; private set; } = 0;
     public double Height { get; private set; } = 0;
