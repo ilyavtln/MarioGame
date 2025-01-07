@@ -1,18 +1,20 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using MarioGame.Core.Interfaces;
 
 namespace MarioGame.Core.Components;
 
-public class FinishObject : GameObject
+public sealed class FinishObject : GameObject, IStatic, INonUpdatable
 {
     private readonly Level _level;
     private const string ImagePath = "pack://application:,,,/Shared/Images/Finish/finish-castle.png";
     private const int FinishWidth = 256;
     private const int FinishHeight = 256;
 
-    public FinishObject(Level level, double x, double y) : base(x, y, FinishWidth, FinishHeight)
+    public FinishObject(Canvas canvas, Level level, double x, double y) : base(x, y, FinishWidth, FinishHeight)
     {
         _level = level;
+        Draw(canvas);
     }
 
     public override void Draw(Canvas canvas)
@@ -28,10 +30,7 @@ public class FinishObject : GameObject
         canvas.Children.Add(image);
     }
 
-    public override void Update(Canvas canvas, List<GameObject?> gameObjects)
-    {
-        
-    }
+    public override void Update(Canvas canvas, List<GameObject?> gameObjects) { }
 
     public override async void InteractWithPlayer(Player player)
     {

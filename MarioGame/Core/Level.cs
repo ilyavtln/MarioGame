@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarioGame.Config;
@@ -13,36 +12,42 @@ namespace MarioGame.Core;
 
 public class Level
 {
+    //для обновления камеры
+    public double Width { get; private set; }
+    public double Height { get; private set; }
+    
     private readonly uint _levelNumber;
     private int _score;
     private int _lives = 3;
     private readonly Canvas _canvas;
+    private readonly Canvas _staticCanvas;
+    private readonly Canvas _dynamicCanvas;
     private Player? _player;
     private readonly List<GameObject?> _objects;
     private readonly List<GameObject> _objectsToRemove = [];
     private readonly List<GameObject> _objectsToChange = [];
     private readonly List<GameObject?> _objectsToAdd = [];
-    private bool _isUpdated;
     public event Action<int>? ScoreChanged;
     public event Action<int>? LivesChanged;
     public event Action? LevelEnded;
     public int MaxLevelDuration { get; private set; } = GameConfig.LevelDuration;
-    //для обновления камеры
-    public double Width { get; private set; }
-    public double Height { get; private set; }
 
-    public Level(uint levelNumber, Canvas canvas)
+    public Level(uint levelNumber, Canvas parentCanvas)
     {
         _levelNumber = levelNumber;
-        _canvas = canvas;
         _objects = [];
-        canvas.Loaded += OnLoaded;
-    }
+        
+        _canvas = parentCanvas;
+        
+        // Инициализация статического слоя
+        _staticCanvas = new Canvas();
+        parentCanvas.Children.Add(_staticCanvas);
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        LoadLevelObjects();
-        _canvas.Loaded -= OnLoaded; 
+        // Инициализация динамического слоя
+        _dynamicCanvas = new Canvas();
+        parentCanvas.Children.Add(_dynamicCanvas);
+        
+        _canvas.Loaded += (_, _) => LoadLevelObjects();
     }
 
     private void LoadLevelObjects()
@@ -59,9 +64,7 @@ public class Level
         {
             foreach (var ground in levelData.Grounds)
             {
-                var groundObject = ground.Type != GroundType.Base ? new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height, GroundType.Ladder) : new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
-                
-                groundObject.Draw(_canvas);
+                var groundObject = ground.Type != GroundType.Base ? new GroundObject(_staticCanvas, ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height, GroundType.Ladder) : new GroundObject(_staticCanvas, ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
                 _objects.Add(groundObject);
 
                 //изменение ширины уровня
@@ -76,7 +79,7 @@ public class Level
 
         if (levelData?.Finish != null)
         {
-            var finishObject = new FinishObject(this, levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y);
+            var finishObject = new FinishObject(_staticCanvas, this, levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y);
             _objects.Add(finishObject);
         }
 
@@ -98,7 +101,7 @@ public class Level
         {
             foreach (var background in levelData.Backgrounds)
             {
-                var backgroundObject = new BackgroundObject(background.X, _canvas.ActualHeight - background.Y, background.Width,
+                var backgroundObject = new BackgroundObject(_staticCanvas, background.X, _canvas.ActualHeight - background.Y, background.Width,
                     background.Height, background.Type);
                 _objects.Add(backgroundObject);
             }
@@ -143,6 +146,7 @@ public class Level
             {
                 var tubeObject = new TubeObject(tube.X, _canvas.ActualHeight - tube.Y, tube.Width, tube.Height);
                 _objects.Add(tubeObject);
+                tubeObject.Draw(_staticCanvas);
             }
         }
     }
@@ -160,19 +164,20 @@ public class Level
         return JsonSerializer.Deserialize<LevelData>(json, options);
     }
 
-    public void DrawLevel()
+    private void DrawLevel()
     {
+        _dynamicCanvas.Children.Clear();
+        
         foreach (var obj in _objects)
         {
-            if (obj is not IStaticObject || _isUpdated)
+            if (obj is not IStatic)
             {
-                obj?.Draw(_canvas);
-                _isUpdated = true;
+                obj?.Draw(_dynamicCanvas);
             }
         }
 
         // Игрока рисуем последним, чтобы бг был сзади
-        _player?.Draw(_canvas);
+        _player?.Draw(_dynamicCanvas);
     }
 
     public void Update()
@@ -185,16 +190,25 @@ public class Level
 
         foreach (var obj in _objects)
         {
-            obj?.Update(_canvas, _objects);
-
-            if (_player != null)
+            if (obj is not INonUpdatable && obj != null)
             {
-                obj?.InteractWithPlayer(_player);
+                obj.Update(_canvas, _objects);    
+            }
+
+            if (obj is not INonInteractive && obj != null && _player != null)
+            {
+                obj.InteractWithPlayer(_player);
             }
         }
 
         _player?.Update(_canvas, _objects);
 
+        UpdateLists();        
+        DrawLevel(); 
+    }
+
+    private void UpdateLists()
+    {
         foreach (var obj in _objectsToAdd)
         {
             _objects.Add(obj);
@@ -212,6 +226,7 @@ public class Level
             }
         }
         _objectsToChange.Clear();
+        
         // Удаляем объекты после итерации
         foreach (var obj in _objectsToRemove)
         {
@@ -219,10 +234,7 @@ public class Level
         }
 
         _objectsToRemove.Clear();
-
-        DrawLevel();
     }
-
 
     public void HandleKeyDown(Key key)
     {

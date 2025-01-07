@@ -6,14 +6,15 @@ using MarioGame.Core.States;
 
 namespace MarioGame.Core.Components;
 
-public class GroundObject : GameObject, IStaticObject
+public sealed class GroundObject : GameObject, IStatic
 {
     private readonly GroundType _groundType;
     private const string FolderPath = "pack://application:,,,/Shared/Images/Ground/";
 
-    public GroundObject(double x, double y, double width, double height, GroundType groundType = GroundType.Base) : base(x, y, width, height)
+    public GroundObject(Canvas canvas, double x, double y, double width, double height, GroundType groundType = GroundType.Base) : base(x, y, width, height)
     {
         _groundType = groundType;
+        Draw(canvas);
     }
 
     public override void Draw(Canvas canvas)
