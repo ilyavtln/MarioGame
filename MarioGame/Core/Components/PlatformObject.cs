@@ -17,7 +17,7 @@ public class PlatformObject : GameObject
 
     public GameObject? _containedObject { get; private set; }
 
-    private PlatformType _type = PlatformType.Brick;
+    public PlatformType _type = PlatformType.Brick;  //желательно сделать приватным
     private ChestsState _state = ChestsState.State1;
     private string _imagePath = "pack://application:,,,/Shared/Images/Platform/";
 

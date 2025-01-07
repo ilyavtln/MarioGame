@@ -10,12 +10,11 @@ public class CoinObject : GameObject
 {
     private CoinType _type = CoinType.Common;
     private bool _movingUp = true;
-    private bool _isMoving = false;
     private double _counter = 0;
     private double MoveAmount = 10; 
     private double MoveSpeed = 0.2;
     private const double Gravity = 1;
-    private const double JumpVelocity = -10;
+    private const double JumpVelocity = -5;
     private string _imagePath = "pack://application:,,,/Shared/Images/Coin/coin-1.png";
     private Level _level;
     
@@ -36,9 +35,6 @@ public class CoinObject : GameObject
 
     public override void Draw(Canvas canvas)
     {
-        if (_type != CoinType.Common)
-            return;
-
         var image = new Image
         {
             Source = new BitmapImage(new Uri(_imagePath)),
@@ -48,11 +44,6 @@ public class CoinObject : GameObject
         Canvas.SetLeft(image, X);
         Canvas.SetTop(image, Y);
         canvas.Children.Add(image);
-    }
-
-    public void UpdateMovingStatus()
-    {
-        _isMoving = true;
     }
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
@@ -87,13 +78,12 @@ public class CoinObject : GameObject
            }
            case CoinType.Chest:
            {
-               if (!_isMoving) return;
-
                Y += MoveSpeed;
                MoveSpeed += Gravity;
 
                if (MoveSpeed < 10d + 1d + 1.0e-7 && MoveSpeed > 10d + 1d - 1.0e-7)
-                   _level.OnCoinFromChestDissapear(this);
+                    _level.OnCoinFromChestDissapear(this);
+                   
                break;
            }
        }

@@ -17,8 +17,9 @@ public class Level
     private int _lives = 3;
     private readonly Canvas _canvas;
     private Player? _player;
-    private List<GameObject?> _objects;
+    private readonly List<GameObject?> _objects;
     private List<GameObject> _objectsToRemove = new List<GameObject>();
+    private List<GameObject> _objectsToChange = new List<GameObject>();
     private List<GameObject> _objectsToAdd = new List<GameObject>();
 
     public event Action<int>? ScoreChanged;
@@ -109,19 +110,21 @@ public class Level
             {
                 var platformObject = new PlatformObject(this,platform.X, _canvas.ActualHeight - platform.Y, platform.Width, platform.Height, platform.Type);
                 
-
-                switch (platform.Type)
+                switch(platformObject._type)
                 {
-                    case PlatformType.Coins or PlatformType.ChestWithCoins:
+                    case PlatformType.ChestWithCoins or PlatformType.Coins:
                     {
-                        var coinObject = new CoinObject(this, platform.X, platform.Y + platform.Height, 16d, 16d, CoinType.Chest);
-                        platformObject.InitializeChestObject(coinObject);
+                        CoinObject newCoin = new CoinObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 16d, 16d, CoinType.Chest);
+                        platformObject.InitializeChestObject(newCoin);
+                        break;
+                    }
+                    case PlatformType.ChestWithMushroom: //задел на гриб
+                    {
                         break;
                     }
                 }
+
                 _objects.Add(platformObject);
-                for(int i = 0; i < platformObject.objects_count; i++) 
-                    _objects.Add(platformObject._containedObject);
             }
         }
 
@@ -179,7 +182,6 @@ public class Level
 
         _player?.Update(_canvas, _objects);
 
-        //Добавляем объекты после итерации
         foreach (var obj in _objectsToAdd)
         {
             _objects.Add(obj);
@@ -187,6 +189,16 @@ public class Level
 
         _objectsToAdd.Clear();
 
+        foreach (var obj in _objectsToChange)
+        {
+            int i = _objects.IndexOf(obj);
+
+            if(_objects[i] is PlatformObject platform)
+            {
+               platform._type = PlatformType.ChestDiactivated; 
+            }
+        }
+        _objectsToChange.Clear();
         // Удаляем объекты после итерации
         foreach (var obj in _objectsToRemove)
         {
@@ -239,22 +251,22 @@ public class Level
 
     public void OnChestWithCoinTouched(PlatformObject platform)
     {
-        //CoinObject newCoin = new CoinObject(this, platform.X,platform.Y + platform.Height, 16d, 16d, CoinType.Chest);
-        //_objectsToAdd.Add(newCoin);
-
         GameObject obj = platform._containedObject;
 
-        int i = _objects.IndexOf(obj);
+        _objectsToAdd.Add(obj);
 
-        if(_objects[i] is CoinObject coin)
-            coin.UpdateMovingStatus();
+        //int i = _objects.IndexOf(obj);
+
+        //_objectsToChange.Add(obj);
         _score += 10;
         ScoreChanged?.Invoke(_score);
+
         if (platform.objects_count == 1)
         {
-            i = _objects.IndexOf(platform);
-            if (_objects[i] is PlatformObject pl)
-                pl.DeactivateChest();
+            //i = _objects.IndexOf(platform);
+            //if (_objects[i] is PlatformObject pl)
+            //    pl.DeactivateChest();
+            _objectsToChange.Add(platform);
         }
         
     }

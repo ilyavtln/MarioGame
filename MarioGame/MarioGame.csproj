@@ -12,6 +12,10 @@
     <ItemGroup>
       <None Remove="Assets\Fonts\HarryPotter.ttf" />
       <None Remove="Assets\Fonts\HarryPotterEN-en.ttf" />
+      <None Remove="Shared\Images\Platform\chest-1.png" />
+      <None Remove="Shared\Images\Platform\gift-chest-2.png" />
+      <None Remove="Shared\Images\Platform\gift-chest-3.png" />
+      <None Remove="Shared\Images\Platform\gift-chest-4.png" />
       <Resource Include="Assets\Fonts\HarryPotterKudosEN-en.ttf" />
       <None Remove="Assets\Fonts\HarryPotterRU-en.ttf" />
       <Resource Include="Assets\Fonts\HarryPotterKudosRU-en.ttf" />
@@ -48,6 +52,10 @@
       </Content>
       <None Remove="Assets\Images\player-heart.png" />
       <None Remove="Shared\Images\Tube\tube-1.png" />
+      <Resource Include="Shared\Images\Platform\chest-1.png" />
+      <Resource Include="Shared\Images\Platform\gift-chest-2.png" />
+      <Resource Include="Shared\Images\Platform\gift-chest-3.png" />
+      <Resource Include="Shared\Images\Platform\gift-chest-4.png" />
       <Resource Include="Shared\Images\Tube\tube-1.png" />
       <None Remove="Shared\Images\Enemy\enemy-left-1.png" />
       <Resource Include="Shared\Images\Enemy\enemy-left-1.png" />
