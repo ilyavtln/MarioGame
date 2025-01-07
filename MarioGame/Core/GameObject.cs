@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MarioGame.Core.Components;
+namespace MarioGame.Core;
 
 public abstract class GameObject
 {

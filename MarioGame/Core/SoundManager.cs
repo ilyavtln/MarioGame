@@ -60,13 +60,7 @@ public class SoundManager
         _soundEffectPlayer.Open(new Uri(_baseSoundPath + soundName, UriKind.Relative));
         _soundEffectPlayer.Play();
     }
-
-    // Остановка звуковых эффектов
-    public void StopSoundEffects()
-    {
-        _soundEffectPlayer.Stop();
-    }
-
+    
     // Установка громкости для звуковых эффектов
     public void SetSoundEffectVolume(double volume)
     {

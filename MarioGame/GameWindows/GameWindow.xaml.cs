@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using MarioGame.Core;
-using MarioGame.Shared.Enums;
 using System.IO;
 using MarioGame.Config;
 using MarioGame.Core.States;
@@ -48,7 +47,6 @@ public partial class GameWindow
 
         return (uint)levelFiles.Length;
     }
-
 
     private void LoadNextLevel()
     {
@@ -151,17 +149,13 @@ public partial class GameWindow
 
     private void GameOver(bool isDeathFromEnemy = false)
     {
-        DrawLivesByCount(0);
-
-        _gameManager.StopGame();
-        UnsubscribeFromEvents();
-
-        _soundManager.StopMusic();
-
+        SetStatusBeforeExit();
+        
         if (!isDeathFromEnemy)
+        {
+            DrawLivesByCount(0);
             _soundManager.PlaySoundEffect("mario-game-over.mp3");
-
-        _gameProgress.SaveProgress();
+        }
 
         var gameOverWindow = new GameOverWindow(_levelNumber, _score, _gameProgress) { Owner = this };
 
@@ -170,20 +164,22 @@ public partial class GameWindow
 
     private void GamePassed()
     {
-        DrawLivesByCount(0);
-
-        _gameManager.StopGame();
-        UnsubscribeFromEvents();
+        SetStatusBeforeExit();
 
         _gameManager.SetGameStatus(GameStatus.Finished);
-        _soundManager.StopMusic();
 
         _soundManager.PlaySoundEffect("mario-win.mp3");
-
-        _gameProgress.SaveProgress();
 
         var gameOverWindow = new GamePassedWindow(_score) { Owner = this };
 
         gameOverWindow.ShowDialog();
+    }
+
+    private void SetStatusBeforeExit()
+    {
+        _gameManager.StopGame();
+        UnsubscribeFromEvents();
+        _soundManager.StopAllSounds();
+        _gameProgress.SaveProgress();
     }
 }

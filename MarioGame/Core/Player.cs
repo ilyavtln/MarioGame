@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using MarioGame.Core.Components;
+using MarioGame.Config;
 using MarioGame.Core.States;
-using MarioGame.Shared.Enums;
 
 namespace MarioGame.Core;
 
@@ -116,7 +115,7 @@ public class Player
 
         while (Math.Abs(X - targetX) > MoveSpeed)
         {
-            await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
+            await Task.Delay(GameConfig.FrameInterval);
         }
 
         _lastDirectionRight = !_lastDirectionRight;
@@ -243,7 +242,7 @@ public class Player
 
         while (Math.Abs(Y - targetY) > JumpVelocity)
         {
-            await Task.Delay(TimeSpan.FromSeconds(1.0 / 60.0));
+            await Task.Delay(GameConfig.FrameInterval);
         }
 
         JumpVelocity = 0;

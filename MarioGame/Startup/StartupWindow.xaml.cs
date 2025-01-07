@@ -6,7 +6,7 @@ namespace MarioGame.Startup;
 
 public partial class StartupWindow : Window
 {
-    private GameProgress _gameProgress;
+    private readonly GameProgress _gameProgress;
     
     public StartupWindow()
     {
@@ -24,12 +24,9 @@ public partial class StartupWindow : Window
         
         Close();
     }
-    
-    /// <summary>
-    /// Делаем вид, что что-то грузим
-    /// </summary>
+
     private Task LoadDependenciesAsync()
     {
-        return Task.Run(() => System.Threading.Thread.Sleep(1000));
+        return Task.Run(() => System.Threading.Thread.Sleep(1500));
     }
 }

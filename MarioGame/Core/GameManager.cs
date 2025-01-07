@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MarioGame.Config;
 using MarioGame.Core.States;
 
 namespace MarioGame.Core;
@@ -12,8 +13,6 @@ public class GameManager
     private GameStatus _gameStatus = GameStatus.Stopped;
     private Level? _level;
     private Camera? _camera;
-
-    private const int TargetFps = 60;
     private TimeSpan _frameInterval;
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _isRunning;
@@ -42,7 +41,7 @@ public class GameManager
 
     private void InitializeTimers()
     {
-        _frameInterval = TimeSpan.FromSeconds(1.0 / TargetFps);
+        _frameInterval = GameConfig.FrameInterval;
         _gameTime = TimeSpan.Zero;
     }
 

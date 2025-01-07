@@ -18,7 +18,7 @@ public class Level
     
     private readonly uint _levelNumber;
     private int _score;
-    private int _lives = 3;
+    private int _lives = GameConfig.Lives;
     private readonly Canvas _canvas;
     private readonly Canvas _staticCanvas;
     private readonly Canvas _dynamicCanvas;
