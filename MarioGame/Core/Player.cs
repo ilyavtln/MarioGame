@@ -37,16 +37,19 @@ public class Player
     private double _opacity = 1.0;
     private SoundManager _soundManager = new SoundManager();
     
+    private int _playerWidth = 32;
+    private  int _playerHeight = 64;
+    
     public event Action? PlayerDied;
 
     public bool isPowered = false;
 
-    public Player(double x, double y, double width, double height)
+    public Player(double x, double y)
     {
         X = x;
         Y = y;
-        Width = width;
-        Height = height;
+        Width = _playerWidth;
+        Height = _playerHeight;
     }
 
     public void Draw(Canvas canvas)

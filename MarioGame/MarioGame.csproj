@@ -158,6 +158,14 @@
       <Resource Include="Shared\Images\Background\bush-2.png" />
       <None Remove="Shared\Images\Background\bush-3.png" />
       <Resource Include="Shared\Images\Background\bush-3.png" />
+      <None Remove="Shared\Images\Enemy\enemy-turtle-left-1.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-turtle-left-1.png" />
+      <None Remove="Shared\Images\Enemy\enemy-turtle-left-2.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-turtle-left-2.png" />
+      <None Remove="Shared\Images\Enemy\enemy-turtle-right-1.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-turtle-right-1.png" />
+      <None Remove="Shared\Images\Enemy\enemy-turtle-right-2.png" />
+      <Resource Include="Shared\Images\Enemy\enemy-turtle-right-2.png" />
     </ItemGroup>
 
 </Project>

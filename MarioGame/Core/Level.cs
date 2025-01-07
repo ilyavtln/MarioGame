@@ -51,7 +51,17 @@ public class Level
         {
             foreach (var ground in levelData.Grounds)
             {
-                var groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+                GroundObject groundObject;
+                
+                if (ground.Type != GroundType.Base)
+                {
+                    groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height, GroundType.Ladder);
+                }
+                else
+                {
+                    groundObject = new GroundObject(ground.X, _canvas.ActualHeight - ground.Y, ground.Width, ground.Height);
+                }
+
                 _objects.Add(groundObject);
 
                 //изменение ширины уровня
@@ -66,13 +76,13 @@ public class Level
 
         if (levelData?.Finish != null)
         {
-            var finishObject = new FinishObject(this, levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y, levelData.Finish.Width, levelData.Finish.Height);
+            var finishObject = new FinishObject(this, levelData.Finish.X, _canvas.ActualHeight - levelData.Finish.Y);
             _objects.Add(finishObject);
         }
 
         if (levelData?.Player != null)
         {
-            _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y, levelData.Player.Width, levelData.Player.Height);
+            _player = new Player(levelData.Player.X, _canvas.ActualHeight - levelData.Player.Y);
         }
 
         if (levelData?.Coins != null)
@@ -98,7 +108,16 @@ public class Level
         {
             foreach (var enemy in levelData.Enemies)
             {
-                var enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
+                EnemyObject enemyObject;
+                
+                if (enemy.Type != EnemyType.Base)
+                {
+                    enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed, enemy.Type);
+                }
+                else
+                {
+                    enemyObject = new EnemyObject(this, enemy.X, _canvas.ActualHeight - enemy.Y, enemy.Width, enemy.Height, enemy.Offset, enemy.Speed);
+                }
                 _objects.Add(enemyObject);
             }
         }
