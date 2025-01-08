@@ -20,8 +20,8 @@ public class Player
     public bool IsBlockOnDirectionMove { get; set; }
     public bool PlayerAtFinish { get; set; }
 
-    private const double Gravity = 1;
-    private const double MaxJumpHeight = 15;
+    private const double Gravity = 1.2;
+    private const double MaxJumpHeight = 18;
     private const double MoveSpeed = 5;
 
     private const string ImagePath = "pack://application:,,,/Shared/Images/Player/";
