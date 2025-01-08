@@ -2,7 +2,7 @@
    "Index": 1,
    "MaxLevelDuration": 400,
    "Player": {
-      "X": 0,
+      "X": 1500,
       "Y": 208
    },
    "Grounds": [
@@ -15,40 +15,54 @@
    ],
    "Platforms": [
       {
-         "X": 600,
+         "X": 1008,
          "Y": 300,
-         "Width": 32,
-         "Height": 32,
+         "Width": 48,
+         "Height": 48,
          "Type": "ChestWithCoins"
       },
       {
-         "X": 632,
+         "X": 1056,
          "Y": 300,
-         "Width": 32,
-         "Height": 32,
+         "Width": 48,
+         "Height": 48,
          "Type": "Coins"
       },
       {
-         "X": 664,
+         "X": 1104,
          "Y": 300,
-         "Width": 32,
-         "Height": 32,
+         "Width": 48,
+         "Height": 48,
          "Type": "ChestWithEnemy",
          "EnemyType": "Turtle"
       },
       {
-         "X": 696,
+         "X": 1152,
          "Y": 300,
-         "Width": 32,
-         "Height": 32,
+         "Width": 48,
+         "Height": 48,
          "Type": "Brick"
       },
       {
-         "X": 728,
+         "X": 1200,
          "Y": 300,
-         "Width": 32,
-         "Height": 32,
+         "Width": 48,
+         "Height": 48,
          "Type": "Brick"
+      },
+      {
+         "X": 1104,
+         "Y": 444,
+         "Width": 48,
+         "Height": 48,
+         "Type": "ChestWithMushroom"
+      },
+      {
+         "X": 800,
+         "Y": 300,
+         "Width": 48,
+         "Height": 48,
+         "Type": "ChestWithCoins"
       }
    ],
    "Coins": [
@@ -114,14 +128,34 @@
          "Offset": 50,
          "Speed": 1,
          "Type": "Turtle"
+      },
+      {
+         "X": 2015,
+         "Y": 176,
+         "Width": 32,
+         "Height": 32,
+         "Offset": 250,
+         "Speed": 3
       }
    ],
    "Tubes": [
       {
-         "X": 1300,
-         "Y": 208,
-         "Width": 64,
-         "Height": 64
+         "X": 1392,
+         "Y": 240,
+         "Width": 96,
+         "Height": 96
+      },
+      {
+         "X": 1872,
+         "Y": 275,
+         "Width": 130,
+         "Height": 130
+      },
+      {
+         "X": 2338,
+         "Y": 275,
+         "Width": 130,
+         "Height": 130
       }
    ],
    "Backgrounds": [
@@ -131,13 +165,6 @@
          "Width": 96,
          "Height": 64,
          "Type": "Cloud1"
-      },
-      {
-         "X": 1400,
-         "Y": 176,
-         "Width": 64,
-         "Height": 32,
-         "Type": "Bush1"
       },
       {
          "X": 72,
@@ -151,7 +178,84 @@
          "Y": 184,
          "Width": 80,
          "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 672,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 612,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
          "Type": "Bush2"
+      },
+      {
+         "X": 1200,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush2"
+      },
+      {
+         "X": 1590,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush3"
+      },
+      {
+         "X": 1650,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush3"
+      },
+      {
+         "X": 900,
+         "Y": 650,
+         "Width": 128,
+         "Height": 96,
+         "Type": "CloudEye1"
+      },
+      {
+         "X": 1400,
+         "Y": 650,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud1"
+      },
+      {
+         "X": 1600,
+         "Y": 450,
+         "Width": 128,
+         "Height": 96,
+         "Type": "CloudEye3"
+      },
+      {
+         "X": 1950,
+         "Y": 550,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud1"
+      },
+      {
+         "X": 2000,
+         "Y": 550,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud1"
+      },
+      {
+         "X": 2105,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
       }
    ]
 }

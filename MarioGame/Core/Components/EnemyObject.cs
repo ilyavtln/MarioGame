@@ -152,10 +152,9 @@ public class EnemyObject : GameObject
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
-            var isAttackFromAir = false;
+            var isAttackFromAir = player.JumpVelocity > 0;
 
-            if (player.Y + player.JumpVelocity + player.Height >= Y &&
-                player.Y + player.JumpVelocity + player.Height < Y + Height)
+            if (isAttackFromAir)
             {
                 isAttackFromAir = true;
                 player.JumpVelocity = -5;
