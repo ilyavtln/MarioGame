@@ -9,10 +9,13 @@ public class PlatformJson : BaseJsonData
     public double Height { get; set; }
     public PlatformType Type { get; set; }
 
-    public PlatformJson(double x, double y, double width, double height, PlatformType type) : base(x, y)
+    public EnemyType EnemyType { get; set; }
+
+    public PlatformJson(double x, double y, double width, double height, PlatformType type, EnemyType enemyType) : base(x, y)
     {
         Width = width;
         Height = height;
         Type = type;
+        EnemyType = enemyType;
     }
 }

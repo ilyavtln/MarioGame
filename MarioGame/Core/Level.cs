@@ -132,8 +132,21 @@ public class Level
                     }
                     case PlatformType.ChestWithEnemy:
                     {
-                        EnemyObject enemy = new EnemyObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 32d, 32d, 100d, 2d);
-                        platformObject.InitializeChestObject(enemy);
+                        switch(platform.EnemyType)
+                        {
+                            case EnemyType.Base:
+                            {
+                                EnemyObject enemy = new EnemyObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 32d, 32d, 100d, 2d);
+                                platformObject.InitializeChestObject(enemy);
+                                break;
+                            }
+                            case EnemyType.Turtle:
+                            {
+                                EnemyObject enemy = new EnemyObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 32d, 32d, 100d, 2d,EnemyType.Turtle);
+                                platformObject.InitializeChestObject(enemy);
+                                break;
+                            }
+                        }
                         break;
                     }
                 }

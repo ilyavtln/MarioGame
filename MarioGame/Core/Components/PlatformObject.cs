@@ -14,6 +14,7 @@ public class PlatformObject : GameObject
     private bool _isMoving;
     public GameObject? ContainedObject { get; private set; }
     private PlatformType _type;
+    //public EnemyType _enemyType { get; private set; } = EnemyType.Base;
 
     private MovingState _movingState = MovingState.State1;
     private const string ImagePath = "pack://application:,,,/Shared/Images/Platform/";
