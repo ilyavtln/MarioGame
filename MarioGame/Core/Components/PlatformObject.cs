@@ -66,7 +66,7 @@ public class PlatformObject : GameObject
                 return ImagePath + "brick-1.png";
             case PlatformType.Coins:
                 return ImagePath + "brick-1.png";
-            case PlatformType.ChestWithCoins or PlatformType.ChestWithMushroom:
+            case PlatformType.ChestWithCoins or PlatformType.ChestWithMushroom or PlatformType.ChestWithEnemy:
             {
                 switch(_movingState)
                 {
