@@ -159,7 +159,7 @@ public class Level
         {
             foreach (var tube in levelData.Tubes)
             {
-                var tubeObject = new TubeObject(tube.X, _canvas.ActualHeight - tube.Y, tube.Width, tube.Height);
+                var tubeObject = new TubeObject(tube.X, _canvas.ActualHeight - tube.Y, tube.Height);
                 _objects.Add(tubeObject);
                 tubeObject.Draw(_staticCanvas);
             }

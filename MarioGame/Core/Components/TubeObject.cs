@@ -1,6 +1,7 @@
 ﻿using MarioGame.Shared.Enums;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using MarioGame.Config;
 using MarioGame.Core.Interfaces;
 using MarioGame.Core.States;
 
@@ -9,15 +10,16 @@ namespace MarioGame.Core.Components;
 public class TubeObject : GameObject, IStatic, INonUpdatable
 {
     private const string ImagePath = "/Shared/Images/Tube/";
+    private const double TubeWidth = GameConfig.TubeWidth;
 
-    public TubeObject(double x, double y, double width, double height) : base(x, y, width, height) { }
+    public TubeObject(double x, double y, double height) : base(x, y, TubeWidth, height) { }
 
     public override void Draw(Canvas canvas)
     {
         var image = new Image
         {
             Source = new BitmapImage(new Uri("pack://application:,,," + ImagePath + GetImage())),
-            Width = Width,
+            Width = TubeWidth,
             Height = Height
         };
         Canvas.SetLeft(image, X);
