@@ -125,5 +125,17 @@
       <Content Include="GameSounds\Sounds\mario-win.mp3">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="Shared\Images\Tube\tube-1_48.png" />
+      <Resource Include="Shared\Images\Tube\tube-1_48.png" />
+      <None Remove="Shared\Images\Tube\tube-1_64.png" />
+      <Resource Include="Shared\Images\Tube\tube-1_64.png" />
+      <None Remove="Shared\Images\Tube\tube-1_80.png" />
+      <Resource Include="Shared\Images\Tube\tube-1_80.png" />
+      <None Remove="Shared\Images\Tube\tube-1_96.png" />
+      <Resource Include="Shared\Images\Tube\tube-1_96.png" />
+      <None Remove="Shared\Images\Tube\tube-1_112.png" />
+      <Resource Include="Shared\Images\Tube\tube-1_112.png" />
+      <None Remove="Shared\Images\Tube\tube-1_128.png" />
+      <Resource Include="Shared\Images\Tube\tube-1_128.png" />
     </ItemGroup>
 </Project>

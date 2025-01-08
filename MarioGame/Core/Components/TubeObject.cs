@@ -8,7 +8,7 @@ namespace MarioGame.Core.Components;
 
 public class TubeObject : GameObject, IStatic, INonUpdatable
 {
-    private const string ImagePath = "/Shared/Images/Tube/tube-1.png";
+    private const string ImagePath = "/Shared/Images/Tube/";
 
     public TubeObject(double x, double y, double width, double height) : base(x, y, width, height) { }
 
@@ -16,7 +16,7 @@ public class TubeObject : GameObject, IStatic, INonUpdatable
     {
         var image = new Image
         {
-            Source = new BitmapImage(new Uri("pack://application:,,," + ImagePath)),
+            Source = new BitmapImage(new Uri("pack://application:,,," + ImagePath + GetImage())),
             Width = Width,
             Height = Height
         };
@@ -24,6 +24,27 @@ public class TubeObject : GameObject, IStatic, INonUpdatable
         Canvas.SetTop(image, Y);
         canvas.Children.Add(image);
     }
+
+    private string GetImage()
+    {
+        string imagePath = "tube-1";
+
+        if (Height <= 32)
+        {
+            return imagePath + ".png";
+        }
+
+        int step = 16;
+        int adjustedHeight = (int)Height;
+        
+        if (adjustedHeight % step == 0)
+        {
+            imagePath += $"_{adjustedHeight}";
+        }
+
+        return imagePath + ".png";
+    }
+
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects) { }
 
