@@ -18,8 +18,23 @@ public sealed class BackgroundObject : GameObject, IStatic, INonUpdatable, INonI
 
     public override void Draw(Canvas canvas)
     {
-        string imageName = _type == BackgroundType.Bush ? "bush-1.png" : "cloud-eye-1.png";
-        
+        //string imageName = _type == BackgroundType.Bush ? "bush-1.png" : "cloud-eye-1.png";
+
+        string imageName = _type switch
+        {
+            BackgroundType.Cloud1 => "cloud-1.png",
+            BackgroundType.Cloud2 => "cloud-2.png",
+            BackgroundType.Cloud3 => "cloud-3.png",
+            BackgroundType.CloudEye1 => "cloud-eye-1.png",
+            BackgroundType.CloudEye2 => "cloud-eye-2.png",
+            BackgroundType.CloudEye3 => "cloud-eye-3.png",
+            BackgroundType.CloudEye4 => "cloud-eye-4.png",
+            BackgroundType.Bush1 => "bush-1.png",
+            BackgroundType.Bush2 => "bush-2.png",
+            BackgroundType.Bush3 => "bush-3.png",
+            _ => throw new Exception("Invalid type of background!")
+        };
+
         var image = new Image
         {
             Source = new BitmapImage(new Uri(GetImage(imageName))),
