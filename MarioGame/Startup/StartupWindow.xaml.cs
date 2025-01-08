@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using MarioGame.Config;
 using MarioGame.Core;
 using MarioGame.GameWindows;
 
@@ -19,7 +20,7 @@ public partial class StartupWindow : Window
     {
         await LoadDependenciesAsync();
         
-        var mainEditorWindow = new GameWindow(1, _gameProgress);
+        var mainEditorWindow = new GameWindow(GameConfig.StartLevel, _gameProgress);
         mainEditorWindow.Show();
         
         Close();
