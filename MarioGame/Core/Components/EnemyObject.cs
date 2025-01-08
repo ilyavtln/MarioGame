@@ -157,9 +157,9 @@ public class EnemyObject : GameObject
             if (isAttackFromAir)
             {
                 isAttackFromAir = true;
-                player.JumpVelocity = -5;
+                player.JumpVelocity = -10;
                 // Попытка починить отскок
-                player.Y = Y - player.Height;
+                player.Y += player.JumpVelocity;
             }
             
             _level.OnEnemyTouched(this, isAttackFromAir, player.IsPowered);
