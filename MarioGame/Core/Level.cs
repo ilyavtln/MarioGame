@@ -130,8 +130,10 @@ public class Level
                         platformObject.InitializeChestObject(newCoin);
                         break;
                     }
-                    case PlatformType.ChestWithMushroom: //задел на гриб
+                    case PlatformType.ChestWithEnemy:
                     {
+                        EnemyObject enemy = new EnemyObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 32d, 32d, 100d, 2d);
+                        platformObject.InitializeChestObject(enemy);
                         break;
                     }
                 }
@@ -268,19 +270,19 @@ public class Level
         }
     }
 
-    public void OnChestWithCoinTouched(PlatformObject platform)
+    public void OnChestTouched(PlatformObject platform)
     {
         GameObject? obj = platform.ContainedObject;
 
         _objectsToAdd.Add(obj);
-        _score += 10;
+        if(obj is CoinObject coinObj)
+            _score += 10;
         ScoreChanged?.Invoke(_score);
 
         if (platform.ObjectsCount == 1)
         {
             _objectsToChange.Add(platform);
         }
-
     }
 
     public void OnCoinFromChestDisappear(CoinObject coin)

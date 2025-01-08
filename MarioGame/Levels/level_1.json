@@ -49,7 +49,7 @@
          "Y": 300,
          "Width": 32,
          "Height": 32,
-         "Type": "Brick"
+         "Type": "ChestWithEnemy"
       },
       {
          "X": 696,

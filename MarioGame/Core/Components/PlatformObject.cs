@@ -41,6 +41,7 @@ public class PlatformObject : GameObject
             case PlatformType.Coins: objectsCount = _random.Next(1, 6); break;
             case PlatformType.ChestWithCoins: objectsCount = 1; break;
             case PlatformType.ChestWithMushroom: objectsCount = 1; break;
+            case PlatformType.ChestWithEnemy: objectsCount = 1; break;
             default: objectsCount = 0; break;
         }
         
@@ -162,15 +163,15 @@ public class PlatformObject : GameObject
                     case PlatformType.Coins:
                     {
                         if (ObjectsCount > 0)
-                            _level.OnChestWithCoinTouched(this);
+                            _level.OnChestTouched(this);
                         else
                             _type = PlatformType.ChestDiactivated;
                         ObjectsCount--;
                         break;
                     }
-                    case PlatformType.ChestWithCoins:
+                    case PlatformType.ChestWithCoins or PlatformType.ChestWithEnemy:
                     {
-                        _level.OnChestWithCoinTouched(this);
+                        _level.OnChestTouched(this);
                         break;
                     }
                     case PlatformType.ChestWithMushroom:

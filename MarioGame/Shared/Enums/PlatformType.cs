@@ -6,5 +6,6 @@ public enum PlatformType
     Coins,
     ChestWithCoins,
     ChestWithMushroom,
-    ChestDiactivated
+    ChestDiactivated,
+    ChestWithEnemy
 }
