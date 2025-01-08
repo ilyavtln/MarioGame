@@ -107,21 +107,21 @@
       "Y": 450,
       "Width": 70,
       "Height": 70,
-      "Type": "Cloud"
+      "Type": "Cloud1"
     },
     {
       "X": 700,
       "Y": 500,
       "Width": 50,
       "Height": 50,
-      "Type": "Cloud"
+      "Type": "Cloud1"
     },
     {
       "X": 450,
       "Y": 176,
       "Width": 64,
       "Height": 32,
-      "Type": "Bush"
+      "Type": "Bush1"
     }
   ]
 }
