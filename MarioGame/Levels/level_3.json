@@ -9,35 +9,40 @@
     {
       "X": 0,
       "Y": 144,
-      "Width": 2832,
+      "Width": 720,
+      "Height": 144
+    },
+    {
+      "X": 816,
+      "Y": 144,
+      "Width": 96,
       "Height": 144
     }
   ],
   "Platforms": [
     {
-      "X": 600,
+      "X": 232,
+      "Y": 300,
+      "Width": 32,
+      "Height": 32,
+      "Type": "Brick"
+    },
+    {
+      "X": 264,
       "Y": 300,
       "Width": 32,
       "Height": 32,
       "Type": "ChestWithCoins"
     },
     {
-      "X": 632,
+      "X": 296,
       "Y": 300,
       "Width": 32,
       "Height": 32,
       "Type": "Coins"
     },
     {
-      "X": 664,
-      "Y": 300,
-      "Width": 32,
-      "Height": 32,
-      "Type": "ChestWithEnemy",
-      "EnemyType": "Turtle"
-    },
-    {
-      "X": 696,
+      "X": 328,
       "Y": 300,
       "Width": 32,
       "Height": 32,
@@ -45,7 +50,7 @@
       "EnemyType": "Base"
     },
     {
-      "X": 728,
+      "X": 360,
       "Y": 300,
       "Width": 32,
       "Height": 32,
@@ -66,60 +71,9 @@
       "Height": 16
     }
   ],
-  "Enemies": [
-    {
-      "X": 616,
-      "Y": 332,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 135,
-      "Speed": 2
-    },
-    {
-      "X": 486,
-      "Y": 240,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 135,
-      "Speed": 2
-    },
-    {
-      "X": 800,
-      "Y": 176,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 100,
-      "Speed": 2
-    },
-    {
-      "X": 1000,
-      "Y": 176,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 50,
-      "Speed": 0
-    },
-    {
-      "X": 900,
-      "Y": 176,
-      "Width": 32,
-      "Height": 32,
-      "Offset": 50,
-      "Speed": 1
-    },
-    {
-      "X": 200,
-      "Y": 192,
-      "Width": 48,
-      "Height": 48,
-      "Offset": 50,
-      "Speed": 1,
-      "Type": "Turtle"
-    }
-  ],
   "Tubes": [
     {
-      "X": 1100,
+      "X": 816,
       "Y": 176,
       "Height": 32
     },
