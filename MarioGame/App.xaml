@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:MarioGame"
              StartupUri="/Startup/StartupWindow.xaml">
     <Application.Resources>
+        <Style TargetType="Image">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+        
         <FontFamily x:Key="HarryPotterFont">pack://application:,,,/Assets/Fonts/#HarryPotterKudos</FontFamily>
         
         <Style TargetType="TextBlock">
