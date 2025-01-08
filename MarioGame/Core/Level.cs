@@ -142,7 +142,7 @@ public class Level
                             }
                             case EnemyType.Turtle:
                             {
-                                EnemyObject enemy = new EnemyObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 32d, 32d, 100d, 2d,EnemyType.Turtle);
+                                EnemyObject enemy = new EnemyObject(this, platform.X, _canvas.ActualHeight - platform.Y - platform.Height, 48, 48, 100d, 2d,EnemyType.Turtle);
                                 platformObject.InitializeChestObject(enemy);
                                 break;
                             }

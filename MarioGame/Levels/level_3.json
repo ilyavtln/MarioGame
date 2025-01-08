@@ -1,39 +1,194 @@
 ﻿{
-  "Index": 3,
+  "Index": 1,
+  "MaxLevelDuration": 400,
   "Player": {
     "X": 0,
-    "Y": 150,
-    "Width": 32,
-    "Height": 64
-  },
-  "Finish" : {
-    "X": 700,
-    "Y": 400,
-    "Width": 256,
-    "Height": 256
+    "Y": 208
   },
   "Grounds": [
     {
       "X": 0,
       "Y": 144,
-      "Width": 1440,
+      "Width": 2832,
       "Height": 144
+    }
+  ],
+  "Platforms": [
+    {
+      "X": 600,
+      "Y": 300,
+      "Width": 32,
+      "Height": 32,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 632,
+      "Y": 300,
+      "Width": 32,
+      "Height": 32,
+      "Type": "Coins"
+    },
+    {
+      "X": 664,
+      "Y": 300,
+      "Width": 32,
+      "Height": 32,
+      "Type": "ChestWithEnemy",
+      "EnemyType": "Turtle"
+    },
+    {
+      "X": 696,
+      "Y": 300,
+      "Width": 32,
+      "Height": 32,
+      "Type": "ChestWithEnemy",
+      "EnemyType": "Base"
+    },
+    {
+      "X": 728,
+      "Y": 300,
+      "Width": 32,
+      "Height": 32,
+      "Type": "Brick"
+    }
+  ],
+  "Coins": [
+    {
+      "X": 600,
+      "Y": 168,
+      "Width": 16,
+      "Height": 16
+    },
+    {
+      "X": 700,
+      "Y": 168,
+      "Width": 16,
+      "Height": 16
+    }
+  ],
+  "Enemies": [
+    {
+      "X": 616,
+      "Y": 332,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 135,
+      "Speed": 2
+    },
+    {
+      "X": 486,
+      "Y": 240,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 135,
+      "Speed": 2
+    },
+    {
+      "X": 800,
+      "Y": 176,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 100,
+      "Speed": 2
+    },
+    {
+      "X": 1000,
+      "Y": 176,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 50,
+      "Speed": 0
+    },
+    {
+      "X": 900,
+      "Y": 176,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 50,
+      "Speed": 1
+    },
+    {
+      "X": 200,
+      "Y": 192,
+      "Width": 48,
+      "Height": 48,
+      "Offset": 50,
+      "Speed": 1,
+      "Type": "Turtle"
+    }
+  ],
+  "Tubes": [
+    {
+      "X": 1100,
+      "Y": 176,
+      "Width": 32,
+      "Height": 32
+    },
+    {
+      "X": 1200,
+      "Y": 192,
+      "Width": 32,
+      "Height": 48
+    },
+    {
+      "X": 1300,
+      "Y": 208,
+      "Width": 32,
+      "Height": 64
+    },
+    {
+      "X": 1400,
+      "Y": 224,
+      "Width": 32,
+      "Height": 80
+    },
+    {
+      "X": 1500,
+      "Y": 240,
+      "Width": 32,
+      "Height": 96
+    },
+    {
+      "X": 1600,
+      "Y": 256,
+      "Width": 32,
+      "Height": 112
+    },
+    {
+      "X": 1700,
+      "Y": 272,
+      "Width": 32,
+      "Height": 128
     }
   ],
   "Backgrounds": [
     {
-      "X": 300,
-      "Y": 300,
-      "Width": 50,
-      "Height": 50,
-      "Type": "Cloud"
+      "X": 360,
+      "Y": 500,
+      "Width": 96,
+      "Height": 64,
+      "Type": "Cloud1"
     },
     {
-      "X": 450,
-      "Y": 450,
-      "Width": 50,
-      "Height": 50,
-      "Type": "Bush"
+      "X": 1400,
+      "Y": 176,
+      "Width": 64,
+      "Height": 32,
+      "Type": "Bush1"
+    },
+    {
+      "X": 72,
+      "Y": 252,
+      "Width": 144,
+      "Height": 144,
+      "Type": "Bush3"
+    },
+    {
+      "X": 552,
+      "Y": 184,
+      "Width": 80,
+      "Height": 40,
+      "Type": "Bush2"
     }
   ]
 }
