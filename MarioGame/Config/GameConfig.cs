@@ -2,7 +2,7 @@
 
 public static class GameConfig
 {
-    public const int StartLevel = 1;
+    public const int StartLevel = 4;
     public const int LevelDuration = 15;
     public const int Lives = 3;
     public const int TubeWidth = 96;
