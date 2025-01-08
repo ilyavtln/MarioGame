@@ -5,7 +5,7 @@ namespace MarioGame.Core;
 public class SoundManager
 {
     private readonly MediaPlayer _musicPlayer;
-    private readonly MediaPlayer _soundEffectPlayer;
+    private MediaPlayer _soundEffectPlayer;
     private readonly string _baseMusicPath = "GameSounds/Music/";
     private readonly string _baseSoundPath = "GameSounds/Sounds/";
     private TimeSpan _currentMusicPosition;
@@ -59,6 +59,21 @@ public class SoundManager
     {
         _soundEffectPlayer.Open(new Uri(_baseSoundPath + soundName, UriKind.Relative));
         _soundEffectPlayer.Play();
+    }
+    
+    // Метод для воспроизведения звукового эффекта ассинхронно
+    public async Task PlaySoundEffectAsync(string soundName)
+    {
+        var asyncPlayer = new MediaPlayer();
+        var tcs = new TaskCompletionSource<bool>();
+
+        asyncPlayer.MediaEnded += (sender, args) => tcs.SetResult(true);
+        asyncPlayer.Open(new Uri(_baseSoundPath + soundName, UriKind.Relative));
+        asyncPlayer.Play();
+
+        await tcs.Task;
+        
+        asyncPlayer.Stop();
     }
     
     // Установка громкости для звуковых эффектов

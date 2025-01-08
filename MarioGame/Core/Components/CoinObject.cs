@@ -62,21 +62,19 @@ public class CoinObject : GameObject
     {
         _frameCounter++;
 
-        if (_frameCounter % 5 == 0)
-        {
-            if (_movingState == MovingState.State5 || _movingState == MovingState.State1)
-                _isUp = !_isUp;
+        if (_frameCounter % 5 != 0) return;
+        if (_movingState is MovingState.State5 or MovingState.State1)
+            _isUp = !_isUp;
 
-            _movingState = _movingState switch
-            {
-                MovingState.State1 => MovingState.State2,
-                MovingState.State2 => !_isUp ? MovingState.State3 : MovingState.State1,
-                MovingState.State3 => !_isUp ? MovingState.State4 : MovingState.State2,
-                MovingState.State4 => !_isUp ? MovingState.State5 : MovingState.State3,
-                MovingState.State5 => MovingState.State4,
-                _ => MovingState.State1
-            };
-        }
+        _movingState = _movingState switch
+        {
+            MovingState.State1 => MovingState.State2,
+            MovingState.State2 => !_isUp ? MovingState.State3 : MovingState.State1,
+            MovingState.State3 => !_isUp ? MovingState.State4 : MovingState.State2,
+            MovingState.State4 => !_isUp ? MovingState.State5 : MovingState.State3,
+            MovingState.State5 => MovingState.State4,
+            _ => MovingState.State1
+        };
     }
 
     public override void Update(Canvas canvas, List<GameObject?> gameObjects)
@@ -124,6 +122,8 @@ public class CoinObject : GameObject
 
                 break;
             }
+            default:
+                return;
         }
     }
 

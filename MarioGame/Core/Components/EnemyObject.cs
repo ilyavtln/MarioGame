@@ -152,15 +152,17 @@ public class EnemyObject : GameObject
         if (player.X < X + Width && player.X + player.Width > X &&
             player.Y < Y + Height && player.Y + player.Height > Y)
         {
-            var isAttackFromAir = player.JumpVelocity > 0;
+            bool isAttackFromAir = player.JumpVelocity > 0;
 
             if (isAttackFromAir)
             {
                 isAttackFromAir = true;
                 player.JumpVelocity = -5;
+                // Попытка починить отскок
+                player.Y = Y - player.Height;
             }
             
-            _level.OnEnemyTouched(this, isAttackFromAir);
+            _level.OnEnemyTouched(this, isAttackFromAir, player.IsPowered);
         }
     }
 

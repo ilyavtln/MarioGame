@@ -152,6 +152,29 @@
       "Type": "ChestWithEnemy"
     },
     {
+      "X": 1728,
+      "Y": 480,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithEnemy",
+      "EnemyType": "Turtle"
+    },
+    {
+      "X": 1776,
+      "Y": 480,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithMushroom"
+    },
+    {
+      "X": 1824,
+      "Y": 480,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithEnemy",
+      "EnemyType": "Turtle"
+    },
+    {
       "X": 1824,
       "Y": 320,
       "Width": 48,
@@ -356,12 +379,29 @@
       "Speed": 0.5
     },
     {
+      "X": 1670,
+      "Y": 376,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 150,
+      "Speed": 1.5
+    },
+    {
+      "X": 1750,
+      "Y": 376,
+      "Width": 48,
+      "Height": 48,
+      "Offset": 200,
+      "Speed": 0.4,
+      "Type": "Turtle"
+    },
+    {
       "X": 1800,
       "Y": 376,
       "Width": 32,
       "Height": 32,
-      "Offset": 100,
-      "Speed": 0
+      "Offset": 160,
+      "Speed": 0.75
     },
     {
       "X": 2200,

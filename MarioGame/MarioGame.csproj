@@ -128,5 +128,13 @@
       <Resource Include="Shared\Images\Tube\tube-1_112.png" />
       <None Remove="Shared\Images\Tube\tube-1_128.png" />
       <Resource Include="Shared\Images\Tube\tube-1_128.png" />
+      <None Remove="GameSounds\Sounds\mario-start-power.mp3" />
+      <Content Include="GameSounds\Sounds\mario-start-power.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="GameSounds\Sounds\mario-stop-power.mp3" />
+      <Content Include="GameSounds\Sounds\mario-stop-power.mp3">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 </Project>

@@ -1,8 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using System.Timers;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using MarioGame.Config;
 using MarioGame.Core.States;
+using Timer = System.Timers.Timer;
 
 namespace MarioGame.Core;
 
@@ -31,20 +33,16 @@ public class Player
     private Image? _playerImage;
     private double _opacity = 1.0;
     private readonly SoundManager _soundManager = new();
-
-    private const int PlayerWidth = 32;
-    private const int PlayerHeight = 64;
-
     public event Action<bool>? PlayerDied;
-
     public bool IsPowered;
+    private bool _playerActive = true;
 
     public Player(double x, double y)
     {
         X = x;
         Y = y;
-        Width = PlayerWidth;
-        Height = PlayerHeight;
+        Width = GameConfig.PlayerSize.Width;
+        Height = GameConfig.PlayerSize.Height;
     }
 
     public void Draw(Canvas canvas)
@@ -190,7 +188,7 @@ public class Player
     public void Update(Canvas canvas, List<GameObject?> objects)
     {
         // Проверка, что игрок падает
-        if (CheckIfPlayerDead(canvas))
+        if (CheckIfPlayerDead(canvas) || !_playerActive)
         {
             return;
         }
@@ -250,11 +248,29 @@ public class Player
         PlayerDied?.Invoke(true);
     }
 
-    public void OnPower()
+    public async Task OnPower()
     {
-        IsPowered = true;
-        Width *= 1.5;
-        Height *= 1.5;
+        if (!IsPowered)
+        {
+            IsPowered = true;
+            _soundManager.PlaySoundEffect("mario-start-power.mp3");
+
+            // Увеличение размеров
+            Width *= GameConfig.PowerMultiplier;
+            Height *= GameConfig.PowerMultiplier;
+            
+            _playerActive = false;
+            await Task.Delay(500);
+            _playerActive = true;
+            
+            await Task.Delay(TimeSpan.FromSeconds(GameConfig.PowerDuration));
+            
+            IsPowered = false;
+            Width /= GameConfig.PowerMultiplier;
+            Height /= GameConfig.PowerMultiplier;
+                
+            await _soundManager.PlaySoundEffectAsync("mario-stop-power.mp3");
+        }
     }
 
     public bool IsCollidingWithBlockOnMoveX(GameObject obj, double shift)
