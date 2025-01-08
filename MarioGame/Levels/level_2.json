@@ -1,12 +1,12 @@
 ﻿{
   "Index": 2,
-  "MaxLevelDuration": 35,
+  "MaxLevelDuration": 300,
   "Player": {
-    "X": 0,
-    "Y": 150
+    "X": 408,
+    "Y": 208
   },
-  "Finish" : {
-    "X": 3000,
+  "Finish": {
+    "X": 4700,
     "Y": 400
   },
   "Grounds": [
@@ -99,6 +99,308 @@
       "Y": 144,
       "Width": 1440,
       "Height": 144
+    },
+    {
+      "X": 3502,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3502,
+      "Y": 192,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Ladder"
+    },
+    {
+      "X": 3598,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3598,
+      "Y": 240,
+      "Width": 48,
+      "Height": 96,
+      "Type": "Ladder"
+    },
+    {
+      "X": 3694,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3694,
+      "Y": 288,
+      "Width": 48,
+      "Height": 144,
+      "Type": "Ladder"
+    },
+    {
+      "X": 3790,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3790,
+      "Y": 336,
+      "Width": 48,
+      "Height": 192,
+      "Type": "Ladder"
+    },
+    {
+      "X": 3886,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3886,
+      "Y": 288,
+      "Width": 48,
+      "Height": 144,
+      "Type": "Ladder"
+    },
+    {
+      "X": 3982,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3982,
+      "Y": 240,
+      "Width": 48,
+      "Height": 144,
+      "Type": "Ladder"
+    },
+    {
+      "X": 4078,
+      "Y": 144,
+      "Width": 960,
+      "Height": 144
+    }
+  ],
+  "Platforms": [
+    {
+      "X": 1056,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1104,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1152,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 1296,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Coins"
+    },
+    {
+      "X": 1392,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 2206,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithEnemy"
+    },
+    {
+      "X": 2398,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2446,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2494,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2542,
+      "Y": 480,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithEnemy"
+    },
+    {
+      "X": 2638,
+      "Y": 480,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 2590,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2638,
+      "Y": 336,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2830,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2878,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 4078,
+      "Y": 288,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Coins"
+    }
+  ],
+  "Coins": [
+    {
+      "X": 2220,
+      "Y": 350,
+      "Width": 16,
+      "Height": 16
+    },
+    {
+      "X": 2650,
+      "Y": 500,
+      "Width": 16,
+      "Height": 16
+    }
+  ],
+  "Enemies": [
+    {
+      "X": 1536,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2494,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2446,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2398,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2350,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2542,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2590,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2638,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2686,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 2734,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
+    },
+    {
+      "X": 4078,
+      "Y": 192,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 300,
+      "Speed": 3
     }
   ],
   "Backgrounds": [
@@ -114,7 +416,70 @@
       "Y": 500,
       "Width": 50,
       "Height": 50,
+      "Type": "Cloud2"
+    },
+    {
+      "X": 1100,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
       "Type": "Cloud1"
+    },
+    {
+      "X": 1500,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud3"
+    },
+    {
+      "X": 1900,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud1"
+    },
+    {
+      "X": 2300,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud2"
+    },
+    {
+      "X": 2700,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud1"
+    },
+    {
+      "X": 3100,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud2"
+    },
+    {
+      "X": 3500,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud3"
+    },
+    {
+      "X": 3900,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud1"
+    },
+    {
+      "X": 4300,
+      "Y": 500,
+      "Width": 50,
+      "Height": 50,
+      "Type": "Cloud3"
     },
     {
       "X": 450,
@@ -122,6 +487,28 @@
       "Width": 64,
       "Height": 32,
       "Type": "Bush1"
+    },
+    {
+      "X": 1822,
+      "Y": 48,
+      "Width": 72,
+      "Height": 60,
+      "Type": "Bush1"
+    },
+    {
+      "X": 1894,
+      "Y": 48,
+      "Width": 72,
+      "Height": 60,
+      "Type": "Bush1"
+    },
+    {
+      "X": 2370,
+      "Y": 570,
+      "Width": 512,
+      "Height": 384,
+      "Type": "CloudEye1"
     }
   ]
+
 }
