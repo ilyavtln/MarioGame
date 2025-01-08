@@ -3,7 +3,7 @@
    "MaxLevelDuration": 400,
    "Player": {
       "X": 400,
-      "Y": 150,
+      "Y": 300,
       "Width": 32,
       "Height": 64
    },
@@ -444,70 +444,394 @@
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5520,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5568,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5616,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5664,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5712,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5760,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5808,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5856,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
       },
       {
          "X": 5904,
          "Y": 460,
          "Width": 48,
          "Height": 48,
-         "Type": "ChestWithCoins"
+         "Type": "ChestWithEnemy",
+         "EnemyType": "Turtle"
+      }
+   ],
+   "Coins": [
+      {
+         "X": 832,
+         "Y": 324,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 880,
+         "Y": 324,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 928,
+         "Y": 324,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1120,
+         "Y": 216,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1168,
+         "Y": 264,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1216,
+         "Y": 312,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1264,
+         "Y": 360,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1312,
+         "Y": 408,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1504,
+         "Y": 524,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1552,
+         "Y": 524,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1600,
+         "Y": 524,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1648,
+         "Y": 524,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1840,
+         "Y": 264,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 1888,
+         "Y": 216,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 2416,
+         "Y": 280,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 2464,
+         "Y": 280,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3520,
+         "Y": 324,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3568,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3616,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3664,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3712,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3760,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4096,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4144,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4192,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4240,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4288,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3760,
+         "Y": 296,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 3808,
+         "Y": 296,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4506,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4554,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4602,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4650,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 4698,
+         "Y": 484,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5104,
+         "Y": 296,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5152,
+         "Y": 296,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5392,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5440,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5488,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5536,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5584,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5632,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5680,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5728,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5776,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5824,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5872,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5920,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 5968,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 6016,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 6064,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
+      },
+      {
+         "X": 6112,
+         "Y": 168,
+         "Width": 16,
+         "Height": 16
       }
    ],
    "Enemies": [
@@ -658,6 +982,153 @@
          "Width": 128,
          "Height": 96,
          "Type": "CloudEye1"
+      },
+      {
+         "X": 1536,
+         "Y": 650,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud3"
+      },
+      {
+         "X": 1536,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 1596,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 2112,
+         "Y": 252,
+         "Width": 144,
+         "Height": 144,
+         "Type": "Bush2"
+      },
+      {
+         "X": 2400,
+         "Y": 700,
+         "Width": 128,
+         "Height": 96,
+         "Type": "CloudEye3"
+      },
+      {
+         "X": 3168,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 3288,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 3228,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 3228,
+         "Y": 600,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud1"
+      },
+      {
+         "X": 3288,
+         "Y": 600,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud1"
+      },
+      {
+         "X": 3936,
+         "Y": 650,
+         "Width": 128,
+         "Height": 96,
+         "Type": "CloudEye3"
+      },
+      {
+         "X": 4368,
+         "Y": 600,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud1"
+      },
+      {
+         "X": 4848,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush3"
+      },
+      {
+         "X": 4908,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush3"
+      },
+      {
+         "X": 5088,
+         "Y": 550,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud3"
+      },
+      {
+         "X": 5148,
+         "Y": 550,
+         "Width": 96,
+         "Height": 64,
+         "Type": "Cloud3"
+      },
+      {
+         "X": 5664,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 5724,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 5784,
+         "Y": 184,
+         "Width": 80,
+         "Height": 40,
+         "Type": "Bush1"
+      },
+      {
+         "X": 5952,
+         "Y": 500,
+         "Width": 128,
+         "Height": 96,
+         "Type": "CloudEye2"
+      },
+      {
+         "X": 6432,
+         "Y": 252,
+         "Width": 144,
+         "Height": 144,
+         "Type": "Bush3"
       }
    ]
 }

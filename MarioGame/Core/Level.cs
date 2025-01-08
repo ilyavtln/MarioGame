@@ -264,9 +264,10 @@ public class Level
         ScoreChanged?.Invoke(_score);
     }
 
-    public void OnEnemyTouched(EnemyObject enemy, bool isAttackFromAir)
+    public void OnEnemyTouched(EnemyObject enemy, bool isAttackFromAir, bool playerWithPower = false)
     {
         _objectsToRemove.Add(enemy);
+        if (playerWithPower) { return; }
 
         if (!isAttackFromAir)
         {

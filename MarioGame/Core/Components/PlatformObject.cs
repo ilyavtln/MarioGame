@@ -177,7 +177,7 @@ public class PlatformObject : GameObject
                     }
                     case PlatformType.ChestWithMushroom:
                     {
-                        player.OnPower();
+                         _ = player.OnPower();
                         _type = PlatformType.ChestDiactivated;
                         break;
                     }
