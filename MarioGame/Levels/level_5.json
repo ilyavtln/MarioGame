@@ -1,23 +1,494 @@
 ﻿{
   "Index": 5,
+  "MaxLevelDuration": 400,
   "Player": {
-    "X": 0,
-    "Y": 150,
-    "Width": 32,
-    "Height": 64
+    "X": 2928,
+    "Y": 150
   },
-  "Finish" : {
-    "X": 700,
-    "Y": 400,
-    "Width": 256,
-    "Height": 256
+  "Finish": {
+    "X": 5200,
+    "Y": 400
   },
   "Grounds": [
     {
       "X": 0,
       "Y": 144,
-      "Width": 1440,
+      "Width": 1632,
       "Height": 144
+    },
+    {
+      "X": 2160,
+      "Y": 144,
+      "Width": 336,
+      "Height": 144
+    },
+    {
+      "X": 2688,
+      "Y": 144,
+      "Width": 336,
+      "Height": 144
+    },
+    {
+      "X": 3504,
+      "Y": 144,
+      "Width": 96,
+      "Height": 144
+    },
+    {
+      "X": 3696,
+      "Y": 144,
+      "Width": 48,
+      "Height": 144
+    },
+    {
+      "X": 3696,
+      "Y": 288,
+      "Width": 48,
+      "Height": 144,
+      "Type": "Ladder"
+    },
+    {
+      "X": 3936,
+      "Y": 144,
+      "Width": 480,
+      "Height": 144
+    },
+    {
+      "X": 4600,
+      "Y": 144,
+      "Width": 960,
+      "Height": 144
+    }
+  ],
+  "Platforms": [
+    {
+      "X": 720,
+      "Y": 260,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 720,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 768,
+      "Y": 260,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 816,
+      "Y": 260,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 816,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 864,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Coins"
+    },
+    {
+      "X": 912,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Coins"
+    },
+    {
+      "X": 960,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 960,
+      "Y": 260,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1008,
+      "Y": 260,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1056,
+      "Y": 260,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1056,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1056,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1200,
+      "Y": 348,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 1392,
+      "Y": 396,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 1584,
+      "Y": 396,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 1824,
+      "Y": 348,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1872,
+      "Y": 348,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 1920,
+      "Y": 348,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2832,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2880,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 2928,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 3160,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 3208,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 3256,
+      "Y": 300,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2832,
+      "Y": 500,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 2880,
+      "Y": 500,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithEnemy"
+    },
+    {
+      "X": 2928,
+      "Y": 500,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 3160,
+      "Y": 500,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    },
+    {
+      "X": 3208,
+      "Y": 500,
+      "Width": 48,
+      "Height": 48,
+      "Type": "ChestWithCoins"
+    },
+    {
+      "X": 3256,
+      "Y": 500,
+      "Width": 48,
+      "Height": 48,
+      "Type": "Brick"
+    }
+  ],
+  "Coins": [
+    {
+      "X": 830,
+      "Y": 320,
+      "Width": 16,
+      "Height": 16
+    },
+    {
+      "X": 878,
+      "Y": 320,
+      "Width": 16,
+      "Height": 16
+    },
+    {
+      "X": 926,
+      "Y": 320,
+      "Width": 16,
+      "Height": 16
+    },
+    {
+      "X": 974,
+      "Y": 320,
+      "Width": 16,
+      "Height": 16
+    }
+  ],
+  "Enemies": [
+    {
+      "X": 768,
+      "Y": 308,
+      "Width": 48,
+      "Height": 48,
+      "Offset": 200,
+      "Speed": 0,
+      "Type": "Turtle"
+    },
+    {
+      "X": 1008,
+      "Y": 308,
+      "Width": 48,
+      "Height": 48,
+      "Offset": 200,
+      "Speed": 0,
+      "Type": "Turtle"
+    },
+    {
+      "X": 1392,
+      "Y": 144,
+      "Width": 48,
+      "Height": 48,
+      "Offset": 200,
+      "Speed": 2,
+      "Type": "Turtle"
+    },
+    {
+      "X": 800,
+      "Y": 144,
+      "Width": 48,
+      "Height": 48,
+      "Offset": 200,
+      "Speed": 2,
+      "Type": "Turtle"
+    },
+    {
+      "X": 2256,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 200,
+      "Speed": 2
+    },
+    {
+      "X": 3936,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 3960,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 3984,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4008,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4032,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4056,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4080,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4104,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4128,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4152,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4176,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4200,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4224,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4248,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4272,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    },
+    {
+      "X": 4296,
+      "Y": 144,
+      "Width": 32,
+      "Height": 32,
+      "Offset": 20,
+      "Speed": 2
+    }
+  ],
+  "Tubes": [
+    {
+      "X": 2160,
+      "Y": 208,
+      "Height": 64
+    },
+    {
+      "X": 2400,
+      "Y": 240,
+      "Height": 96
     }
   ],
   "Backgrounds": [
@@ -26,14 +497,14 @@
       "Y": 300,
       "Width": 50,
       "Height": 50,
-      "Type": "Cloud"
+      "Type": "Cloud1"
     },
     {
       "X": 450,
       "Y": 450,
       "Width": 50,
       "Height": 50,
-      "Type": "Bush"
+      "Type": "Bush1"
     }
   ]
 }
